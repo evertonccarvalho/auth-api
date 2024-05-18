@@ -1,0 +1,36 @@
+name: 'API'
+
+on: pull_request
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout for the main branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: run install, build and test
+        run: |
+          npm install
+          npm run build
+          npm run test
+
+      - name: Copy files with SSH
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: './'
+          REMOTE_HOST: 'ec2-54-233-203-106.sa-east-1.compute.amazonaws.com'
+          REMOTE_USER: 'ec2-user'
+          TARGET: '/home/ec2-user/mks'
+          EXCLUDE: '/dist/, /node_modules/, **.env, rebuild_app.sh, watcher.sh'
