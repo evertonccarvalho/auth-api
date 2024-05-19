@@ -9,14 +9,16 @@ services:
     restart: always
     tty: true
     ports:
-      - '5432:5432'
+      - '${DB_PORT}:${DB_PORT}'
     volumes:
-      - .docker/development/postgres/postgres_data:/var/lib/postgresql/data
+      - .docker/development/postgres/data/${DB_DATABASE_NAME}:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=DBPASSWORD
-      - POSTGRES_DB=DBNAME
+      - POSTGRES_DB=${DB_DATABASE_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
     healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'DBNAME']
+      test:
+        ['CMD', 'pg_isready', '-U', '${DB_USER}', '-d', '${DB_DATABASE_NAME}']
       interval: 5s
       timeout: 3s
       retries: 5
@@ -48,8 +50,13 @@ services:
     volumes:
       - .:/home/node/app:delegated
       - /home/node/app/node_modules
-    env_file:
-      - .env.docker
+    environment:
+      - DB_HOST=db
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE_NAME=${DB_DATABASE_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - PORT=${PORT}
     expose:
       - 3000
     command: npm run start:dev
