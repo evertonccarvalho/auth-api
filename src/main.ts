@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { applyGlobalPipes } from './infra/config/pipes/global-pipes.config.ts';
+import { setupSwagger } from './infra/config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });
@@ -9,16 +10,8 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
-  if (!configService.get('App.isProduction')) {
-    const config = new DocumentBuilder()
-      .setTitle('API Documentation')
-      .setDescription('endpoints list, request and response')
-      .setVersion('1.0')
-      .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('documentation', app, document);
-  }
-
+  setupSwagger(app);
+  applyGlobalPipes(app);
   await app.listen(configService.get('APP.port'));
 }
 
