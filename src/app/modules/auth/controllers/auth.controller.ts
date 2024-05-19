@@ -9,7 +9,7 @@ export class AuthController {
 
   @SkipAuth()
   @HttpCode(HttpStatus.OK)
-  @Post('login')
+  @Post('signin')
   async signIn(@Body() signInDto: SignInDto) {
     return await this.authService.signIn(signInDto.email, signInDto.password);
   }

@@ -1,6 +1,6 @@
 import { Role } from '@/core/utils/enums/roles';
 import { UserStatus } from '@/core/utils/enums/status';
-import { UUID } from '@/core/utils/libs/uuid';
+import { UUID } from '@/core/utils/libs/id';
 import {
   BeforeInsert,
   Column,
@@ -43,7 +43,7 @@ export class User {
 
   @Column({
     type: 'simple-array',
-    default: [Role.User, Role.Admin],
+    default: ['user'],
   })
   roles: Role[];
 

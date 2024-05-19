@@ -2,17 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
-import { VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });
   app.setGlobalPrefix('api');
-  // app.enableVersioning({
-  //   type: VersioningType.HEADER,
-  //   header: 'x-version-id',
-  // });
 
   const configService = app.get(ConfigService);
+
   if (!configService.get('App.isProduction')) {
     const config = new DocumentBuilder()
       .setTitle('API Documentation')
