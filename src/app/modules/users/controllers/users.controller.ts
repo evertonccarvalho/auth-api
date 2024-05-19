@@ -12,7 +12,7 @@ import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { Roles } from '../../../../core/decorators/role.decorators';
-import { Role } from '../../../../core/utils/roles';
+import { Role } from '../../../../core/utils/enums/roles';
 import { SkipAuth } from '../../../../core/decorators/auth.decorator';
 
 @Controller('users')
@@ -38,17 +38,17 @@ export class UsersController {
 
   @Get(':id')
   async findOneById(@Param('id') id: string) {
-    return await this.usersService.findOneById(+id);
+    return await this.usersService.findOneById(id);
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return await this.usersService.update(+id, updateUserDto);
+    return await this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   @Roles(Role.Admin)
   async remove(@Param('id') id: string) {
-    return await this.usersService.remove(+id);
+    return await this.usersService.remove(id);
   }
 }

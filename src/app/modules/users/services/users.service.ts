@@ -31,15 +31,15 @@ export class UsersService {
     return await this.userRepository.findOne({ where: { email } });
   }
 
-  async findOneById(id: number) {
+  async findOneById(id: string) {
     return await this.userRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     return await this.userRepository.update({ id }, updateUserDto);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.userRepository.delete({ id });
   }
 }

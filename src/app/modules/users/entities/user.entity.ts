@@ -1,11 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from '@/core/utils/enums/roles';
+import { UserStatus } from '@/core/utils/enums/status';
+import { UUID } from '@/core/utils/libs/uuid';
+import {
+  BeforeInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-  })
-  id: number;
+  @PrimaryColumn('uuid')
+  id: string;
 
   @Column({
     type: 'varchar',
@@ -16,20 +24,9 @@ export class User {
   @Column({
     type: 'varchar',
     length: 255,
+    unique: true,
   })
   email: string;
-
-  @Column({
-    type: 'varchar',
-    length: 255,
-  })
-  phone: string;
-
-  @Column({
-    type: 'varchar',
-    length: 255,
-  })
-  bio: string;
 
   @Column({
     type: 'varchar',
@@ -38,21 +35,26 @@ export class User {
   password: string;
 
   @Column({
-    type: 'varchar',
-    length: 255,
+    type: 'enum',
+    enum: UserStatus,
+    default: UserStatus.Pending,
   })
-  status: string;
+  status: UserStatus;
 
   @Column({
-    type: 'varchar',
-    length: 255,
-    array: true,
+    type: 'simple-array',
+    default: [Role.User, Role.Admin],
   })
-  roles: string[];
+  roles: Role[];
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-  })
-  created: string;
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @BeforeInsert()
+  generetedId() {
+    this.id = UUID.generate();
+  }
 }

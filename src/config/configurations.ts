@@ -1,5 +1,7 @@
 import { registerAs } from '@nestjs/config';
+import 'dotenv/config';
 
+console.log(process.env.NODE_ENV);
 export enum ConfigKey {
   app = 'APP',
   db = 'DB',
@@ -37,7 +39,7 @@ const JWTConfig = registerAs(ConfigKey.jwt, () => ({
 }));
 
 const GeneralConfig = registerAs(ConfigKey.general, () => ({
-  salt_or_round: process.env.SALT_OR_ROUND,
+  salt_or_round: Number(process.env.SALT_OR_ROUND) || 10,
 }));
 
 export const configurations = [APPConfig, DBConfig, JWTConfig, GeneralConfig];
