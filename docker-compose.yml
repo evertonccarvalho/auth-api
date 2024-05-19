@@ -13,10 +13,10 @@ services:
     volumes:
       - .docker/development/postgres/postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=mksdb
+      - POSTGRES_PASSWORD=DBPASSWORD
+      - POSTGRES_DB=DBNAME
     healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'mksdb']
+      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'DBNAME']
       interval: 5s
       timeout: 3s
       retries: 5
