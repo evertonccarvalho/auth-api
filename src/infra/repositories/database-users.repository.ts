@@ -37,14 +37,14 @@ export class DatabaseUsersRepository implements UserRepository {
     return this._get(id);
   }
 
+  async findAll(): Promise<UserModel[]> {
+    const users = await this.userRepository.find();
+    return users.map((user) => UserModelMapper.toEntity(user));
+  }
+
   async delete(id: string): Promise<void> {
     await this._get(id);
     await this.userRepository.delete(id);
-  }
-
-  async findAll(): Promise<UserEntity[]> {
-    const users = await this.userRepository.find();
-    return users;
   }
 
   async update(id: string, entity: UserEntity): Promise<UserEntity> {
