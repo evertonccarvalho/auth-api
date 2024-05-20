@@ -1,5 +1,5 @@
-import { Role } from '@/infra/utils/enums/roles';
-import { UserStatus } from '@/infra/utils/enums/status';
+import { Role } from '@/infra/interfaces/enums/roles';
+import { UserStatus } from '@/infra/interfaces/enums/status';
 
 export class UserOutput {
   id: string;

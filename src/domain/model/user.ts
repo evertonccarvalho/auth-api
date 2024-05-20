@@ -1,7 +1,7 @@
 import { BaseEntity } from '../entities/entity';
 import { UserProps } from '@/infra/entities/user.entity';
-import { Role } from '@/infra/utils/enums/roles';
-import { UserStatus } from '@/infra/utils/enums/status';
+import { Role } from '@/infra/interfaces/enums/roles';
+import { UserStatus } from '@/infra/interfaces/enums/status';
 
 export class UserModel extends BaseEntity<UserProps> {
   id: string;

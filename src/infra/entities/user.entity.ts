@@ -5,8 +5,8 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Role } from '@/infra/utils/enums/roles';
-import { UserStatus } from '@/infra/utils/enums/status';
+import { Role } from '@/infra/interfaces/enums/roles';
+import { UserStatus } from '@/infra/interfaces/enums/status';
 import { BaseEntity } from '@/domain/entities/entity';
 
 export type UserProps = {
