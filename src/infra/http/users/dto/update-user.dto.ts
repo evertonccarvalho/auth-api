@@ -11,15 +11,4 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   readonly name?: string;
-
-  @IsString()
-  @IsOptional()
-  @ApiProperty({
-    description: 'The phone number of the user.',
-    example: '88 x xxxx xxxx',
-    required: false,
-    type: String,
-    format: 'phone number',
-  })
-  readonly phoneNumber?: string;
 }

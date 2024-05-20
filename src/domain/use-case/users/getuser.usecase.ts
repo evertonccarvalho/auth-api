@@ -1,7 +1,7 @@
 import { DefaultUseCase } from '@/domain/protocols/use-case';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
-import { UserOutputMapper } from '@/infra/http/users/dto/user-output.mapper';
+import { UserOutputMapper } from '@/infra/http/users/mappers/user-output.mapper';
 import { Injectable } from '@nestjs/common';
 
 export namespace GetUserUseCase {

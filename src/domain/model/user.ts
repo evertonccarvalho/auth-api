@@ -1,5 +1,5 @@
 import { BaseEntity } from '../entities/entity';
-import { UserEntity, UserProps } from '@/infra/entities/user.entity';
+import { UserProps } from '@/infra/entities/user.entity';
 import { Role } from '@/infra/utils/enums/roles';
 import { UserStatus } from '@/infra/utils/enums/status';
 

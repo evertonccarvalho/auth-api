@@ -5,8 +5,8 @@ import { UserEntity } from '../entities/user.entity';
 import { UserModel } from '@/domain/model/user';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
-import { UserModelMapper } from '../http/users/dto/user-model.mapper';
-import { UserOutputMapper } from '../http/users/dto/user-output.mapper';
+import { UserModelMapper } from '../http/users/mappers/user-model.mapper';
+import { UserOutputMapper } from '../http/users/mappers/user-output.mapper';
 import { UpdateUserDto } from '../http/users/dto';
 
 @Injectable()

@@ -18,7 +18,7 @@ import { ListUsersUseCase } from '@/domain/use-case/users/listusers.usecase';
 import { UpdateUserDto } from './dto';
 import { UserOutput } from './dto/user-output';
 import { UpdateUserUseCase } from '@/domain/use-case/users/update-user.usecase';
-import { UserOutputMapper } from './dto/user-output.mapper';
+import { UserOutputMapper } from './mappers/user-output.mapper';
 
 @ApiTags('Users')
 @Controller('users')
