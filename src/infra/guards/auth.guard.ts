@@ -4,14 +4,14 @@ import {
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtTokenService } from '../services/jwt/jwt.service';
+import { AuthService } from '../services/auth/auth.service';
 import { IS_PUBLIC_KEY } from '../decorators/auth.decorator';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(
-    private authService: JwtTokenService,
+    private authService: AuthService,
     private reflector: Reflector,
   ) {}
 

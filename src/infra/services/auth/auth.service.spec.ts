@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { JwtTokenService } from './jwt.service';
+import { AuthService } from './auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-describe('JwtService', () => {
-  let service: JwtTokenService;
+describe('AuthService', () => {
+  let service: AuthService;
   let jwtService: JwtService;
   let configService: ConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        JwtTokenService,
+        AuthService,
         {
           provide: JwtService,
           useValue: {
@@ -28,7 +28,7 @@ describe('JwtService', () => {
       ],
     }).compile();
 
-    service = module.get<JwtTokenService>(JwtTokenService);
+    service = module.get<AuthService>(AuthService);
     jwtService = module.get<JwtService>(JwtService);
     configService = module.get<ConfigService>(ConfigService);
   });

@@ -5,11 +5,11 @@ import { ConfigsModule } from './infra/config/config.module';
 import { RolesGuard } from './infra/guards/role.guard';
 import { UsersModule } from './infra/users.module';
 import { MoviesModule } from './infra/movies.module';
-import { JwtServiceModule } from './infra/services/jwt/jwt.module';
-import { JwtAuthGuard } from './infra/guards/jwtAuth.guard';
+import { AuhModule } from './infra/auth.module';
+import { AuthGuard } from './infra/guards/auth.guard';
 
 @Module({
-  imports: [ConfigsModule, JwtServiceModule, UsersModule, MoviesModule],
+  imports: [ConfigsModule, AuhModule, UsersModule, MoviesModule],
   controllers: [],
   providers: [
     {
@@ -18,7 +18,7 @@ import { JwtAuthGuard } from './infra/guards/jwtAuth.guard';
     },
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard,
+      useClass: AuthGuard,
     },
   ],
 })

@@ -14,8 +14,8 @@ describe('Entity unit tests', () => {
     const entity = new StubEntity(props);
 
     expect(entity.props).toStrictEqual(props);
-    expect(entity._id).not.toBeNull();
-    expect(uuidValidate(entity._id)).toBeTruthy();
+    expect(entity.id).not.toBeNull();
+    expect(uuidValidate(entity.id)).toBeTruthy();
   });
 
   it('Should accept a valid uuid', () => {
@@ -23,8 +23,8 @@ describe('Entity unit tests', () => {
     const id = '698b0c7e-c68b-4cfd-99dd-aac08024be8d';
     const entity = new StubEntity(props, id);
 
-    expect(uuidValidate(entity._id)).toBeTruthy();
-    expect(entity._id).toBe(id);
+    expect(uuidValidate(entity.id)).toBeTruthy();
+    expect(entity.id).toBe(id);
   });
 
   it('Should convert a entity to a Javascript Object', () => {

@@ -1,30 +1,44 @@
-// import { Module } from '@nestjs/common';
-// import { AuthService } from './services/auth.service';
-// import { PassportModule } from '@nestjs/passport';
-// import { JwtModule, JwtService } from '@nestjs/jwt';
-// import { TypeOrmModule } from '@nestjs/typeorm';
-// import { UserEntity } from '@/infra/entities/user.entity';
-// import { AuthRepository } from './repositories/auth.repository';
-// import { AuthController } from './http/auth/auth.controller';
-// import { BcryptjsHashProvider } from './providers/bcrypt/bcryptjs-hash.provider';
-// import { JwtStrategy } from '@/infra/strategies/jwt.estrategy';
-// @Module({
-//   imports: [
-//     TypeOrmModule.forFeature([UserEntity]),
-//     PassportModule,
-//     JwtModule.register({
-//       secret: process.env.JWT_SECRET,
-//       signOptions: { expiresIn: process.env.JWT_EXPIRATION },
-//     }),
-//   ],
-//   controllers: [AuthController],
-//   providers: [
-//     AuthService,
-//     BcryptjsHashProvider,
-//     AuthRepository,
-//     JwtStrategy,
-//     JwtService,
-//   ],
-//   exports: [AuthService],
-// })
-// export class AuthMVCModule {}
+import { Module } from '@nestjs/common';
+import { AuthService } from './services/auth/auth.service';
+import { JwtModule as Jwt } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthController } from './http/auth/Auth.controller';
+import { UserRepository } from '@/domain/repositories/user.repository';
+import { DatabaseUsersRepository } from '@/infra/repositories/database-users.repository';
+import { HashProvider } from '@/domain/protocols/hash-provider';
+import { BcryptjsHashProvider } from '@/infra/providers/bcrypt/bcryptjs-hash.provider';
+import { SignInUseCase } from '@/domain/use-case/auth/signip.usecase';
+import { SignupUseCase } from '@/domain/use-case/auth/signup.usecase';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from '@/infra/entities/user.entity';
+
+@Module({
+  imports: [
+    Jwt.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService], // Adicionado para corrigir a injeção de dependência
+      useFactory: async (configService: ConfigService) => ({
+        global: true,
+        secret: configService.get<string>('JWT.secret'), // Ajustado para obter como string
+        signOptions: { expiresIn: configService.get<number>('JWT.expiresIn') }, // Ajustado para obter como número
+      }),
+    }),
+    TypeOrmModule.forFeature([UserEntity]),
+  ],
+  controllers: [AuthController],
+  providers: [
+    AuthService,
+    {
+      provide: UserRepository,
+      useClass: DatabaseUsersRepository,
+    },
+    {
+      provide: HashProvider,
+      useClass: BcryptjsHashProvider,
+    },
+    SignInUseCase.UseCase,
+    SignupUseCase.UseCase,
+  ],
+  exports: [AuthService],
+})
+export class AuhModule {}
