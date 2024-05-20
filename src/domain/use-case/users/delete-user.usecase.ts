@@ -1,5 +1,6 @@
 import { DefaultUseCase } from '@/domain/protocols/use-case';
 import { UserRepository } from '@/domain/repositories/user.repository';
+import { Injectable } from '@nestjs/common';
 
 export namespace DeleteUserUseCase {
   export type Input = {
@@ -7,7 +8,7 @@ export namespace DeleteUserUseCase {
   };
 
   export type Output = void;
-
+  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private userRepository: UserRepository) {}
 

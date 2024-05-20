@@ -9,6 +9,7 @@ import { UserRepository } from '@/domain/repositories/user.repository';
 import { HashProvider } from '@/domain/protocols/hash-provider';
 import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
 import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
+import { DeleteUserUseCase } from '@/domain/use-case/users/delete-user.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
@@ -19,6 +20,7 @@ import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
       useClass: DatabaseUsersRepository,
     },
     GetUserUseCase.UseCase,
+    DeleteUserUseCase.UseCase,
   ],
 })
 export class UsersModule {}

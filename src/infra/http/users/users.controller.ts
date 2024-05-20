@@ -20,21 +20,30 @@ import { UserOutput } from './dto/user-output';
 import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
 import { SigninDto } from '../auth/dto';
 import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
+import { DeleteUserUseCase } from '@/domain/use-case/users/delete-user.usecase';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly getUserUseCase: GetUserUseCase.UseCase) {}
+  constructor(
+    private readonly getUserUseCase: GetUserUseCase.UseCase,
+    private readonly deleteUserUseCase: DeleteUserUseCase.UseCase,
+  ) {}
 
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    console.log('Received ID:', id);
     const output = await this.getUserUseCase.execute({ id }); // Passando um objeto com a chave `id`
     return new UserPresenter(output);
   }
-
+  @ApiResponse({ status: 404, description: 'Não encontrado' })
+  @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @HttpCode(204)
+  @Delete(':id')
+  async remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.deleteUserUseCase.execute({ id });
+  }
   // @ApiForbiddenResponse({ description: 'Acesso negado' })
   // @Get()
   // findAll() {
@@ -49,12 +58,5 @@ export class UsersController {
   //   @Body() updateUserDto: UpdateUserDto,
   // ) {
   //   return this.SignupUseCase.update(id, updateUserDto);
-  // }
-
-  // @ApiResponse({ status: 404, description: 'Não encontrado' })
-  // @ApiForbiddenResponse({ description: 'Acesso negado' })
-  // @Delete(':id')
-  // remove(@Param('id', new ParseUUIDPipe()) id: string) {
-  //   return this.SignupUseCase.remove(id);
   // }
 }

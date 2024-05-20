@@ -1,11 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { UserModel } from '@/domain/model/user';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
-import { NotFoundError } from '@/domain/errors/not-found-error';
 import { UserModelMapper } from '../http/users/dto/user-model.mapper';
 
 @Injectable()
@@ -22,7 +21,7 @@ export class DatabaseUsersRepository implements UserRepository {
   async findByEmail(email: string): Promise<UserModel | undefined> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
-      throw new NotFoundException(`User with email ${email} not found`);
+      throw new UserNotFoundError();
     }
     return user;
   }
@@ -35,8 +34,12 @@ export class DatabaseUsersRepository implements UserRepository {
   }
 
   async findById(id: string): Promise<UserEntity | undefined> {
-    console.log('id no reposiroty', id);
     return this._get(id);
+  }
+
+  async delete(id: string): Promise<void> {
+    await this._get(id);
+    await this.userRepository.delete(id);
   }
 
   async findAll(): Promise<UserEntity[]> {
@@ -45,7 +48,7 @@ export class DatabaseUsersRepository implements UserRepository {
   }
 
   async update(id: string, entity: UserEntity): Promise<UserEntity> {
-    await this.findById(id); // Verifica se o usuário existe antes de atualizar
+    await this.findById(id);
     const updatedUser = await this.userRepository.save({
       ...entity,
       id,
@@ -53,22 +56,15 @@ export class DatabaseUsersRepository implements UserRepository {
     return updatedUser;
   }
 
-  async delete(id: string): Promise<void> {
-    const result = await this.userRepository.delete(id);
-    if (result.affected === 0) {
-      throw new UserNotFoundError();
-    }
-  }
-
   protected async _get(id: string): Promise<UserModel | undefined> {
     try {
       const user = await this.userRepository.findOne({ where: { id } });
       if (!user) {
-        throw new NotFoundError(`UserModel not found using ID ${id}`);
+        throw new UserNotFoundError();
       }
       return UserModelMapper.toEntity(user);
     } catch {
-      throw new NotFoundError(`UserModel not found using ID ${id}`);
+      throw new UserNotFoundError();
     }
   }
 }
