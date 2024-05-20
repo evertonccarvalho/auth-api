@@ -12,7 +12,7 @@ import { MovieEntity } from './entities/movie.entity';
 import { CreateMovieUseCase } from '@/domain/use-case/movie/create-movie';
 
 @Module({
-  imports: [AuthModule, TypeOrmModule.forFeature([MovieEntity])],
+  imports: [TypeOrmModule.forFeature([MovieEntity])],
   controllers: [MoviesController],
   providers: [
     // Fornecendo o repositório específico para filmes como provedor de MovieRepository

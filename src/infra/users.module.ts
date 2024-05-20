@@ -7,7 +7,7 @@ import { UserEntity } from './entities/user.entity';
 import { AuthModule } from '@/infra/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), AuthModule],
+  imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UsersController],
   providers: [UsersService, DatabaseUsersRepository],
 })

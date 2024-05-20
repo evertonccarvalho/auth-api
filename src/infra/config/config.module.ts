@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { configurations } from './configurations';
-import { POSTGRESQL } from './database/postgres';
+import { PersistenceModule } from '../persistence/persistence.module';
 
 @Module({
   imports: [
@@ -9,7 +9,10 @@ import { POSTGRESQL } from './database/postgres';
       load: [...configurations],
       isGlobal: true,
     }),
-    POSTGRESQL,
+    PersistenceModule.register({
+      type: 'typeorm',
+      global: true,
+    }),
   ],
 })
 export class ConfigsModule {}

@@ -8,6 +8,7 @@ import { RolesGuard } from './infra/guards/role.guard';
 import { UsersModule } from './infra/users.module';
 import { AuthModule } from './infra/auth.module';
 import { MoviesModule } from './infra/movies.module';
+import { PersistenceModule } from './infra/persistence/persistence.module';
 
 @Module({
   imports: [ConfigsModule, UsersModule, AuthModule],
