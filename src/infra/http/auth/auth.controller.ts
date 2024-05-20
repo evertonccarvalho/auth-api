@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SignupDto } from './dto/sign-up.dto';
 import { SigninDto } from './dto/sign-in.dto';
-import { AuthenticatedUser } from '@/domain/adapters';
+import { AuthenticatedUser } from '@/domain/protocols';
 import { AuthService } from '../../services/auth.service';
 import { SkipAuth } from '@/infra/decorators/auth.decorator';
 

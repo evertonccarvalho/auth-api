@@ -15,6 +15,6 @@ export class CreateMovieUseCase {
 
   async execute(input: CreateMovieUseCaseCommand): Promise<MovieModel> {
     const movie = new MovieModel(input);
-    return await this.movieRepository.create(movie);
+    return await this.movieRepository.insert(movie);
   }
 }

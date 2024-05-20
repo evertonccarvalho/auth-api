@@ -31,7 +31,7 @@ export class DatabaseMoviesRepository implements MovieRepository {
     return this.toMovie(entity);
   }
 
-  async updateEntity(id: string, movie: MovieListDto): Promise<MovieModel> {
+  async update(id: string, movie: MovieListDto): Promise<MovieModel> {
     const entity = await this.findById(id);
 
     entity.title = movie.title;
@@ -45,12 +45,12 @@ export class DatabaseMoviesRepository implements MovieRepository {
     return this.toMovie(entity);
   }
 
-  async findMany(): Promise<MovieModel[]> {
+  async findAll(): Promise<MovieModel[]> {
     const movies = await this.movieRepository.find();
     return movies.map((entity) => this.toMovie(entity));
   }
 
-  async create(movie: MovieModel): Promise<MovieModel> {
+  async insert(movie: MovieModel): Promise<MovieModel> {
     const data = this.toMovie(movie);
     const entity = this.movieRepository.create(data);
     const createdMovie = await this.movieRepository.save(entity);

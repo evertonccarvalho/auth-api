@@ -1,19 +1,26 @@
-import { Role } from '@/infra/utils/enums/roles';
-import { UserStatus } from '@/infra/utils/enums/status';
-import { UUID } from '@/infra/utils/libs/id';
 import {
-  BeforeInsert,
+  Entity,
   Column,
   CreateDateColumn,
-  Entity,
-  PrimaryColumn,
   UpdateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Role } from '@/infra/utils/enums/roles';
+import { UserStatus } from '@/infra/utils/enums/status';
+import { BaseEntity } from '@/domain/entities/entity';
 
-@Entity()
-export class UserEntity {
-  @PrimaryColumn('uuid')
-  id: string;
+interface UserProps {
+  name: string;
+  email: string;
+  password: string;
+  status: UserStatus;
+  roles: Role[];
+}
+
+@Entity('users')
+export class UserEntity extends BaseEntity<UserProps> {
+  @PrimaryGeneratedColumn('uuid')
+  _id: string;
 
   @Column({
     type: 'varchar',
@@ -53,8 +60,12 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @BeforeInsert()
-  generetedId() {
-    this.id = UUID.generate();
+  constructor(props: UserProps, id?: string) {
+    super(props, id);
+    this._id = id; // Aqui, utilizamos _id como a coluna primária
+  }
+
+  get id() {
+    return this._id; // Definimos um getter para 'id' que retorna '_id'
   }
 }

@@ -9,6 +9,6 @@ export class GetMoviesUseCase {
   constructor(private readonly movieRepository: MovieRepository) {}
 
   async execute({}: GetMovieUseCaseCommand): Promise<MovieModel[]> {
-    return await this.movieRepository.findMany();
+    return await this.movieRepository.findAll();
   }
 }

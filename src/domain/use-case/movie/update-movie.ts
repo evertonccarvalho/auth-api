@@ -18,6 +18,6 @@ export class UpdateMovieUseCase {
     id: string,
     data: UpdateMovieUseCaseRequest,
   ): Promise<MovieModel> {
-    return this.movieRepository.updateEntity(id, data);
+    return this.movieRepository.update(id, data);
   }
 }

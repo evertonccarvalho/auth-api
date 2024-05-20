@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { AuthenticatedUser, JwtPayload } from '../../domain/adapters';
+import { AuthenticatedUser, JwtPayload } from '../../domain/protocols';
 import { SigninDto, SignupDto } from '../http/auth/dto';
 import { AuthRepository } from '../repositories/auth.repository';
 import { UserEntity } from '@/infra/entities/user.entity';
