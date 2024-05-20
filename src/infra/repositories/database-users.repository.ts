@@ -5,6 +5,8 @@ import { UserEntity } from '../entities/user.entity';
 import { UserModel } from '@/domain/model/user';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
+import { NotFoundError } from '@/domain/errors/not-found-error';
+import { UserModelMapper } from '../http/users/dto/user-model.mapper';
 
 @Injectable()
 export class DatabaseUsersRepository implements UserRepository {
@@ -33,11 +35,8 @@ export class DatabaseUsersRepository implements UserRepository {
   }
 
   async findById(id: string): Promise<UserEntity | undefined> {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) {
-      throw new UserNotFoundError();
-    }
-    return user;
+    console.log('id no reposiroty', id);
+    return this._get(id);
   }
 
   async findAll(): Promise<UserEntity[]> {
@@ -58,6 +57,18 @@ export class DatabaseUsersRepository implements UserRepository {
     const result = await this.userRepository.delete(id);
     if (result.affected === 0) {
       throw new UserNotFoundError();
+    }
+  }
+
+  protected async _get(id: string): Promise<UserModel | undefined> {
+    try {
+      const user = await this.userRepository.findOne({ where: { id } });
+      if (!user) {
+        throw new NotFoundError(`UserModel not found using ID ${id}`);
+      }
+      return UserModelMapper.toEntity(user);
+    } catch {
+      throw new NotFoundError(`UserModel not found using ID ${id}`);
     }
   }
 }

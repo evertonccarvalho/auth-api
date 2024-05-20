@@ -19,23 +19,26 @@ import { UserPresenter } from '@/infra/presenters/user.presenter';
 import { UserOutput } from './dto/user-output';
 import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
 import { SigninDto } from '../auth/dto';
+import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor() {}
+  constructor(private readonly getUserUseCase: GetUserUseCase.UseCase) {}
+
+  @ApiResponse({ status: 404, description: 'Não encontrado' })
+  @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @Get(':id')
+  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+    console.log('Received ID:', id);
+    const output = await this.getUserUseCase.execute({ id }); // Passando um objeto com a chave `id`
+    return new UserPresenter(output);
+  }
 
   // @ApiForbiddenResponse({ description: 'Acesso negado' })
   // @Get()
   // findAll() {
   //   return this.SignupUseCase.findAll();
-  // }
-
-  // @ApiResponse({ status: 404, description: 'Não encontrado' })
-  // @ApiForbiddenResponse({ description: 'Acesso negado' })
-  // @Get(':id')
-  // findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-  //   return this.SignupUseCase.findOne(id);
   // }
 
   // @ApiResponse({ status: 404, description: 'Não encontrado' })

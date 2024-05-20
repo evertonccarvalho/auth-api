@@ -5,10 +5,8 @@ import { UserEntity } from '@/infra/entities/user.entity';
 import { BadRequestError } from '@/domain/errors/bad-request-error';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
-import {
-  UserOutput,
-  UserOutputMapper,
-} from '@/infra/http/users/dto/user-output';
+import { UserOutput } from '@/infra/http/users/dto/user-output';
+import { UserOutputMapper } from '@/infra/http/users/dto/user-output.mapper';
 
 export namespace SignupUseCase {
   export type Input = {

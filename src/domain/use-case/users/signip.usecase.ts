@@ -6,10 +6,8 @@ import { BadRequestError } from '@/domain/errors/bad-request-error';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error';
-import {
-  UserOutput,
-  UserOutputMapper,
-} from '@/infra/http/users/dto/user-output';
+import { UserOutput } from '@/infra/http/users/dto/user-output';
+import { UserOutputMapper } from '@/infra/http/users/dto/user-output.mapper';
 
 export namespace SignInUseCase {
   export type Input = {

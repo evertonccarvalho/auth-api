@@ -1,12 +1,9 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthenticatedUser } from '@/domain/protocols';
-import { AuthService } from '../../services/auth.service';
 import { SkipAuth } from '@/infra/decorators/auth.decorator';
 import { SigninDto, SignupDto } from '@/infra/http/auth/dto';
 import { SignupUseCase } from '@/domain/use-case/users/signup.usecase';
 import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
-import { JwtServiceModule } from './jwt.module';
 import { JwtTokenService } from './jwt.service';
 import { UserPresenter } from '@/infra/presenters/user.presenter';
 
