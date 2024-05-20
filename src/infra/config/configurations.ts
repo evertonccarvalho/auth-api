@@ -36,6 +36,7 @@ const DBConfig = registerAs(ConfigKey.db, () => ({
 
 const JWTConfig = registerAs(ConfigKey.jwt, () => ({
   secret: process.env.JWT_SECRET,
+  expiresIn: 86400,
 }));
 
 const GeneralConfig = registerAs(ConfigKey.general, () => ({

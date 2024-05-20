@@ -10,6 +10,7 @@ import {
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from '../../services/users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { SkipAuth } from '@/infra/decorators/auth.decorator';
 
 @ApiTags('Users')
 @Controller('users')

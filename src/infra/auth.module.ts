@@ -27,4 +27,4 @@ import { JwtStrategy } from '@/infra/strategies/jwt.estrategy';
   ],
   exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthMVCModule {}
