@@ -5,7 +5,6 @@ import { ConfigsModule } from './infra/config/config.module';
 import { RolesGuard } from './infra/guards/role.guard';
 import { UsersModule } from './infra/users.module';
 import { MoviesModule } from './infra/movies.module';
-import { PersistenceModule } from './infra/persistence/persistence.module';
 import { JwtServiceModule } from './infra/services/jwt/jwt.module';
 import { JwtAuthGuard } from './infra/guards/jwtAuth.guard';
 

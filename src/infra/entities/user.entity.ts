@@ -13,8 +13,8 @@ interface UserProps {
   name: string;
   email: string;
   password: string;
-  status: UserStatus;
-  roles: Role[];
+  status?: UserStatus;
+  roles?: Role[];
 }
 
 @Entity('users')
@@ -50,7 +50,7 @@ export class UserEntity extends BaseEntity<UserProps> {
 
   @Column({
     type: 'simple-array',
-    default: ['user'],
+    default: [Role.User],
   })
   roles: Role[];
 
@@ -59,13 +59,4 @@ export class UserEntity extends BaseEntity<UserProps> {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  constructor(props: UserProps, id?: string) {
-    super(props, id);
-    this._id = id; // Aqui, utilizamos _id como a coluna primária
-  }
-
-  get id() {
-    return this._id; // Definimos um getter para 'id' que retorna '_id'
-  }
 }

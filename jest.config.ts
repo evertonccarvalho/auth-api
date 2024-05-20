@@ -10,7 +10,6 @@ export default {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  testTimeout: 20000,
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
