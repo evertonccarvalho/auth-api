@@ -7,6 +7,7 @@ import { BcryptjsHashProvider } from './providers/bcrypt/bcryptjs-hash.provider'
 import { SignupUseCase } from '@/domain/use-case/users/signup.usecase';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { HashProvider } from '@/domain/protocols/hash-provider';
+import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
@@ -22,6 +23,7 @@ import { HashProvider } from '@/domain/protocols/hash-provider';
       useClass: BcryptjsHashProvider,
     },
     SignupUseCase.UseCase,
+    SignInUseCase.UseCase,
   ],
 })
 export class UsersModule {}

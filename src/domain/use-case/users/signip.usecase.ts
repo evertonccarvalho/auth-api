@@ -6,15 +6,18 @@ import { BadRequestError } from '@/domain/errors/bad-request-error';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error';
+import {
+  UserOutput,
+  UserOutputMapper,
+} from '@/infra/http/users/dto/user-output';
 
 export namespace SignInUseCase {
   export type Input = {
-    name: string;
     email: string;
     password: string;
   };
 
-  export type Output = SigninDto;
+  export type Output = UserOutput;
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
@@ -41,7 +44,7 @@ export namespace SignInUseCase {
         throw new InvalidCredentialsError('Invalid credentials');
       }
 
-      return entity.toJSON();
+      return UserOutputMapper.toOutput(entity);
     }
   }
 }

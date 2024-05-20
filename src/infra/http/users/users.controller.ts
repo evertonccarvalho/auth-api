@@ -17,6 +17,8 @@ import { SignupUseCase } from '@/domain/use-case/users/signup.usecase';
 import { SignupDto } from './dto/sign-up.dto';
 import { UserPresenter } from '@/infra/presenters/user.presenter';
 import { UserOutput } from './dto/user-output';
+import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
+import { SigninDto } from '../auth/dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -31,6 +33,7 @@ export class UsersController {
     const response = await this.signupUseCase.execute(signupDto);
     return new UserPresenter(response);
   }
+
   // @ApiForbiddenResponse({ description: 'Acesso negado' })
   // @Get()
   // findAll() {
