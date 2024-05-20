@@ -8,6 +8,7 @@ import { SignupUseCase } from '@/domain/use-case/users/signup.usecase';
 import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
 import { JwtServiceModule } from './jwt.module';
 import { JwtTokenService } from './jwt.service';
+import { UserPresenter } from '@/infra/presenters/user.presenter';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -24,5 +25,14 @@ export class JwtController {
   async signIn(@Body() signInDto: SigninDto) {
     const output = await this.signinUseCase.execute(signInDto);
     return this.authService.generateJwt(output.id);
+  }
+
+  @SkipAuth()
+  @Post('signup')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiResponse({ status: 409, description: 'Conflito de email' })
+  async create(@Body() signupDto: SignupDto) {
+    const response = await this.signupUseCase.execute(signupDto);
+    return new UserPresenter(response);
   }
 }

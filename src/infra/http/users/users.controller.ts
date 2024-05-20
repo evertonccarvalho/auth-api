@@ -23,16 +23,7 @@ import { SigninDto } from '../auth/dto';
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly signupUseCase: SignupUseCase.UseCase) {}
-
-  @SkipAuth()
-  @Post('signup')
-  @HttpCode(HttpStatus.CREATED)
-  @ApiResponse({ status: 409, description: 'Conflito de email' })
-  async create(@Body() signupDto: SignupDto) {
-    const response = await this.signupUseCase.execute(signupDto);
-    return new UserPresenter(response);
-  }
+  constructor() {}
 
   // @ApiForbiddenResponse({ description: 'Acesso negado' })
   // @Get()
