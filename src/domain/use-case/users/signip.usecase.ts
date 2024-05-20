@@ -1,23 +1,20 @@
 import { DefaultUseCase } from '@/domain/protocols/use-case';
-import { SignupDto } from '@/infra/http/auth/dto';
+import { SigninDto, SignupDto } from '@/infra/http/auth/dto';
 import { HashProvider } from '@/domain/protocols/hash-provider';
 import { UserEntity } from '@/infra/entities/user.entity';
 import { BadRequestError } from '@/domain/errors/bad-request-error';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
-import {
-  UserOutput,
-  UserOutputMapper,
-} from '@/infra/http/users/dto/user-output';
+import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error';
 
-export namespace SignupUseCase {
+export namespace SignInUseCase {
   export type Input = {
     name: string;
     email: string;
     password: string;
   };
 
-  export type Output = UserOutput;
+  export type Output = SigninDto;
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
@@ -27,21 +24,24 @@ export namespace SignupUseCase {
     ) {}
 
     async execute(input: Input): Promise<Output> {
-      const { email, name, password } = input;
-      if (!email || !name || !password) {
+      const { email, password } = input;
+
+      if (!email || !password) {
         throw new BadRequestError('Input data not provided');
       }
 
-      await this.userRepository.emailExists(email);
+      const entity = await this.userRepository.findByEmail(email);
 
-      const hashPassword = await this.hashProvider.generateHash(password);
-
-      const entity = new UserEntity(
-        Object.assign(input, { password: hashPassword }),
+      const hashPasswordMatches = await this.hashProvider.compareHash(
+        password,
+        entity.password,
       );
 
-      await this.userRepository.insert(entity);
-      return UserOutputMapper.toOutput(entity);
+      if (!hashPasswordMatches) {
+        throw new InvalidCredentialsError('Invalid credentials');
+      }
+
+      return entity.toJSON();
     }
   }
 }

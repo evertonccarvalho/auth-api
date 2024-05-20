@@ -13,11 +13,8 @@ export class DatabaseUsersRepository implements UserRepository {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async insert(entity: UserEntity): Promise<UserEntity> {
-    console.log(entity);
-
-    const newUser = await this.userRepository.save(entity.toJSON());
-    return newUser;
+  async insert(entity: UserEntity): Promise<void> {
+    await this.userRepository.save(entity.toJSON());
   }
 
   async findByEmail(email: string): Promise<UserModel | undefined> {

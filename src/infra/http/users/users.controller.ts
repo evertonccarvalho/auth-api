@@ -15,6 +15,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { SkipAuth } from '@/infra/decorators/auth.decorator';
 import { SignupUseCase } from '@/domain/use-case/users/signup.usecase';
 import { SignupDto } from './dto/sign-up.dto';
+import { UserPresenter } from '@/infra/presenters/user.presenter';
+import { UserOutput } from './dto/user-output';
 
 @ApiTags('Users')
 @Controller('users')
@@ -25,9 +27,9 @@ export class UsersController {
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({ status: 409, description: 'Conflito de email' })
-  create(@Body() signupDto: SignupDto) {
-    const response = this.signupUseCase.execute(signupDto);
-    return response;
+  async create(@Body() signupDto: SignupDto) {
+    const response = await this.signupUseCase.execute(signupDto);
+    return new UserPresenter(response);
   }
   // @ApiForbiddenResponse({ description: 'Acesso negado' })
   // @Get()

@@ -1,4 +1,4 @@
-import { CreateMovieUseCaseCommand } from '../use-case/movie/create-movie';
+import { MovieProps } from '../use-case/movie/create-movie';
 export class MovieModel {
   id: string;
   title: string;
@@ -7,7 +7,7 @@ export class MovieModel {
   director: string;
   year: number;
 
-  constructor(props: CreateMovieUseCaseCommand) {
+  constructor(props: MovieProps) {
     this.title = props.title;
     this.synopsis = props.synopsis;
     this.duration = props.duration;

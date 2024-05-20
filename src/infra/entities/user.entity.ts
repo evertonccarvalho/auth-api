@@ -9,13 +9,15 @@ import { Role } from '@/infra/utils/enums/roles';
 import { UserStatus } from '@/infra/utils/enums/status';
 import { BaseEntity } from '@/domain/entities/entity';
 
-interface UserProps {
+export type UserProps = {
   name: string;
   email: string;
   password: string;
   status?: UserStatus;
   roles?: Role[];
-}
+  createdAt?: Date;
+  updatedAt?: Date;
+};
 
 @Entity('users')
 export class UserEntity extends BaseEntity<UserProps> {
