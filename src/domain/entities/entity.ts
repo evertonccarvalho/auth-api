@@ -1,21 +1,17 @@
-import { v4 as uuidv4 } from 'uuid';
+import { UUID } from '@/infra/utils/libs/uuid';
 
 export abstract class BaseEntity<Props = any> {
-  public readonly _id: string;
+  public readonly id: string;
   public readonly props: Props;
 
   constructor(props: Props, id?: string) {
     this.props = props;
-    this._id = id || uuidv4();
-  }
-
-  get id() {
-    return this._id;
+    this.id = id || UUID.generate();
   }
 
   toJSON(): Required<{ id: string } & Props> {
     return {
-      id: this._id,
+      id: this.id,
       ...this.props,
     } as Required<{ id: string } & Props>;
   }

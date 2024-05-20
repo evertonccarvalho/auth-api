@@ -20,7 +20,7 @@ interface UserProps {
 @Entity('users')
 export class UserEntity extends BaseEntity<UserProps> {
   @PrimaryGeneratedColumn('uuid')
-  _id: string;
+  id: string;
 
   @Column({
     type: 'varchar',
