@@ -10,7 +10,7 @@ import { JwtServiceModule } from './infra/services/jwt/jwt.module';
 import { JwtAuthGuard } from './infra/guards/jwtAuth.guard';
 
 @Module({
-  imports: [ConfigsModule, UsersModule, JwtServiceModule],
+  imports: [ConfigsModule, JwtServiceModule, UsersModule, MoviesModule],
   controllers: [],
   providers: [
     {

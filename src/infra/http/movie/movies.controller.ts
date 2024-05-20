@@ -15,14 +15,15 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { CreateMovieUseCase } from '@/domain/use-case/movie/create-movie';
 import { CreateMovieDto, UpdateMovieDto } from './dto';
 import { GetMoviesUseCase } from '@/domain/use-case/movie/get-movies';
 import { DeleteMovieUseCase } from '@/domain/use-case/movie/delete-movie';
 import { GetMovieUseCase } from '@/domain/use-case/movie/get-movie';
 import { UpdateMovieUseCase } from '@/domain/use-case/movie/update-movie';
+import { SkipAuth } from '@/infra/decorators/auth.decorator';
 
+@SkipAuth()
 @ApiTags('Movies')
 @ApiBearerAuth()
 @Controller('/movies')
@@ -43,9 +44,7 @@ export class MoviesController {
   }
 
   @Get()
-  @CacheKey('movies')
   @ApiForbiddenResponse({ description: 'Acesso negado' })
-  @UseInterceptors(CacheInterceptor)
   findAll() {
     return this.getMoviesUseCase.execute({});
   }
