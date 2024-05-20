@@ -2,7 +2,7 @@ import { DefaultUseCase } from '@/domain/protocols/use-case';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
 import { Injectable } from '@nestjs/common';
-import { UserOutputMapper } from '../http/users/dto/user-output.mapper';
+import { UserOutputMapper } from '../../../infra/http/users/dto/user-output.mapper';
 
 // search-input.ts
 export interface SearchInput {

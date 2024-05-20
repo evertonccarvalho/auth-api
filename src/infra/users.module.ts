@@ -10,7 +10,8 @@ import { HashProvider } from '@/domain/protocols/hash-provider';
 import { SignInUseCase } from '@/domain/use-case/users/signip.usecase';
 import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
 import { DeleteUserUseCase } from '@/domain/use-case/users/delete-user.usecase';
-import { ListUsersUseCase } from './repositories/listusers.usecase';
+import { ListUsersUseCase } from '../domain/use-case/users/listusers.usecase';
+import { UpdateUserUseCase } from '@/domain/use-case/users/update-user.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
@@ -22,6 +23,7 @@ import { ListUsersUseCase } from './repositories/listusers.usecase';
     },
     GetUserUseCase.UseCase,
     ListUsersUseCase.UseCase,
+    UpdateUserUseCase.UseCase,
     DeleteUserUseCase.UseCase,
   ],
 })

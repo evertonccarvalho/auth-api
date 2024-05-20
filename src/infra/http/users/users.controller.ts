@@ -5,6 +5,8 @@ import {
   Delete,
   ParseUUIDPipe,
   HttpCode,
+  Put,
+  Body,
 } from '@nestjs/common';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -12,7 +14,11 @@ import { UserPresenter } from '@/infra/presenters/user.presenter';
 
 import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
 import { DeleteUserUseCase } from '@/domain/use-case/users/delete-user.usecase';
-import { ListUsersUseCase } from '@/infra/repositories/listusers.usecase';
+import { ListUsersUseCase } from '@/domain/use-case/users/listusers.usecase';
+import { UpdateUserDto } from './dto';
+import { UserOutput } from './dto/user-output';
+import { UpdateUserUseCase } from '@/domain/use-case/users/update-user.usecase';
+import { UserOutputMapper } from './dto/user-output.mapper';
 
 @ApiTags('Users')
 @Controller('users')
@@ -21,6 +27,7 @@ export class UsersController {
     private readonly getUserUseCase: GetUserUseCase.UseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase.UseCase,
     private readonly listUsersUseCase: ListUsersUseCase.UseCase,
+    private readonly updateUserUseCase: UpdateUserUseCase.UseCase,
   ) {}
 
   @ApiResponse({ status: 404, description: 'Não encontrado' })
@@ -44,13 +51,15 @@ export class UsersController {
     return this.listUsersUseCase.execute();
   }
 
-  // @ApiResponse({ status: 404, description: 'Não encontrado' })
-  // @ApiForbiddenResponse({ description: 'Acesso negado' })
-  // @Put(':id')
-  // update(
-  //   @Param('id', new ParseUUIDPipe()) id: string,
-  //   @Body() updateUserDto: UpdateUserDto,
-  // ) {
-  //   return this.SignupUseCase.update(id, updateUserDto);
-  // }
+  // @ApiResponse({ status: 200, description: 'Usuário atualizado', type: UserOutput })
+  @ApiResponse({ status: 400, description: 'Requisição inválida' })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateDto: UpdateUserDto) {
+    const output = await this.updateUserUseCase.execute({
+      id,
+      data: updateDto,
+    });
+    return new UserPresenter(output);
+  }
 }

@@ -6,6 +6,8 @@ import { UserModel } from '@/domain/model/user';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
 import { UserModelMapper } from '../http/users/dto/user-model.mapper';
+import { UserOutputMapper } from '../http/users/dto/user-output.mapper';
+import { UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
 export class DatabaseUsersRepository implements UserRepository {
@@ -47,13 +49,13 @@ export class DatabaseUsersRepository implements UserRepository {
     await this.userRepository.delete(id);
   }
 
-  async update(id: string, entity: UserEntity): Promise<UserEntity> {
-    await this.findById(id);
-    const updatedUser = await this.userRepository.save({
-      ...entity,
-      id,
-    });
-    return updatedUser;
+  async update(id: string, data: UpdateUserDto): Promise<UserEntity> {
+    const userToUpdate = await this.findById(id);
+
+    Object.assign(userToUpdate, data);
+
+    const updatedUser = await this.userRepository.save(userToUpdate);
+    return UserModelMapper.toEntity(updatedUser);
   }
 
   protected async _get(id: string): Promise<UserModel | undefined> {
