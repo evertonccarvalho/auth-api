@@ -1,5 +1,5 @@
 import { instanceToPlain } from 'class-transformer';
-import { UserPresenter } from '../../user.presenter';
+import { UserPresenter } from './user.presenter';
 import { UserStatus } from '@/domain/interfaces/enums/status';
 import { UserRoles } from '@/domain/interfaces/enums/roles';
 

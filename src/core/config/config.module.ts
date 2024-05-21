@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { configurations } from './configurations';
-import { PersistenceModule } from '../../infra/persistence/persistence.module';
+import { DataModule } from '../../infra/data/data.module';
 
 @Module({
   imports: [
@@ -9,7 +9,7 @@ import { PersistenceModule } from '../../infra/persistence/persistence.module';
       load: [...configurations],
       isGlobal: true,
     }),
-    PersistenceModule.register({
+    DataModule.register({
       type: 'typeorm',
       global: true,
     }),

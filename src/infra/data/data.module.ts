@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmDatabaseModule } from './typeorm/typeorm.module';
+import { TypeOrmDatabaseModule } from './typerom/typeorm.module';
 import { BcryptService } from '../cryptography/bcrypt/bcrypt.service';
 
 interface DatabaseOptions {
@@ -9,7 +9,7 @@ interface DatabaseOptions {
 }
 
 @Module({})
-export class PersistenceModule {
+export class DataModule {
   static register(options: DatabaseOptions): DynamicModule {
     const { type, global = false } = options;
 
@@ -27,7 +27,7 @@ export class PersistenceModule {
 
     return {
       global,
-      module: PersistenceModule,
+      module: DataModule,
       imports: imports,
       exports: exports,
     };

@@ -20,7 +20,7 @@ import {
   ListUsersUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
-import { UserPresenter } from '@/domain/presenters/user.presenter';
+import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
 
 @ApiTags('Users')

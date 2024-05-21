@@ -5,7 +5,7 @@ import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
 import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
 import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
 import { SkipAuth } from '@/core/decorators/auth.decorator';
-import { UserPresenter } from '@/domain/presenters/user.presenter';
+import { UserPresenter } from '@/presentation/presenters/user.presenter';
 
 @ApiTags('Auth')
 @Controller('auth')
