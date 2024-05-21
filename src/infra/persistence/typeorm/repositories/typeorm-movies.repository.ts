@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieModel } from '@/domain/model/movie';
 import { IMovieRepository } from '@/application/repositories/movie.repositoy';
-import { UserNotFoundError } from '@/presentation/exceptions';
 import { MovieEntity } from '../entities/movie.entity';
-import { MovieOutput } from '@/domain/dtos/movie';
+import { UpdateMovieDto } from '@/domain/dtos/movie';
+import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 
 @Injectable()
 export class TypeormMoviesRepository implements IMovieRepository {
@@ -14,57 +14,42 @@ export class TypeormMoviesRepository implements IMovieRepository {
     private readonly movieRepository: Repository<MovieEntity>,
   ) {}
 
-  async delete(id: string): Promise<void> {
-    const entity = await this.movieRepository.findOne({ where: { id: id } });
-    if (!entity) {
-      throw new UserNotFoundError();
-    }
-    await this.movieRepository.remove(entity);
+  async insert(movie: MovieEntity): Promise<MovieEntity> {
+    return await this.movieRepository.save(movie.toJSON());
   }
 
   async findById(id: string): Promise<MovieModel> {
-    const entity = await this.movieRepository.findOne({ where: { id: id } });
-    if (!entity) {
-      throw new UserNotFoundError();
-    }
-    return this.toMovie(entity);
-  }
-
-  async update(id: string, movie: MovieOutput): Promise<MovieModel> {
-    const entity = await this.findById(id);
-
-    entity.title = movie.title;
-    entity.synopsis = movie.synopsis;
-    entity.duration = movie.duration;
-    entity.director = movie.director;
-    entity.year = movie.year;
-
-    await this.movieRepository.save(entity);
-
-    return this.toMovie(entity);
+    return this._get(id);
   }
 
   async findAll(): Promise<MovieModel[]> {
     const movies = await this.movieRepository.find();
-    return movies.map((entity) => this.toMovie(entity));
+    return movies;
   }
 
-  async insert(movie: MovieModel): Promise<MovieModel> {
-    const data = this.toMovie(movie);
-    const entity = this.movieRepository.create(data);
-    const createdMovie = await this.movieRepository.save(entity);
-    return this.toMovie(createdMovie);
+  async delete(id: string): Promise<void> {
+    await this._get(id);
+    await this.movieRepository.delete(id);
   }
 
-  private toMovie(entity: MovieModel): MovieModel {
-    const movie: MovieModel = new MovieModel(entity);
+  async update(id: string, data: UpdateMovieDto): Promise<MovieEntity> {
+    const entity = await this.findById(id);
 
-    movie.id = entity.id;
-    movie.director = entity.director;
-    movie.duration = entity.duration;
-    movie.synopsis = entity.synopsis;
-    movie.title = entity.title;
-    movie.year = entity.year;
-    return movie;
+    Object.assign(entity, data);
+
+    const updatedUser = await this.movieRepository.save(entity);
+    return updatedUser;
+  }
+
+  protected async _get(id: string): Promise<MovieEntity | undefined> {
+    try {
+      const entity = await this.movieRepository.findOne({ where: { id } });
+      if (!entity) {
+        throw new NotFoundErrorException('Movie Not found');
+      }
+      return entity;
+    } catch {
+      throw new NotFoundErrorException('Movie Not found');
+    }
   }
 }

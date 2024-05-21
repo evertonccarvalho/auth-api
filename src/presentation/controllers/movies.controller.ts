@@ -7,6 +7,7 @@ import {
   Param,
   Put,
   ParseUUIDPipe,
+  HttpCode,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -14,16 +15,18 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CreateMovieDto, UpdateMovieDto } from '../../domain/dtos/movie';
+import {
+  CreateMovieDto,
+  MovieOutput,
+  UpdateMovieDto,
+} from '../../domain/dtos/movie';
 
 import { UpdateMovieUseCase } from '@/application/use-case/movie/update-movie.usecase';
 import { DeleteMovieUseCase } from '@/application/use-case/movie/delete-movie.usecase';
 import { GetMovieUseCase } from '@/application/use-case/movie/get-movie.usecase';
 import { CreateMovieUseCase } from '@/application/use-case/movie/create-movie.usecase';
 import { GetMoviesUseCase } from '@/application/use-case/movie/get-movies.usecase';
-import { SkipAuth } from '@/core/decorators/auth.decorator';
 
-@SkipAuth()
 @ApiTags('Movies')
 @ApiBearerAuth()
 @Controller('/movies')
@@ -36,35 +39,41 @@ export class MoviesController {
     private updateMoviesUseCase: UpdateMovieUseCase.UseCase,
   ) {}
 
-  @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @ApiForbiddenResponse({ description: 'Access denied' })
   @Post()
   create(@Body() createMovieDto: CreateMovieDto) {
     const response = this.createMovieUseCase.execute(createMovieDto);
     return response;
   }
 
+  @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
-  @ApiForbiddenResponse({ description: 'Acesso negado' })
   findAll() {
     return this.getMoviesUseCase.execute();
   }
 
-  @ApiResponse({ status: 404, description: 'Não encontrado' })
-  @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @ApiResponse({ status: 404, description: 'Not found' })
+  @ApiForbiddenResponse({ description: 'Access denied' })
   @Get(':id')
   findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.getMovieUseCase.execute({ id });
   }
 
-  @ApiResponse({ status: 404, description: 'Não encontrado' })
-  @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @ApiResponse({ status: 404, description: 'Not found' })
+  @ApiForbiddenResponse({ description: 'Access denied' })
+  @HttpCode(204)
   @Delete(':id')
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.deleteMoviesUseCase.execute({ id });
   }
 
-  @ApiResponse({ status: 404, description: 'Não encontrado' })
-  @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @ApiResponse({
+    status: 200,
+    description: 'Movie updated',
+    type: MovieOutput,
+  })
+  @ApiResponse({ status: 400, description: 'Invalid request' })
+  @ApiResponse({ status: 404, description: 'Movie not found' })
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,

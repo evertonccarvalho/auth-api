@@ -1,5 +1,5 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { SigninDto, SignupDto } from '../../domain/dtos/auth';
 import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
 import { AuthService } from '@/infra/cryptography/jwt/auth.service';
@@ -19,6 +19,8 @@ export class AuthController {
   @SkipAuth()
   @Post('signin')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Sign in to get JWT token' })
+  @ApiResponse({ status: 200, description: 'JWT token generated' })
   async signIn(@Body() signInDto: SigninDto) {
     const output = await this.signinUseCase.execute(signInDto);
     return this.authService.generateJwt(output.id);
@@ -26,8 +28,9 @@ export class AuthController {
 
   @SkipAuth()
   @Post('signup')
-  @HttpCode(HttpStatus.CREATED)
-  @ApiResponse({ status: 409, description: 'Conflito de email' })
+  @ApiOperation({ summary: 'Create a new user' })
+  @ApiResponse({ status: 201, description: 'User created' })
+  @ApiResponse({ status: 409, description: 'Email conflict' })
   async create(@Body() signupDto: SignupDto) {
     const response = await this.signupUseCase.execute(signupDto);
     return new UserPresenter(response);
