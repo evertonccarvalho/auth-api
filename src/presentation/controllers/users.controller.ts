@@ -55,8 +55,8 @@ export class UsersController {
 
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
-  @CacheKey('users')
-  @UseInterceptors(HttpCacheInterceptor)
+  // @CacheKey('users')
+  // @UseInterceptors(CacheInterceptor)
   findAll() {
     return this.listUsersUseCase.execute();
   }

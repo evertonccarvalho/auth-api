@@ -15,7 +15,7 @@ import { redisStore } from 'cache-manager-ioredis-yet';
           host: configService.get('CACHE.host'),
           port: configService.get('CACHE.port'),
           ttl: configService.get('CACHE.ttl'),
-          max: configService.get('CACHE.max'),
+          max: 2,
         };
       },
     }),
