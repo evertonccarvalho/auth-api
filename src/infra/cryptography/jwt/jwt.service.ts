@@ -7,7 +7,7 @@ type GenerateJwtProps = {
 };
 
 @Injectable()
-export class AuthService {
+export class JwtTokenService {
   constructor(
     private jwtService: JwtService,
     private configService: ConfigService,

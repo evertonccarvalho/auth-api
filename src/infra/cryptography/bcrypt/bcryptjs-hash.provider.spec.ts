@@ -1,10 +1,10 @@
-import { BcryptjsHashProvider } from './bcryptjs-hash.provider';
+import { BcryptService } from './bcrypt.service';
 
 describe('BcryptjsHashProvider unit tests', () => {
-  let sut: BcryptjsHashProvider;
+  let sut: BcryptService;
 
   beforeEach(() => {
-    sut = new BcryptjsHashProvider();
+    sut = new BcryptService();
   });
 
   it('Should return encrypted password', async () => {

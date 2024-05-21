@@ -1,7 +1,9 @@
-import { HashProvider } from '@/application/contracts/hash-provider.contract';
+import { IBcryptService } from '@/application/contracts/hash-provider.contract';
+import { Injectable } from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
 
-export class BcryptjsHashProvider implements HashProvider {
+@Injectable()
+export class BcryptService implements IBcryptService {
   async generateHash(payload: string): Promise<string> {
     return hash(payload, 6);
   }

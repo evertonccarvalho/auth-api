@@ -6,12 +6,12 @@ import {
 } from '@nestjs/common';
 import { IS_PUBLIC_KEY } from '../decorators/auth.decorator';
 import { Reflector } from '@nestjs/core';
-import { AuthService } from '@/infra/cryptography/jwt/auth.service';
+import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private authService: AuthService,
+    private authService: JwtTokenService,
     private reflector: Reflector,
   ) {}
 

@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
-import { JwtService } from '@nestjs/jwt';
+import { JwtTokenService } from './jwt.service';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 describe('AuthService', () => {
-  let service: AuthService;
-  let jwtService: JwtService;
-  let configService: ConfigService;
+  let service: JwtTokenService;
+  let jwtServiceMock: JwtService;
+  let configServiceMock: ConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        AuthService,
+        JwtTokenService,
         {
           provide: JwtService,
           useValue: {
@@ -28,9 +28,9 @@ describe('AuthService', () => {
       ],
     }).compile();
 
-    service = module.get<AuthService>(AuthService);
-    jwtService = module.get<JwtService>(JwtService);
-    configService = module.get<ConfigService>(ConfigService);
+    service = module.get<JwtTokenService>(JwtTokenService);
+    jwtServiceMock = module.get<JwtService>(JwtService);
+    configServiceMock = module.get<ConfigService>(ConfigService);
   });
 
   it('should be defined', () => {
@@ -42,7 +42,7 @@ describe('AuthService', () => {
       const userId = 'user-id';
       const result = await service.generateJwt(userId);
       expect(result.accessToken).toEqual('mocked-access-token');
-      expect(jwtService.signAsync).toHaveBeenCalledWith({ id: userId }, {});
+      expect(jwtServiceMock.signAsync).toHaveBeenCalledWith({ id: userId }, {});
     });
   });
 
@@ -51,7 +51,7 @@ describe('AuthService', () => {
       const token = 'mocked-token';
       const result = await service.verifyJwt(token);
       expect(result).toEqual({ id: 'mocked-user-id' });
-      expect(jwtService.verifyAsync).toHaveBeenCalledWith(token, {
+      expect(jwtServiceMock.verifyAsync).toHaveBeenCalledWith(token, {
         secret: 'mocked-jwt-secret',
       });
     });

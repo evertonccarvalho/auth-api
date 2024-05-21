@@ -1,5 +1,5 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { HashProvider } from '@/application/contracts/hash-provider.contract';
+import { IBcryptService } from '@/application/contracts/hash-provider.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { Injectable } from '@nestjs/common';
 import { UserModel } from '@/domain/model/user';
@@ -19,7 +19,7 @@ export namespace SignUpUseCase {
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
       private userRepository: IAuthRepository,
-      private hashProvider: HashProvider,
+      private hashProvider: IBcryptService,
     ) {}
 
     async execute(input: Input): Promise<Output> {

@@ -1,24 +1,12 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { ConfigsModule } from '../config/config.module';
-import { UsersModule } from './users.module';
-import { MoviesModule } from './movies.module';
-import { AuhModule } from './auth.module';
-import { RolesGuard } from '../guards/role.guard';
-import { AuthGuard } from '../guards/auth.guard';
+
+import { HttpModule } from './http.module';
+import { BcryptModule } from '@/infra/cryptography/bcrypt/bcrypt.module';
 
 @Module({
-  imports: [ConfigsModule, AuhModule, UsersModule, MoviesModule],
+  imports: [ConfigsModule, HttpModule],
   controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
-  ],
+  providers: [],
 })
 export class AppModule {}
