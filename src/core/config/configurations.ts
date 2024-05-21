@@ -4,6 +4,7 @@ import 'dotenv/config';
 export enum ConfigKey {
   app = 'APP',
   db = 'DB',
+  cash = 'CASH',
   jwt = 'JWT',
   general = 'GENERAL',
 }
@@ -33,6 +34,11 @@ const DBConfig = registerAs(ConfigKey.db, () => ({
   database: process.env.DB_DATABASE_NAME,
 }));
 
+const CACHEConfig = registerAs(ConfigKey.cash, () => ({
+  ttl: process.env.CASH_TTL,
+  max: process.env.CACHE_MAX,
+}));
+
 const JWTConfig = registerAs(ConfigKey.jwt, () => ({
   secret: process.env.JWT_SECRET,
   expiresIn: 86400,
@@ -42,4 +48,10 @@ const GeneralConfig = registerAs(ConfigKey.general, () => ({
   salt_or_round: Number(process.env.SALT_OR_ROUND) || 10,
 }));
 
-export const configurations = [APPConfig, DBConfig, JWTConfig, GeneralConfig];
+export const configurations = [
+  APPConfig,
+  DBConfig,
+  CACHEConfig,
+  JWTConfig,
+  GeneralConfig,
+];
