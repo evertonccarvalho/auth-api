@@ -35,6 +35,7 @@ export class TypeormUsersRepository implements IUserRepository {
     await this._get(id);
     await this.userRepository.delete(id);
   }
+
   protected async _get(id: string): Promise<UserEntity | undefined> {
     try {
       const user = await this.userRepository.findOne({ where: { id } });

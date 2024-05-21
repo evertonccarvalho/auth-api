@@ -14,13 +14,14 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { UpdateUserDto } from '../../domain/dtos/users';
-import { UserOutput } from '../../domain/dtos/users/user-output';
-import { DeleteUserUseCase } from '@/application/use-case/users/delete-user.usecase';
-import { GetUserUseCase } from '@/application/use-case/users/get-user.usecase';
-import { ListUsersUseCase } from '@/application/use-case/users/get-users.usecase';
-import { UpdateUserUseCase } from '@/application/use-case/users/update-user.usecase';
+import {
+  DeleteUserUseCase,
+  GetUserUseCase,
+  ListUsersUseCase,
+  UpdateUserUseCase,
+} from '@/application/use-case/users';
 import { UserPresenter } from '@/domain/presenters/user.presenter';
+import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
 
 @ApiTags('Users')
 @ApiBearerAuth()

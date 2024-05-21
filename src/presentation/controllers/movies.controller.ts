@@ -20,12 +20,13 @@ import {
   MovieOutput,
   UpdateMovieDto,
 } from '../../domain/dtos/movie';
-
-import { UpdateMovieUseCase } from '@/application/use-case/movie/update-movie.usecase';
-import { DeleteMovieUseCase } from '@/application/use-case/movie/delete-movie.usecase';
-import { GetMovieUseCase } from '@/application/use-case/movie/get-movie.usecase';
-import { CreateMovieUseCase } from '@/application/use-case/movie/create-movie.usecase';
-import { GetMoviesUseCase } from '@/application/use-case/movie/get-movies.usecase';
+import {
+  CreateMovieUseCase,
+  DeleteMovieUseCase,
+  GetMoviesUseCase,
+  GetMovieUseCase,
+  UpdateMovieUseCase,
+} from '@/application/use-case/movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()

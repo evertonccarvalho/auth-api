@@ -2,9 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
-import { EmailIsTakenError } from '@/presentation/exceptions';
-import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 import { IAuthRepository } from '@/application/repositories/auth.repository';
+import {
+  EmailIsTakenError,
+  NotFoundErrorException,
+} from '@/presentation/exceptions';
 
 @Injectable()
 export class TypeormAuthRepository implements IAuthRepository {

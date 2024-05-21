@@ -3,8 +3,8 @@ import { HashProvider } from '@/application/contracts/hash-provider.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/presentation/errors/invalid-credentials-error';
-import { UserOutput } from '@/domain/dtos/users/user-output';
 import { IAuthRepository } from '@/application/repositories/auth.repository';
+import { UserOutput } from '@/domain/dtos/users';
 
 export namespace SignInUseCase {
   export type Input = {
