@@ -1,10 +1,10 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { HashProvider } from '@/application/contracts/hash-provider.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
-import { IUserRepository } from '@/application/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/presentation/errors/invalid-credentials-error';
 import { UserOutput } from '@/domain/dtos/users/user-output';
+import { IAuthRepository } from '@/application/repositories/auth.repository';
 
 export namespace SignInUseCase {
   export type Input = {
@@ -17,7 +17,7 @@ export namespace SignInUseCase {
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
-      private userRepository: IUserRepository,
+      private authRepository: IAuthRepository,
       private hashProvider: HashProvider,
     ) {}
 
@@ -28,7 +28,7 @@ export namespace SignInUseCase {
         throw new BadRequestError('Input data not provided');
       }
 
-      const entity = await this.userRepository.findByEmail(email);
+      const entity = await this.authRepository.findByEmail(email);
 
       const hashPasswordMatches = await this.hashProvider.compareHash(
         password,

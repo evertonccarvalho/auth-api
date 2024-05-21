@@ -6,6 +6,7 @@ import { IUserRepository } from '@/application/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { UserOutput } from '@/domain/dtos/users/user-output';
 import { UserModel } from '@/domain/model/user';
+import { IAuthRepository } from '@/application/repositories/auth.repository';
 
 export namespace SignUpUseCase {
   export type Input = {
@@ -19,7 +20,7 @@ export namespace SignUpUseCase {
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
-      private userRepository: IUserRepository,
+      private userRepository: IAuthRepository,
       private hashProvider: HashProvider,
     ) {}
 
