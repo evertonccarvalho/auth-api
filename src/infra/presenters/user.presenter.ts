@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserOutput } from '../http/users/dto/user-output';
-import { UserStatus } from '../interfaces/enums/status';
-import { UserRoles } from '../interfaces/enums/roles';
+import { UserStatus } from '../../domain/interfaces/enums/status';
+import { UserRoles } from '../../domain/interfaces/enums/roles';
 
 export class UserPresenter {
   @ApiProperty({ description: 'Identificação do usuário' })

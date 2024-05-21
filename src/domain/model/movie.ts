@@ -1,5 +1,6 @@
-import { MovieProps } from '../use-case/movie/create-movie';
-export class MovieModel {
+import { IMovies } from '@/domain/interfaces/movie';
+import { BaseEntity } from '../entities/entity';
+export class MovieModel extends BaseEntity<IMovies> {
   id: string;
   title: string;
   synopsis: string;
@@ -7,11 +8,13 @@ export class MovieModel {
   director: string;
   year: number;
 
-  constructor(props: MovieProps) {
+  constructor(props: IMovies, id?: string) {
+    super(props, id);
     this.title = props.title;
     this.synopsis = props.synopsis;
     this.duration = props.duration;
     this.director = props.director;
     this.year = props.year;
+    Object.assign(this, props);
   }
 }

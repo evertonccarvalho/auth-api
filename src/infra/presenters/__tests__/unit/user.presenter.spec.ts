@@ -1,7 +1,7 @@
 import { instanceToPlain } from 'class-transformer';
 import { UserPresenter } from '../../user.presenter';
-import { UserStatus } from '@/infra/interfaces/enums/status';
-import { UserRoles } from '@/infra/interfaces/enums/roles';
+import { UserStatus } from '@/domain/interfaces/enums/status';
+import { UserRoles } from '@/domain/interfaces/enums/roles';
 
 describe('UserPresenter unit tests', () => {
   const createdAt = new Date();

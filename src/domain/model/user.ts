@@ -1,7 +1,7 @@
 import { BaseEntity } from '../entities/entity';
-import { UserRoles } from '@/infra/interfaces/enums/roles';
-import { UserStatus } from '@/infra/interfaces/enums/status';
-import { IUser } from '@/infra/interfaces/user';
+import { UserRoles } from '@/domain/interfaces/enums/roles';
+import { UserStatus } from '@/domain/interfaces/enums/status';
+import { IUser } from '@/domain/interfaces/user';
 
 export class UserModel extends BaseEntity<IUser> {
   id: string;

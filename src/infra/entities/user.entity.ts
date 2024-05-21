@@ -5,10 +5,10 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { UserRoles } from '@/infra/interfaces/enums/roles';
-import { UserStatus } from '@/infra/interfaces/enums/status';
+import { UserRoles } from '@/domain/interfaces/enums/roles';
+import { UserStatus } from '@/domain/interfaces/enums/status';
 import { BaseEntity } from '@/domain/entities/entity';
-import { IUser } from '../interfaces/user';
+import { IUser } from '../../domain/interfaces/user';
 
 @Entity('users')
 export class UserEntity extends BaseEntity<IUser> {

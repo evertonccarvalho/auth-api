@@ -1,6 +1,6 @@
 // movie-list.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { MovieEntity } from '../../../entities/movie.entity';
+import { MovieModel } from '@/domain/model/movie';
 
 export class MovieListDto {
   @ApiProperty({ description: 'Identificador único do filme' })
@@ -21,7 +21,7 @@ export class MovieListDto {
   @ApiProperty({ description: 'Ano de lançamento do filme' })
   year: number;
 
-  constructor(movie: MovieEntity) {
+  constructor(movie: MovieModel) {
     this.id = movie.id;
     this.title = movie.title;
     this.synopsis = movie.synopsis;
