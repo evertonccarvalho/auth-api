@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserOutput } from '../http/users/dto/user-output';
+import { UserOutput } from '../../domain/dtos/users/user-output';
 import { UserStatus } from '../../domain/interfaces/enums/status';
 import { UserRoles } from '../../domain/interfaces/enums/roles';
 

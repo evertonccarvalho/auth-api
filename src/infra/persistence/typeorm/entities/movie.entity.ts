@@ -1,4 +1,4 @@
-import { BaseEntity } from '@/domain/entities/base-entity';
+import { BaseEntity } from '@/application/entities/base-entity';
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
 import { IMovies } from '../../../../domain/interfaces/movie';
 

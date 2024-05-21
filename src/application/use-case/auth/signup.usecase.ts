@@ -1,10 +1,10 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { SignupDto } from '@/infra/http/auth/dto';
+import { SignupDto } from '@/domain/dtos/auth';
 import { HashProvider } from '@/application/contracts/hash-provider.contract';
-import { BadRequestError } from '@/domain/errors/bad-request-error';
-import { IUserRepository } from '@/application/contracts/repositories/user.repository';
+import { BadRequestError } from '@/presentation/errors/bad-request-error';
+import { IUserRepository } from '@/application/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
-import { UserOutput } from '@/infra/http/users/dto/user-output';
+import { UserOutput } from '@/domain/dtos/users/user-output';
 import { UserModel } from '@/domain/model/user';
 
 export namespace SignupUseCase {

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
-import { ConfigsModule } from './config/config.module';
+import { ConfigsModule } from '../config/config.module';
 
-import { UsersModule } from '../infra/users.module';
-import { MoviesModule } from '../infra/movies.module';
-import { AuhModule } from '../infra/auth.module';
-import { RolesGuard } from './guards/role.guard';
-import { AuthGuard } from './guards/auth.guard';
+import { UsersModule } from './users.module';
+import { MoviesModule } from './movies.module';
+import { AuhModule } from './auth.module';
+import { RolesGuard } from '../guards/role.guard';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Module({
   imports: [ConfigsModule, AuhModule, UsersModule, MoviesModule],

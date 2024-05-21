@@ -1,5 +1,5 @@
 import { MovieModel } from '@/domain/model/movie';
-import { UpdateMovieDto } from '@/infra/http/movie/dto';
+import { UpdateMovieDto } from '@/domain/dtos/movie';
 
 export abstract class IMovieRepository {
   abstract insert(data: MovieModel): Promise<MovieModel>;

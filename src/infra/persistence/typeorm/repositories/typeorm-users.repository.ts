@@ -2,10 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserModel } from '@/domain/model/user';
-import { IUserRepository } from '@/application/contracts/repositories/user.repository';
+import { IUserRepository } from '@/application/repositories/user.repository';
 import { UserEntity } from '../entities/user.entity';
-import { EmailIsTakenError, UserNotFoundError } from '@/infra/exceptions';
-import { UpdateUserDto } from '@/infra/http/users/dto';
+import {
+  EmailIsTakenError,
+  UserNotFoundError,
+} from '@/presentation/exceptions';
+import { UpdateUserDto } from '@/domain/dtos/users';
 
 @Injectable()
 export class TypeormUsersRepository implements IUserRepository {

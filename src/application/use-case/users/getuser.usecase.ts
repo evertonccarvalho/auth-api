@@ -1,6 +1,6 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { IUserRepository } from '@/application/contracts/repositories/user.repository';
-import { UserOutput } from '@/infra/http/users/dto/user-output';
+import { IUserRepository } from '@/application/repositories/user.repository';
+import { UserOutput } from '@/domain/dtos/users/user-output';
 import { Injectable } from '@nestjs/common';
 
 export namespace GetUserUseCase {

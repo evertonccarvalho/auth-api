@@ -9,13 +9,13 @@ import {
   Body,
 } from '@nestjs/common';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserPresenter } from '@/infra/presenters/user.presenter';
-import { UpdateUserDto } from './dto';
-import { UserOutput } from './dto/user-output';
+import { UpdateUserDto } from '../../domain/dtos/users';
+import { UserOutput } from '../../domain/dtos/users/user-output';
 import { DeleteUserUseCase } from '@/application/use-case/users/delete-user.usecase';
 import { GetUserUseCase } from '@/application/use-case/users/getuser.usecase';
 import { ListUsersUseCase } from '@/application/use-case/users/listusers.usecase';
 import { UpdateUserUseCase } from '@/application/use-case/users/update-user.usecase';
+import { UserPresenter } from '@/domain/presenters/user.presenter';
 
 @ApiTags('Users')
 @Controller('users')

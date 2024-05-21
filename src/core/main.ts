@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './core/app.module';
+import { AppModule } from './modules/app.module';
 import { ConfigService } from '@nestjs/config';
-import { applyGlobalPipes } from './core/config/pipes/global-pipes.config.ts';
-import { setupSwagger } from './core/config/swagger.config';
+import { applyGlobalPipes } from './config/pipes/global-pipes.config.ts';
+import { setupSwagger } from './config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });

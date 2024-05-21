@@ -1,8 +1,8 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { IUserRepository } from '@/application/contracts/repositories/user.repository';
-import { UserOutput } from '@/infra/http/users/dto/user-output';
+import { IUserRepository } from '@/application/repositories/user.repository';
+import { UserOutput } from '@/domain/dtos/users/user-output';
 import { Injectable } from '@nestjs/common';
-import { UserPresenter } from '@/infra/presenters/user.presenter';
+import { UserPresenter } from '@/domain/presenters/user.presenter';
 
 // search-input.ts
 export interface SearchInput {
