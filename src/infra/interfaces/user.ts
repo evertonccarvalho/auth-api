@@ -1,4 +1,4 @@
-import { Role } from './enums/roles';
+import { UserRoles } from './enums/roles';
 import { UserStatus } from './enums/status';
 
 export type IUser = {
@@ -6,7 +6,7 @@ export type IUser = {
   email: string;
   password: string;
   status?: UserStatus;
-  roles?: Role[];
+  roles?: UserRoles[];
   createdAt?: Date;
   updatedAt?: Date;
 };

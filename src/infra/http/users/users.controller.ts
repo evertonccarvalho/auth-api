@@ -9,16 +9,13 @@ import {
   Body,
 } from '@nestjs/common';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-
 import { UserPresenter } from '@/infra/presenters/user.presenter';
-
 import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
 import { DeleteUserUseCase } from '@/domain/use-case/users/delete-user.usecase';
 import { ListUsersUseCase } from '@/domain/use-case/users/listusers.usecase';
 import { UpdateUserDto } from './dto';
-import { UserOutput } from './dto/user-output';
 import { UpdateUserUseCase } from '@/domain/use-case/users/update-user.usecase';
-import { UserOutputMapper } from './mappers/user-output.mapper';
+import { UserOutput } from './dto/user-output';
 
 @ApiTags('Users')
 @Controller('users')
@@ -34,7 +31,7 @@ export class UsersController {
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    const output = await this.getUserUseCase.execute({ id }); // Passando um objeto com a chave `id`
+    const output = await this.getUserUseCase.execute({ id });
     return new UserPresenter(output);
   }
   @ApiResponse({ status: 404, description: 'Não encontrado' })
@@ -51,7 +48,11 @@ export class UsersController {
     return this.listUsersUseCase.execute();
   }
 
-  // @ApiResponse({ status: 200, description: 'Usuário atualizado', type: UserOutput })
+  @ApiResponse({
+    status: 200,
+    description: 'Usuário atualizado',
+    type: UserOutput,
+  })
   @ApiResponse({ status: 400, description: 'Requisição inválida' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
   @Put(':id')

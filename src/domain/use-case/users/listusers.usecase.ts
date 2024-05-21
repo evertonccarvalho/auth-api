@@ -2,7 +2,7 @@ import { DefaultUseCase } from '@/domain/protocols/use-case';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
 import { Injectable } from '@nestjs/common';
-import { UserOutputMapper } from '../../../infra/http/users/mappers/user-output.mapper';
+import { UserPresenter } from '@/infra/presenters/user.presenter';
 
 // search-input.ts
 export interface SearchInput {
@@ -22,7 +22,7 @@ export namespace ListUsersUseCase {
     async execute(): Promise<Output> {
       const result = await this.userRepository.findAll();
       const items = result.map((item) => {
-        return UserOutputMapper.toOutput(item);
+        return new UserPresenter(item);
       });
 
       return items;

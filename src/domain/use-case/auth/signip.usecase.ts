@@ -5,7 +5,6 @@ import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
-import { UserOutputMapper } from '@/infra/http/users/mappers/user-output.mapper';
 
 export namespace SignInUseCase {
   export type Input = {
@@ -40,7 +39,7 @@ export namespace SignInUseCase {
         throw new InvalidCredentialsError('Invalid credentials');
       }
 
-      return UserOutputMapper.toOutput(entity);
+      return entity;
     }
   }
 }

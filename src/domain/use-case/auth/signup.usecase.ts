@@ -6,7 +6,6 @@ import { BadRequestError } from '@/domain/errors/bad-request-error';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
-import { UserOutputMapper } from '@/infra/http/users/mappers/user-output.mapper';
 
 export namespace SignupUseCase {
   export type Input = {
@@ -39,7 +38,7 @@ export namespace SignupUseCase {
       );
 
       await this.userRepository.insert(entity);
-      return UserOutputMapper.toOutput(entity);
+      return entity;
     }
   }
 }

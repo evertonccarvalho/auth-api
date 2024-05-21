@@ -5,7 +5,7 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Role } from '@/infra/interfaces/enums/roles';
+import { UserRoles } from '@/infra/interfaces/enums/roles';
 import { UserStatus } from '@/infra/interfaces/enums/status';
 import { BaseEntity } from '@/domain/entities/entity';
 import { IUser } from '../interfaces/user';
@@ -43,9 +43,9 @@ export class UserEntity extends BaseEntity<IUser> {
 
   @Column({
     type: 'simple-array',
-    default: [Role.User],
+    default: [UserRoles.User],
   })
-  roles: Role[];
+  roles: UserRoles[];
 
   @CreateDateColumn()
   createdAt: Date;

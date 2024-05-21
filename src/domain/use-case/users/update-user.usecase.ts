@@ -2,7 +2,6 @@ import { DefaultUseCase } from '@/domain/protocols/use-case';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { UpdateUserDto } from '@/infra/http/users/dto';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
-import { UserOutputMapper } from '@/infra/http/users/mappers/user-output.mapper';
 import { Injectable } from '@nestjs/common';
 
 export namespace UpdateUserUseCase {
@@ -24,7 +23,7 @@ export namespace UpdateUserUseCase {
 
       const updatedUser = await this.userRepository.update(id, data);
 
-      return UserOutputMapper.toOutput(updatedUser);
+      return updatedUser;
     }
   }
 }

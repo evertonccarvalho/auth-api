@@ -6,7 +6,7 @@ export abstract class BaseEntity<Props = any> {
 
   constructor(props: Props, id?: string) {
     this.props = props;
-    this.id = id || uuidv4(); // Gerando um UUID v4 caso o ID não seja fornecido
+    this.id = id || uuidv4();
   }
 
   toJSON(): Required<{ id: string } & Props> {

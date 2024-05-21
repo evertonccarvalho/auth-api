@@ -5,8 +5,6 @@ import { UserEntity } from '../entities/user.entity';
 import { UserModel } from '@/domain/model/user';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
-import { UserModelMapper } from '../http/users/mappers/user-model.mapper';
-import { UserOutputMapper } from '../http/users/mappers/user-output.mapper';
 import { UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
@@ -41,7 +39,7 @@ export class DatabaseUsersRepository implements UserRepository {
 
   async findAll(): Promise<UserModel[]> {
     const users = await this.userRepository.find();
-    return users.map((user) => UserModelMapper.toEntity(user));
+    return users;
   }
 
   async delete(id: string): Promise<void> {
@@ -49,13 +47,13 @@ export class DatabaseUsersRepository implements UserRepository {
     await this.userRepository.delete(id);
   }
 
-  async update(id: string, data: UpdateUserDto): Promise<UserEntity> {
-    const userToUpdate = await this.findById(id);
+  async update(id: string, data: UpdateUserDto): Promise<UserModel> {
+    const entity = await this.findById(id);
 
-    Object.assign(userToUpdate, data);
+    Object.assign(entity, data);
 
-    const updatedUser = await this.userRepository.save(userToUpdate);
-    return UserModelMapper.toEntity(updatedUser);
+    const updatedUser = await this.userRepository.save(entity);
+    return updatedUser;
   }
 
   protected async _get(id: string): Promise<UserModel | undefined> {
@@ -64,7 +62,7 @@ export class DatabaseUsersRepository implements UserRepository {
       if (!user) {
         throw new UserNotFoundError();
       }
-      return UserModelMapper.toEntity(user);
+      return user;
     } catch {
       throw new UserNotFoundError();
     }
