@@ -12,8 +12,8 @@ import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateUserDto } from '../../domain/dtos/users';
 import { UserOutput } from '../../domain/dtos/users/user-output';
 import { DeleteUserUseCase } from '@/application/use-case/users/delete-user.usecase';
-import { GetUserUseCase } from '@/application/use-case/users/getuser.usecase';
-import { ListUsersUseCase } from '@/application/use-case/users/listusers.usecase';
+import { GetUserUseCase } from '@/application/use-case/users/get-user.usecase';
+import { ListUsersUseCase } from '@/application/use-case/users/get-users.usecase';
 import { UpdateUserUseCase } from '@/application/use-case/users/update-user.usecase';
 import { UserPresenter } from '@/domain/presenters/user.presenter';
 

@@ -1,9 +1,9 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SigninDto, SignupDto } from '../../domain/dtos/auth';
-import { SignInUseCase } from '@/application/use-case/auth/signip.usecase';
+import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
 import { AuthService } from '@/infra/cryptography/jwt/auth.service';
-import { SignupUseCase } from '@/application/use-case/auth/signup.usecase';
+import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
 import { SkipAuth } from '@/core/decorators/auth.decorator';
 import { UserPresenter } from '@/domain/presenters/user.presenter';
 
@@ -12,7 +12,7 @@ import { UserPresenter } from '@/domain/presenters/user.presenter';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly signupUseCase: SignupUseCase.UseCase,
+    private readonly signupUseCase: SignUpUseCase.UseCase,
     private readonly signinUseCase: SignInUseCase.UseCase,
   ) {}
 

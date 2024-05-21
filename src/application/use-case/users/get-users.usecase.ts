@@ -5,13 +5,9 @@ import { Injectable } from '@nestjs/common';
 import { UserPresenter } from '@/domain/presenters/user.presenter';
 
 // search-input.ts
-export interface SearchInput {
-  page: number;
-  limit: number;
-}
 
 export namespace ListUsersUseCase {
-  export type Input = SearchInput;
+  export type Input = any;
 
   export type Output = UserOutput[];
 

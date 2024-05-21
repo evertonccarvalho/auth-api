@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigsModule } from '../config/config.module';
-
 import { UsersModule } from './users.module';
 import { MoviesModule } from './movies.module';
 import { AuhModule } from './auth.module';

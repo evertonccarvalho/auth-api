@@ -6,11 +6,11 @@ import { IUserRepository } from '@/application/repositories/user.repository';
 import { HashProvider } from '@/application/contracts/hash-provider.contract';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@/infra/persistence/typeorm/entities/user.entity';
-import { SignInUseCase } from '@/application/use-case/auth/signip.usecase';
+import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
 import { TypeormUsersRepository } from '../../infra/persistence/typeorm/repositories/typeorm-users.repository';
 import { BcryptjsHashProvider } from '../../infra/cryptography/bcrypt/bcryptjs-hash.provider';
 import { AuthService } from '../../infra/cryptography/jwt/auth.service';
-import { SignupUseCase } from '@/application/use-case/auth/signup.usecase';
+import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
 
 @Module({
   imports: [
@@ -37,7 +37,7 @@ import { SignupUseCase } from '@/application/use-case/auth/signup.usecase';
       useClass: BcryptjsHashProvider,
     },
     SignInUseCase.UseCase,
-    SignupUseCase.UseCase,
+    SignUpUseCase.UseCase,
   ],
   exports: [AuthService],
 })

@@ -7,7 +7,7 @@ import { Injectable } from '@nestjs/common';
 import { UserOutput } from '@/domain/dtos/users/user-output';
 import { UserModel } from '@/domain/model/user';
 
-export namespace SignupUseCase {
+export namespace SignUpUseCase {
   export type Input = {
     name: string;
     email: string;
