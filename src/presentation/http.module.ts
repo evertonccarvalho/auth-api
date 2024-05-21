@@ -20,10 +20,10 @@ import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { UsersController } from '@/presentation/controllers/users.controller';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '../infra/cryptography/jwt/jwt.module';
-import { CacheManagerModule } from '@/infra/data/cache/cache.module';
+import { RedisModule } from '@/infra/data/cache/redis.module';
 
 @Module({
-  imports: [JwtModule, CacheManagerModule],
+  imports: [JwtModule, RedisModule],
   controllers: [UsersController, MoviesController, AuthController],
   providers: [
     {

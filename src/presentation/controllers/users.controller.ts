@@ -23,7 +23,7 @@ import {
 } from '@/application/use-case/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
-import { CacheKey } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { HttpCacheInterceptor } from '@/infra/data/cache/interceptor/http-cache.interceptor';
 
 @ApiTags('Users')

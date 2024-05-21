@@ -18,6 +18,7 @@ export class HttpCacheInterceptor extends CacheInterceptor {
     ) {
       return undefined;
     }
+    console.log(request);
     return httpAdapter.getRequestUrl(request);
   }
 }

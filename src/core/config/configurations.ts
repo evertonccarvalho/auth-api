@@ -37,6 +37,8 @@ const DBConfig = registerAs(ConfigKey.db, () => ({
 const CACHEConfig = registerAs(ConfigKey.cash, () => ({
   ttl: process.env.CASH_TTL,
   max: process.env.CACHE_MAX,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
 }));
 
 const JWTConfig = registerAs(ConfigKey.jwt, () => ({
