@@ -8,19 +8,10 @@ import {
 import { Role } from '@/infra/interfaces/enums/roles';
 import { UserStatus } from '@/infra/interfaces/enums/status';
 import { BaseEntity } from '@/domain/entities/entity';
-
-export type UserProps = {
-  name: string;
-  email: string;
-  password: string;
-  status?: UserStatus;
-  roles?: Role[];
-  createdAt?: Date;
-  updatedAt?: Date;
-};
+import { IUser } from '../interfaces/user';
 
 @Entity('users')
-export class UserEntity extends BaseEntity<UserProps> {
+export class UserEntity extends BaseEntity<IUser> {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

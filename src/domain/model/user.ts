@@ -1,9 +1,9 @@
 import { BaseEntity } from '../entities/entity';
-import { UserProps } from '@/infra/entities/user.entity';
 import { Role } from '@/infra/interfaces/enums/roles';
 import { UserStatus } from '@/infra/interfaces/enums/status';
+import { IUser } from '@/infra/interfaces/user';
 
-export class UserModel extends BaseEntity<UserProps> {
+export class UserModel extends BaseEntity<IUser> {
   id: string;
   name: string;
   email: string;
@@ -13,7 +13,7 @@ export class UserModel extends BaseEntity<UserProps> {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor(props: UserProps, id: string) {
+  constructor(props: IUser, id: string) {
     super(props, id); // Chame o construtor da BaseEntity com props
 
     // Atribua os campos diretamente
