@@ -1,11 +1,11 @@
 import { DefaultUseCase } from '@/domain/protocols/use-case';
 import { SignupDto } from '@/infra/http/auth/dto';
 import { HashProvider } from '@/domain/protocols/hash-provider';
-import { UserEntity } from '@/infra/entities/user.entity';
 import { BadRequestError } from '@/domain/errors/bad-request-error';
 import { UserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
+import { UserModel } from '@/domain/model/user';
 
 export namespace SignupUseCase {
   export type Input = {
@@ -30,14 +30,10 @@ export namespace SignupUseCase {
       }
 
       await this.userRepository.emailExists(email);
-
       const hashPassword = await this.hashProvider.generateHash(password);
-
-      const entity = new UserEntity(
-        Object.assign(input, { password: hashPassword }),
-      );
-
+      const entity = new UserModel({ ...input, password: hashPassword });
       await this.userRepository.insert(entity);
+
       return entity;
     }
   }

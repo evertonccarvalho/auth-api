@@ -4,7 +4,7 @@ import { JwtModule as Jwt } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './http/auth/Auth.controller';
 import { UserRepository } from '@/domain/repositories/user.repository';
-import { DatabaseUsersRepository } from '@/infra/repositories/database-users.repository';
+import { TypeormUsersRepository } from '@/infra/repositories/typeorm-users.repository';
 import { HashProvider } from '@/domain/protocols/hash-provider';
 import { BcryptjsHashProvider } from '@/infra/providers/bcrypt/bcryptjs-hash.provider';
 import { SignInUseCase } from '@/domain/use-case/auth/signip.usecase';
@@ -30,7 +30,7 @@ import { UserEntity } from '@/infra/entities/user.entity';
     AuthService,
     {
       provide: UserRepository,
-      useClass: DatabaseUsersRepository,
+      useClass: TypeormUsersRepository,
     },
     {
       provide: HashProvider,

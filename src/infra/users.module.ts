@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersController } from './http/users/users.controller';
 import { UserEntity } from './entities/user.entity';
-import { DatabaseUsersRepository } from './repositories/database-users.repository';
+import { TypeormUsersRepository } from './repositories/typeorm-users.repository';
 import { BcryptjsHashProvider } from './providers/bcrypt/bcryptjs-hash.provider';
 import { SignupUseCase } from '@/domain/use-case/auth/signup.usecase';
 import { UserRepository } from '@/domain/repositories/user.repository';
@@ -19,7 +19,7 @@ import { UpdateUserUseCase } from '@/domain/use-case/users/update-user.usecase';
   providers: [
     {
       provide: UserRepository,
-      useClass: DatabaseUsersRepository,
+      useClass: TypeormUsersRepository,
     },
     GetUserUseCase.UseCase,
     ListUsersUseCase.UseCase,

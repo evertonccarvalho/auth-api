@@ -8,7 +8,7 @@ import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
 import { UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
-export class DatabaseUsersRepository implements UserRepository {
+export class TypeormUsersRepository implements UserRepository {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,

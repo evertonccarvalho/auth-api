@@ -8,7 +8,7 @@ import { MovieListDto } from '../http/movie/dto';
 import { UserNotFoundError } from '../exceptions';
 
 @Injectable()
-export class DatabaseMoviesRepository implements MovieRepository {
+export class TypeormMoviesRepository implements MovieRepository {
   constructor(
     @InjectRepository(MovieEntity)
     private readonly movieRepository: Repository<MovieEntity>,

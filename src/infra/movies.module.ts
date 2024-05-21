@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MoviesController } from './http/movie/movies.controller';
-import { DatabaseMoviesRepository } from './repositories/database-movies.repository';
+import { TypeormMoviesRepository } from './repositories/typeorm-movies.repository';
 import { GetMovieUseCase } from '@/domain/use-case/movie/get-movie';
 import { GetMoviesUseCase } from '@/domain/use-case/movie/get-movies';
 import { UpdateMovieUseCase } from '@/domain/use-case/movie/update-movie';
@@ -15,10 +15,10 @@ import { CreateMovieUseCase } from '@/domain/use-case/movie/create-movie';
   controllers: [MoviesController],
   providers: [
     // Fornecendo o repositório específico para filmes como provedor de MovieRepository
-    DatabaseMoviesRepository,
+    TypeormMoviesRepository,
     {
       provide: MovieRepository,
-      useClass: DatabaseMoviesRepository,
+      useClass: TypeormMoviesRepository,
     },
     // Outros casos de uso
     CreateMovieUseCase,

@@ -13,7 +13,7 @@ export class UserModel extends BaseEntity<IUser> {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor(props: IUser, id: string) {
+  constructor(props: IUser, id?: string) {
     super(props, id);
 
     this.name = props.name;
