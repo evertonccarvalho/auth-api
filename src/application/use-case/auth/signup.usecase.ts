@@ -1,8 +1,8 @@
-import { DefaultUseCase } from '@/domain/contracts/use-case.contract';
+import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { SignupDto } from '@/infra/http/auth/dto';
-import { HashProvider } from '@/domain/contracts/hash-provider.contract';
+import { HashProvider } from '@/application/contracts/hash-provider.contract';
 import { BadRequestError } from '@/domain/errors/bad-request-error';
-import { IUserRepository } from '@/domain/repositories/user.repository';
+import { IUserRepository } from '@/application/contracts/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
 import { UserModel } from '@/domain/model/user';

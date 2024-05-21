@@ -1,5 +1,5 @@
 import { UpdateUserDto } from '@/infra/http/users/dto';
-import { UserModel } from '../model/user';
+import { UserModel } from '../../../domain/model/user';
 
 export abstract class IUserRepository {
   abstract insert(data: UserModel): Promise<void>;

@@ -1,7 +1,7 @@
-import { DefaultUseCase } from '@/domain/contracts/use-case.contract';
-import { HashProvider } from '@/domain/contracts/hash-provider.contract';
+import { DefaultUseCase } from '@/application/contracts/use-case.contract';
+import { HashProvider } from '@/application/contracts/hash-provider.contract';
 import { BadRequestError } from '@/domain/errors/bad-request-error';
-import { IUserRepository } from '@/domain/repositories/user.repository';
+import { IUserRepository } from '@/application/contracts/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error';
 import { UserOutput } from '@/infra/http/users/dto/user-output';

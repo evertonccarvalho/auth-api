@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserPresenter } from '@/infra/presenters/user.presenter';
-import { GetUserUseCase } from '@/domain/use-case/users/getuser.usecase';
-import { DeleteUserUseCase } from '@/domain/use-case/users/delete-user.usecase';
-import { ListUsersUseCase } from '@/domain/use-case/users/listusers.usecase';
 import { UpdateUserDto } from './dto';
-import { UpdateUserUseCase } from '@/domain/use-case/users/update-user.usecase';
 import { UserOutput } from './dto/user-output';
+import { DeleteUserUseCase } from '@/application/use-case/users/delete-user.usecase';
+import { GetUserUseCase } from '@/application/use-case/users/getuser.usecase';
+import { ListUsersUseCase } from '@/application/use-case/users/listusers.usecase';
+import { UpdateUserUseCase } from '@/application/use-case/users/update-user.usecase';
 
 @ApiTags('Users')
 @Controller('users')

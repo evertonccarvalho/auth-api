@@ -15,13 +15,14 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CreateMovieUseCase } from '@/domain/use-case/movie/create-movie';
 import { CreateMovieDto, UpdateMovieDto } from './dto';
-import { GetMoviesUseCase } from '@/domain/use-case/movie/get-movies';
-import { DeleteMovieUseCase } from '@/domain/use-case/movie/delete-movie';
-import { GetMovieUseCase } from '@/domain/use-case/movie/get-movie';
-import { UpdateMovieUseCase } from '@/domain/use-case/movie/update-movie';
+
 import { SkipAuth } from '@/infra/decorators/auth.decorator';
+import { UpdateMovieUseCase } from '@/application/use-case/movie/update-movie';
+import { DeleteMovieUseCase } from '@/application/use-case/movie/delete-movie';
+import { GetMovieUseCase } from '@/application/use-case/movie/get-movie';
+import { CreateMovieUseCase } from '@/application/use-case/movie/create-movie';
+import { GetMoviesUseCase } from '@/application/use-case/movie/get-movies';
 
 @SkipAuth()
 @ApiTags('Movies')

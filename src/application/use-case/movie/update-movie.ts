@@ -1,6 +1,6 @@
 import { MovieModel } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
-import { IMovieRepository } from '../../repositories/movie.repositoy';
+import { IMovieRepository } from '../../contracts/repositories/movie.repositoy';
 
 interface UpdateMovieUseCaseRequest {
   title?: string;

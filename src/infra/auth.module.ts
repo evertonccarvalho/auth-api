@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './services/auth/auth.service';
 import { JwtModule as Jwt } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './http/auth/Auth.controller';
-import { IUserRepository } from '@/domain/repositories/user.repository';
-import { TypeormUsersRepository } from '@/infra/repositories/typeorm-users.repository';
-import { HashProvider } from '@/domain/contracts/hash-provider.contract';
-import { BcryptjsHashProvider } from '@/infra/providers/bcrypt/bcryptjs-hash.provider';
-import { SignInUseCase } from '@/domain/use-case/auth/signip.usecase';
-import { SignupUseCase } from '@/domain/use-case/auth/signup.usecase';
+import { IUserRepository } from '@/application/contracts/repositories/user.repository';
+import { HashProvider } from '@/application/contracts/hash-provider.contract';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@/infra/persistence/typeorm/entities/user.entity';
+import { SignInUseCase } from '@/application/use-case/auth/signip.usecase';
+import { TypeormUsersRepository } from './persistence/typeorm/repositories/typeorm-users.repository';
+import { BcryptjsHashProvider } from './cryptography/bcrypt/bcryptjs-hash.provider';
+import { SignupUseCase } from '@/application/use-case/auth/signup.usecase';
+import { AuthService } from './cryptography/jwt/auth.service';
 
 @Module({
   imports: [

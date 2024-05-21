@@ -1,5 +1,5 @@
-import { DefaultUseCase } from '@/domain/contracts/use-case.contract';
-import { IUserRepository } from '@/domain/repositories/user.repository';
+import { DefaultUseCase } from '@/application/contracts/use-case.contract';
+import { IUserRepository } from '@/application/contracts/repositories/user.repository';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
 import { Injectable } from '@nestjs/common';
 import { UserPresenter } from '@/infra/presenters/user.presenter';
