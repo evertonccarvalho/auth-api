@@ -15,16 +15,11 @@ import {
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { BcryptService } from '@/infra/cryptography/bcrypt/bcrypt.service';
-import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
 import { AuthController } from '@/presentation/controllers/Auth.controller';
 import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { UsersController } from '@/presentation/controllers/users.controller';
 import { Module } from '@nestjs/common';
-import { JwtModule } from '../../infra/cryptography/jwt/jwt.module';
-import { BcryptModule } from '@/infra/cryptography/bcrypt/bcrypt.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from '../guards/role.guard';
-import { AuthGuard } from '../guards/auth.guard';
+import { JwtModule } from '../infra/cryptography/jwt/jwt.module';
 
 @Module({
   imports: [JwtModule],
