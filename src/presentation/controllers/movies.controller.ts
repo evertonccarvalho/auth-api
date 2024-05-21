@@ -8,6 +8,7 @@ import {
   Put,
   ParseUUIDPipe,
   HttpCode,
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -27,6 +28,8 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
+import { HttpCacheInterceptor } from '@/infra/data/cache/interceptor/http-cache.interceptor';
+import { CacheKey } from '@nestjs/cache-manager';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
@@ -49,6 +52,8 @@ export class MoviesController {
 
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
+  @CacheKey('movies')
+  @UseInterceptors(HttpCacheInterceptor)
   findAll() {
     return this.getMoviesUseCase.execute();
   }

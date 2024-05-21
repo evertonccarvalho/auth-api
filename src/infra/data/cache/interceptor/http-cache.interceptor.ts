@@ -10,6 +10,7 @@ export class HttpCacheInterceptor extends CacheInterceptor {
     const isGetRequest = httpAdapter.getRequestMethod(request) === 'GET';
     const excludePaths = [
       // Routes to be excluded
+      // '/api/users',
     ];
     if (
       !isGetRequest ||
@@ -18,7 +19,6 @@ export class HttpCacheInterceptor extends CacheInterceptor {
     ) {
       return undefined;
     }
-    console.log(request);
     return httpAdapter.getRequestUrl(request);
   }
 }

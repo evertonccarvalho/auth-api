@@ -1,3 +1,4 @@
+import { RedisModule } from './cache/redis.module';
 import { TypeOrmDatabaseModule } from './typerom/typeorm.module';
 import { DynamicModule, Module } from '@nestjs/common';
 
