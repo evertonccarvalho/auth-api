@@ -9,8 +9,8 @@ import { UserEntity } from '@/infra/persistence/typeorm/entities/user.entity';
 import { SignInUseCase } from '@/application/use-case/auth/signip.usecase';
 import { TypeormUsersRepository } from '../../infra/persistence/typeorm/repositories/typeorm-users.repository';
 import { BcryptjsHashProvider } from '../../infra/cryptography/bcrypt/bcryptjs-hash.provider';
-import { SignupUseCase } from '@/application/use-case/auth/signup.usecase';
 import { AuthService } from '../../infra/cryptography/jwt/auth.service';
+import { SignupUseCase } from '@/application/use-case/auth/signup.usecase';
 
 @Module({
   imports: [

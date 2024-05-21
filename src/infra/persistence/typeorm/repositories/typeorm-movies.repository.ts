@@ -5,7 +5,7 @@ import { MovieModel } from '@/domain/model/movie';
 import { IMovieRepository } from '@/application/repositories/movie.repositoy';
 import { UserNotFoundError } from '@/presentation/exceptions';
 import { MovieEntity } from '../entities/movie.entity';
-import { MovieListDto } from '@/domain/dtos/movie';
+import { MovieOutput } from '@/domain/dtos/movie';
 
 @Injectable()
 export class TypeormMoviesRepository implements IMovieRepository {
@@ -30,7 +30,7 @@ export class TypeormMoviesRepository implements IMovieRepository {
     return this.toMovie(entity);
   }
 
-  async update(id: string, movie: MovieListDto): Promise<MovieModel> {
+  async update(id: string, movie: MovieOutput): Promise<MovieModel> {
     const entity = await this.findById(id);
 
     entity.title = movie.title;
