@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule as Jwt } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from '@/infra/data/typerom/entities/user.entity';
 import { JwtTokenService } from './jwt.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from '@/core/guards/role.guard';
@@ -19,10 +17,8 @@ import { AuthGuard } from '@/core/guards/auth.guard';
         signOptions: { expiresIn: configService.get<number>('JWT.expiresIn') },
       }),
     }),
-    TypeOrmModule.forFeature([UserEntity]),
   ],
   providers: [
-    JwtTokenService,
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
@@ -31,6 +27,7 @@ import { AuthGuard } from '@/core/guards/auth.guard';
       provide: APP_GUARD,
       useClass: AuthGuard,
     },
+    JwtTokenService,
   ],
   exports: [JwtTokenService],
 })

@@ -10,13 +10,12 @@ import { redisStore } from 'cache-manager-ioredis-yet';
       isGlobal: false,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        return {
-          store: redisStore,
+        const store = await redisStore({
           host: configService.get('CACHE.host'),
-          port: configService.get('CACHE.port'),
-          ttl: configService.get('CACHE.ttl'),
-          max: 2,
-        };
+          port: +configService.get('CACHE.port'),
+          ttl: 5,
+        });
+        return { store };
       },
     }),
   ],

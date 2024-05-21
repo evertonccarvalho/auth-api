@@ -4,7 +4,7 @@ import 'dotenv/config';
 export enum ConfigKey {
   app = 'APP',
   db = 'DB',
-  cash = 'CASH',
+  ch = 'CASH',
   jwt = 'JWT',
   general = 'GENERAL',
 }
@@ -34,11 +34,11 @@ const DBConfig = registerAs(ConfigKey.db, () => ({
   database: process.env.DB_DATABASE_NAME,
 }));
 
-const CACHEConfig = registerAs(ConfigKey.cash, () => ({
-  ttl: process.env.CASH_TTL,
-  max: process.env.CACHE_MAX,
+const CACHEConfig = registerAs(ConfigKey.ch, () => ({
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
+  ttl: process.env.CASH_TTL,
+  max: process.env.CACHE_MAX,
 }));
 
 const JWTConfig = registerAs(ConfigKey.jwt, () => ({
@@ -50,6 +50,7 @@ const GeneralConfig = registerAs(ConfigKey.general, () => ({
   salt_or_round: Number(process.env.SALT_OR_ROUND) || 10,
 }));
 
+console.log(CACHEConfig());
 export const configurations = [
   APPConfig,
   DBConfig,
