@@ -1,7 +1,7 @@
 import { UpdateUserDto } from '@/infra/http/users/dto';
 import { UserModel } from '../model/user';
 
-export abstract class UserRepository {
+export abstract class IUserRepository {
   abstract insert(data: UserModel): Promise<void>;
   abstract findAll(): Promise<UserModel[]>;
   abstract findById(id: string): Promise<UserModel>;

@@ -1,11 +1,11 @@
 import { MovieModel } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../../repositories/movie.repositoy';
+import { IMovieRepository } from '../../repositories/movie.repositoy';
 import { IMovies } from '@/domain/interfaces/movie';
 
 @Injectable()
 export class CreateMovieUseCase {
-  constructor(private readonly movieRepository: MovieRepository) {}
+  constructor(private readonly movieRepository: IMovieRepository) {}
 
   async execute(input: IMovies): Promise<MovieModel> {
     const movie = new MovieModel(input);

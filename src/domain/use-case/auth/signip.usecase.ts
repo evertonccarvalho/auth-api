@@ -1,7 +1,7 @@
-import { DefaultUseCase } from '@/domain/protocols/use-case';
-import { HashProvider } from '@/domain/protocols/hash-provider';
+import { DefaultUseCase } from '@/domain/contracts/use-case.contract';
+import { HashProvider } from '@/domain/contracts/hash-provider.contract';
 import { BadRequestError } from '@/domain/errors/bad-request-error';
-import { UserRepository } from '@/domain/repositories/user.repository';
+import { IUserRepository } from '@/domain/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
@@ -17,7 +17,7 @@ export namespace SignInUseCase {
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
-      private userRepository: UserRepository,
+      private userRepository: IUserRepository,
       private hashProvider: HashProvider,
     ) {}
 

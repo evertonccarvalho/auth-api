@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../persistence/typeorm/entities/user.entity';
 import { UserModel } from '@/domain/model/user';
-import { UserRepository } from '@/domain/repositories/user.repository';
+import { IUserRepository } from '@/domain/repositories/user.repository';
 import { EmailIsTakenError, UserNotFoundError } from '../exceptions';
 import { UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
-export class TypeormUsersRepository implements UserRepository {
+export class TypeormUsersRepository implements IUserRepository {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,

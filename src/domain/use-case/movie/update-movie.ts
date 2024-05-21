@@ -1,6 +1,6 @@
 import { MovieModel } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../../repositories/movie.repositoy';
+import { IMovieRepository } from '../../repositories/movie.repositoy';
 
 interface UpdateMovieUseCaseRequest {
   title?: string;
@@ -12,7 +12,7 @@ interface UpdateMovieUseCaseRequest {
 
 @Injectable()
 export class UpdateMovieUseCase {
-  constructor(private movieRepository: MovieRepository) {}
+  constructor(private movieRepository: IMovieRepository) {}
 
   async execute(
     id: string,

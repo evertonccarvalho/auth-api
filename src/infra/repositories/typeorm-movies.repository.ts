@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { MovieEntity } from '../entities/movie.entity';
+import { MovieEntity } from '../persistence/typeorm/entities/movie.entity';
 import { MovieModel } from '@/domain/model/movie';
-import { MovieRepository } from '@/domain/repositories/movie.repositoy';
+import { IMovieRepository } from '@/domain/repositories/movie.repositoy';
 import { MovieListDto } from '../http/movie/dto';
 import { UserNotFoundError } from '../exceptions';
 
 @Injectable()
-export class TypeormMoviesRepository implements MovieRepository {
+export class TypeormMoviesRepository implements IMovieRepository {
   constructor(
     @InjectRepository(MovieEntity)
     private readonly movieRepository: Repository<MovieEntity>,

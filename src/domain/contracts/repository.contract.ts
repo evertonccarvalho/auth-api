@@ -1,4 +1,4 @@
-import { BaseEntity } from '../entities/entity';
+import { BaseEntity } from '../entities/base-entity';
 
 export interface RepositoryInterface<E extends BaseEntity> {
   insert(entity: E): Promise<void>;

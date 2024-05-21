@@ -1,4 +1,4 @@
-import { HashProvider } from '@/domain/protocols/hash-provider';
+import { HashProvider } from '@/domain/contracts/hash-provider.contract';
 import { compare, hash } from 'bcrypt';
 
 export class BcryptjsHashProvider implements HashProvider {

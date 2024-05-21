@@ -1,5 +1,5 @@
-import { DefaultUseCase } from '@/domain/protocols/use-case';
-import { UserRepository } from '@/domain/repositories/user.repository';
+import { DefaultUseCase } from '@/domain/contracts/use-case.contract';
+import { IUserRepository } from '@/domain/repositories/user.repository';
 import { UserOutput } from '@/infra/http/users/dto/user-output';
 import { Injectable } from '@nestjs/common';
 import { UserPresenter } from '@/infra/presenters/user.presenter';
@@ -17,7 +17,7 @@ export namespace ListUsersUseCase {
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(private readonly userRepository: IUserRepository) {}
 
     async execute(): Promise<Output> {
       const result = await this.userRepository.findAll();

@@ -1,6 +1,6 @@
-import { BaseEntity } from '@/domain/entities/entity';
+import { BaseEntity } from '@/domain/entities/base-entity';
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
-import { IMovies } from '../../domain/interfaces/movie';
+import { IMovies } from '../../../../domain/interfaces/movie';
 
 @Entity('movies')
 export class MovieEntity extends BaseEntity<IMovies> {

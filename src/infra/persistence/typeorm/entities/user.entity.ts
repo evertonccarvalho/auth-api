@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 import { UserRoles } from '@/domain/interfaces/enums/roles';
 import { UserStatus } from '@/domain/interfaces/enums/status';
-import { BaseEntity } from '@/domain/entities/entity';
-import { IUser } from '../../domain/interfaces/user';
+import { BaseEntity } from '@/domain/entities/base-entity';
+import { IUser } from '../../../../domain/interfaces/user';
 
 @Entity('users')
 export class UserEntity extends BaseEntity<IUser> {

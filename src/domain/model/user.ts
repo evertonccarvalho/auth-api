@@ -1,4 +1,4 @@
-import { BaseEntity } from '../entities/entity';
+import { BaseEntity } from '../entities/base-entity';
 import { UserRoles } from '@/domain/interfaces/enums/roles';
 import { UserStatus } from '@/domain/interfaces/enums/status';
 import { IUser } from '@/domain/interfaces/user';
