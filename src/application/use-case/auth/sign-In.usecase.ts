@@ -4,10 +4,7 @@ import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { InvalidCredentialsError } from '@/presentation/errors/invalid-credentials-error';
 import { IAuthRepository } from '@/application/repositories/auth.repository';
 
-import {
-  IJwtService,
-  IJwtServicePayload,
-} from '@/application/contracts/jwt.interface';
+import { IJwtService } from '@/application/contracts/jwt.interface';
 
 export namespace SignInUseCase {
   export type Input = {
@@ -43,10 +40,10 @@ export namespace SignInUseCase {
       if (!hashPasswordMatches) {
         throw new InvalidCredentialsError('Invalid credentials');
       }
-      const payload: IJwtServicePayload = { id: entity.id };
-      const accessToken = this.jwtTokenService.generateJwt(payload);
 
-      return { accessToken };
+      const accessToken = this.jwtTokenService.generateJwt(entity.id);
+
+      return accessToken;
     }
   }
 }

@@ -1,8 +1,7 @@
-export interface IJwtServicePayload {
-  id: string;
-}
-
+export type GenerateJwtProps = {
+  accessToken: string;
+};
 export interface IJwtService {
-  generateJwt(payload: IJwtServicePayload): string;
+  generateJwt(userId: string): Promise<GenerateJwtProps>;
   verifyJwt(token: string): Promise<any>;
 }

@@ -1,14 +1,7 @@
-import {
-  IJwtService,
-  IJwtServicePayload,
-} from '@/application/contracts/jwt.interface';
+import { GenerateJwtProps } from '@/application/contracts/jwt.interface';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-
-type GenerateJwtProps = {
-  accessToken: string;
-};
 
 @Injectable()
 export class JwtTokenService {
