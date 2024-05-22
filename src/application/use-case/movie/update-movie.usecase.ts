@@ -10,7 +10,6 @@ export namespace UpdateMovieUseCase {
   };
 
   export type Output = MovieOutput;
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private movieRepository: IMovieRepository) {}
 

@@ -6,12 +6,11 @@ import { UserOutput } from '@/domain/dtos/users';
 
 // search-input.ts
 
-export namespace ListUsersUseCase {
+export namespace GetUsersUseCase {
   export type Input = any;
 
   export type Output = UserOutput[];
 
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private readonly userRepository: IUserRepository) {}
 

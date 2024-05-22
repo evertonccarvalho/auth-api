@@ -49,7 +49,7 @@ describe('AuthService', () => {
   describe('verifyJwt', () => {
     it('should verify JWT token', async () => {
       const token = 'mocked-token';
-      const result = await service.verifyJwt(token);
+      const result = await service.decrypt(token);
       expect(result).toEqual({ id: 'mocked-user-id' });
       expect(jwtServiceMock.verifyAsync).toHaveBeenCalledWith(token, {
         secret: 'mocked-jwt-secret',

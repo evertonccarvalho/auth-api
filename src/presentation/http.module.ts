@@ -11,7 +11,7 @@ import {
 import {
   DeleteUserUseCase,
   GetUserUseCase,
-  ListUsersUseCase,
+  GetUsersUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { BcryptService } from '@/infra/cryptography/bcrypt/bcrypt.service';
@@ -33,7 +33,7 @@ import { RedisModule } from '@/infra/data/cache/redis.module';
     SignInUseCase.UseCase,
     SignUpUseCase.UseCase,
     GetUserUseCase.UseCase,
-    ListUsersUseCase.UseCase,
+    GetUsersUseCase.UseCase,
     UpdateUserUseCase.UseCase,
     DeleteUserUseCase.UseCase,
     CreateMovieUseCase.UseCase,

@@ -9,6 +9,7 @@ import {
   ParseUUIDPipe,
   HttpCode,
   UseInterceptors,
+  Inject,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -28,37 +29,46 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
+import { UseCaseProxy } from '../usecases-proxy/usecases-proxy';
+import { MoviesUseCasesProxyModule } from '../usecases-proxy/movie-usecases-proxy.module';
 
+@Controller('movies')
 @ApiTags('Movies')
 @ApiBearerAuth()
-@Controller('/movies')
 export class MoviesController {
   constructor(
-    private getMoviesUseCase: GetMoviesUseCase.UseCase,
-    private createMovieUseCase: CreateMovieUseCase.UseCase,
-    private getMovieUseCase: GetMovieUseCase.UseCase,
-    private deleteMoviesUseCase: DeleteMovieUseCase.UseCase,
-    private updateMoviesUseCase: UpdateMovieUseCase.UseCase,
+    @Inject(MoviesUseCasesProxyModule.CREATE_MOVIE_USECASES_PROXY)
+    private createMovieUseCase: UseCaseProxy<CreateMovieUseCase.UseCase>,
+    @Inject(MoviesUseCasesProxyModule.GET_MOVIES_USECASES_PROXY)
+    private getMoviesUseCase: UseCaseProxy<GetMoviesUseCase.UseCase>,
+    @Inject(MoviesUseCasesProxyModule.GET_MOVIE_USECASE_PROXY)
+    private getMovieUseCase: UseCaseProxy<GetMovieUseCase.UseCase>,
+    @Inject(MoviesUseCasesProxyModule.UPDATE_MOVIE_USECASES_PROXY)
+    private updateMoviesUseCase: UseCaseProxy<UpdateMovieUseCase.UseCase>,
+    @Inject(MoviesUseCasesProxyModule.DELETE_MOVIE_USECASES_PROXY)
+    private deleteMoviesUseCase: UseCaseProxy<DeleteMovieUseCase.UseCase>,
   ) {}
 
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Post()
   create(@Body() createMovieDto: CreateMovieDto) {
-    const response = this.createMovieUseCase.execute(createMovieDto);
+    const response = this.createMovieUseCase
+      .getInstance()
+      .execute(createMovieDto);
     return response;
   }
 
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
   findAll() {
-    return this.getMoviesUseCase.execute();
+    return this.getMoviesUseCase.getInstance().execute();
   }
 
   @ApiResponse({ status: 404, description: 'Not found' })
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get(':id')
   findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.getMovieUseCase.execute({ id });
+    return this.getMovieUseCase.getInstance().execute({ id });
   }
 
   @ApiResponse({ status: 404, description: 'Not found' })
@@ -66,7 +76,7 @@ export class MoviesController {
   @HttpCode(204)
   @Delete(':id')
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.deleteMoviesUseCase.execute({ id });
+    return this.deleteMoviesUseCase.getInstance().execute({ id });
   }
 
   @ApiResponse({
@@ -81,7 +91,7 @@ export class MoviesController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateMovieDto: UpdateMovieDto,
   ) {
-    const output = await this.updateMoviesUseCase.execute({
+    const output = await this.updateMoviesUseCase.getInstance().execute({
       id,
       data: updateMovieDto,
     });

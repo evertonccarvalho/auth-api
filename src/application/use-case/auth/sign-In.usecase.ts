@@ -5,6 +5,11 @@ import { Injectable } from '@nestjs/common';
 import { InvalidCredentialsError } from '@/presentation/errors/invalid-credentials-error';
 import { IAuthRepository } from '@/application/repositories/auth.repository';
 import { UserOutput } from '@/domain/dtos/users';
+import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
+import {
+  IJwtService,
+  IJwtServicePayload,
+} from '@/application/contracts/jwt.interface';
 
 export namespace SignInUseCase {
   export type Input = {
@@ -12,12 +17,14 @@ export namespace SignInUseCase {
     password: string;
   };
 
-  export type Output = UserOutput;
+  export type Output = {
+    accessToken: string;
+  };
 
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
       private authRepository: IAuthRepository,
+      private jwtTokenService: IJwtService,
       private hashProvider: IBcryptService,
     ) {}
 
@@ -38,8 +45,10 @@ export namespace SignInUseCase {
       if (!hashPasswordMatches) {
         throw new InvalidCredentialsError('Invalid credentials');
       }
+      const payload: IJwtServicePayload = { id: entity.id };
+      const accessToken = this.jwtTokenService.generateJwt(payload);
 
-      return entity;
+      return { accessToken };
     }
   }
 }

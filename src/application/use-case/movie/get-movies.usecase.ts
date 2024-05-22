@@ -7,7 +7,6 @@ export namespace GetMoviesUseCase {
   export type Input = any;
 
   export type Output = MovieOutput[];
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private readonly movieRepository: IMovieRepository) {}
 

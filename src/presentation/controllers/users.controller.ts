@@ -8,7 +8,7 @@ import {
   Put,
   Body,
   UseInterceptors,
-  NotFoundException,
+  Inject,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -19,29 +19,35 @@ import {
 import {
   DeleteUserUseCase,
   GetUserUseCase,
-  ListUsersUseCase,
+  GetUsersUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { UsersUseCasesProxyModule } from '../usecases-proxy/user-usecases-proxy.module';
+import { UseCaseProxy } from '../usecases-proxy/usecases-proxy';
 
 @ApiTags('Users')
 @ApiBearerAuth()
 @Controller('users')
 export class UsersController {
   constructor(
-    private readonly getUserUseCase: GetUserUseCase.UseCase,
-    private readonly deleteUserUseCase: DeleteUserUseCase.UseCase,
-    private readonly listUsersUseCase: ListUsersUseCase.UseCase,
-    private readonly updateUserUseCase: UpdateUserUseCase.UseCase,
+    @Inject(UsersUseCasesProxyModule.GET_USER_USECASE_PROXY)
+    private readonly getUserUseCase: UseCaseProxy<GetUserUseCase.UseCase>,
+    @Inject(UsersUseCasesProxyModule.GET_USERS_USECASES_PROXY)
+    private readonly listUsersUseCase: UseCaseProxy<GetUsersUseCase.UseCase>,
+    @Inject(UsersUseCasesProxyModule.UPDATE_USER_USECASES_PROXY)
+    private readonly updateUserUseCase: UseCaseProxy<UpdateUserUseCase.UseCase>,
+    @Inject(UsersUseCasesProxyModule.DELETE_USER_USECASES_PROXY)
+    private readonly deleteUserUseCase: UseCaseProxy<DeleteUserUseCase.UseCase>,
   ) {}
 
   @ApiResponse({ status: 404, description: 'Not found' })
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    const output = await this.getUserUseCase.execute({ id });
+    const output = await this.getUserUseCase.getInstance().execute({ id });
     return new UserPresenter(output);
   }
 
@@ -50,7 +56,7 @@ export class UsersController {
   @HttpCode(204)
   @Delete(':id')
   async remove(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.deleteUserUseCase.execute({ id });
+    return this.deleteUserUseCase.getInstance().execute({ id });
   }
 
   @ApiForbiddenResponse({ description: 'Access denied' })
@@ -58,7 +64,7 @@ export class UsersController {
   @CacheKey('users')
   @UseInterceptors(CacheInterceptor)
   findAll() {
-    return this.listUsersUseCase.execute();
+    return this.listUsersUseCase.getInstance().execute();
   }
 
   @ApiResponse({
@@ -70,7 +76,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'User not found' })
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateDto: UpdateUserDto) {
-    const output = await this.updateUserUseCase.execute({
+    const output = await this.updateUserUseCase.getInstance().execute({
       id,
       data: updateDto,
     });

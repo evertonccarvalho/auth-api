@@ -7,7 +7,6 @@ import { CreateMovieDto, MovieOutput } from '@/domain/dtos/movie';
 export namespace CreateMovieUseCase {
   export type Input = CreateMovieDto;
   export type Output = MovieOutput;
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private readonly movieRepository: IMovieRepository) {}
 

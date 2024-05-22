@@ -17,15 +17,15 @@ import { PrismaMoviesRepository } from './repositories/prisma-movies.repository'
       provide: IUserRepository,
       useClass: PrismaUsersRepository,
     },
-    {
-      provide: IMovieRepository,
-      useClass: PrismaMoviesRepository,
-    },
+    // {
+    //   provide: IMovieRepository,
+    //   useClass: PrismaMoviesRepository,
+    // },
     {
       provide: IAuthRepository,
       useClass: PrismaAuthRepository,
     },
   ],
-  exports: [PrismaService, IAuthRepository, IUserRepository, IMovieRepository],
+  exports: [PrismaService, IAuthRepository, IUserRepository],
 })
 export class PrismaModule {}

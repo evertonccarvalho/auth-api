@@ -9,7 +9,6 @@ export namespace GetUserUseCase {
   };
 
   export type Output = UserOutput;
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private userRepository: IUserRepository) {}
 

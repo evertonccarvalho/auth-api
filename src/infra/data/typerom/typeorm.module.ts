@@ -34,20 +34,7 @@ export const getTypeOrmModuleOptions = (
     }),
     TypeOrmModule.forFeature([UserEntity, MovieEntity]),
   ],
-  providers: [
-    {
-      provide: IUserRepository,
-      useClass: TypeormUsersRepository,
-    },
-    {
-      provide: IMovieRepository,
-      useClass: TypeormMoviesRepository,
-    },
-    {
-      provide: IAuthRepository,
-      useClass: TypeormAuthRepository,
-    },
-  ],
-  exports: [IAuthRepository, IUserRepository, IMovieRepository],
+  providers: [],
+  exports: [],
 })
 export class TypeOrmDatabaseModule {}
