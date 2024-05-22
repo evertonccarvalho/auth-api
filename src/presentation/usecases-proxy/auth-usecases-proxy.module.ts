@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { UseCaseProxy } from './usecases-proxy';
-import { RepositoriesModule } from '@/infra/data/typerom/repositories/repositories.module';
+import { UseCaseProxy } from '../protocols/usecases-proxy';
+import { TypeormRepositoriesModule } from '@/presentation/typeorm-repositories.module';
 import { TypeormAuthRepository } from '@/infra/data/typerom/repositories/typeorm-auth.repository';
 import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
 import { BcryptService } from '@/infra/cryptography/bcrypt/bcrypt.service';
@@ -10,7 +10,7 @@ import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
 import { BcryptModule } from '@/infra/cryptography/bcrypt/bcrypt.module';
 
 @Module({
-  imports: [RepositoriesModule, BcryptModule, JwtModule],
+  imports: [TypeormRepositoriesModule, BcryptModule, JwtModule],
 })
 export class AuthUseCasesProxyModule {
   static SIGNIN_USECASE_PROXY = 'signinAuthUsecasesProxy';

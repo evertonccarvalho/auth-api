@@ -1,47 +1,20 @@
-import { IBcryptService } from '@/application/contracts/hash-provider.contract';
-import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
-import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
-import {
-  CreateMovieUseCase,
-  DeleteMovieUseCase,
-  GetMoviesUseCase,
-  GetMovieUseCase,
-  UpdateMovieUseCase,
-} from '@/application/use-case/movie';
-import {
-  DeleteUserUseCase,
-  GetUserUseCase,
-  GetUsersUseCase,
-  UpdateUserUseCase,
-} from '@/application/use-case/users';
-import { BcryptService } from '@/infra/cryptography/bcrypt/bcrypt.service';
-import { AuthController } from '@/presentation/controllers/Auth.controller';
-import { MoviesController } from '@/presentation/controllers/movies.controller';
-import { UsersController } from '@/presentation/controllers/users.controller';
 import { Module } from '@nestjs/common';
-import { JwtModule } from '../infra/cryptography/jwt/jwt.module';
+import { MoviesUseCasesProxyModule } from './usecases-proxy/movie-usecases-proxy.module';
+import { UsersUseCasesProxyModule } from './usecases-proxy/user-usecases-proxy.module';
+import { AuthUseCasesProxyModule } from './usecases-proxy/auth-usecases-proxy.module';
+import { MoviesController } from './controllers/movies.controller';
+import { UsersController } from './controllers/users.controller';
+import { AuthController } from './controllers/Auth.controller';
 import { RedisModule } from '@/infra/data/cache/redis.module';
 
 @Module({
-  imports: [JwtModule, RedisModule],
-  controllers: [UsersController, MoviesController, AuthController],
-  providers: [
-    {
-      provide: IBcryptService,
-      useClass: BcryptService,
-    },
-    SignInUseCase.UseCase,
-    SignUpUseCase.UseCase,
-    GetUserUseCase.UseCase,
-    GetUsersUseCase.UseCase,
-    UpdateUserUseCase.UseCase,
-    DeleteUserUseCase.UseCase,
-    CreateMovieUseCase.UseCase,
-    GetMovieUseCase.UseCase,
-    GetMoviesUseCase.UseCase,
-    UpdateMovieUseCase.UseCase,
-    DeleteMovieUseCase.UseCase,
+  imports: [
+    RedisModule,
+    MoviesUseCasesProxyModule.register(),
+    UsersUseCasesProxyModule.register(),
+    AuthUseCasesProxyModule.register(),
   ],
+  controllers: [MoviesController, UsersController, AuthController],
   exports: [],
 })
 export class HttpModule {}

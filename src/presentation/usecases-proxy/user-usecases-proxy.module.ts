@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { UseCaseProxy } from './usecases-proxy';
-import { RepositoriesModule } from '@/infra/data/typerom/repositories/repositories.module';
+import { UseCaseProxy } from '../protocols/usecases-proxy';
+import { TypeormRepositoriesModule } from '@/presentation/typeorm-repositories.module';
 import { TypeormUsersRepository } from '@/infra/data/typerom/repositories/typeorm-users.repository';
 import {
   DeleteUserUseCase,
@@ -10,7 +10,7 @@ import {
 } from '@/application/use-case/users';
 
 @Module({
-  imports: [RepositoriesModule],
+  imports: [TypeormRepositoriesModule],
 })
 export class UsersUseCasesProxyModule {
   static GET_USERS_USECASES_PROXY = 'getUsersUsecasesProxy';

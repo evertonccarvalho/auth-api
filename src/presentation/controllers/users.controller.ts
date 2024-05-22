@@ -26,7 +26,7 @@ import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { UsersUseCasesProxyModule } from '../usecases-proxy/user-usecases-proxy.module';
-import { UseCaseProxy } from '../usecases-proxy/usecases-proxy';
+import { UseCaseProxy } from '../protocols/usecases-proxy';
 
 @ApiTags('Users')
 @ApiBearerAuth()

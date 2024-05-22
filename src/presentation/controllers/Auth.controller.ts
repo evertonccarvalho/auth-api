@@ -13,7 +13,7 @@ import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
 import { SkipAuth } from '@/core/decorators/auth.decorator';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { AuthUseCasesProxyModule } from '../usecases-proxy/auth-usecases-proxy.module';
-import { UseCaseProxy } from '../usecases-proxy/usecases-proxy';
+import { UseCaseProxy } from '../protocols/usecases-proxy';
 
 @ApiTags('Auth')
 @Controller('auth')

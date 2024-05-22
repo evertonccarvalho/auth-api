@@ -34,7 +34,5 @@ export const getTypeOrmModuleOptions = (
     }),
     TypeOrmModule.forFeature([UserEntity, MovieEntity]),
   ],
-  providers: [],
-  exports: [],
 })
 export class TypeOrmDatabaseModule {}

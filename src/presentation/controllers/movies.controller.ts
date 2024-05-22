@@ -29,7 +29,7 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
-import { UseCaseProxy } from '../usecases-proxy/usecases-proxy';
+import { UseCaseProxy } from '../protocols/usecases-proxy';
 import { MoviesUseCasesProxyModule } from '../usecases-proxy/movie-usecases-proxy.module';
 
 @Controller('movies')

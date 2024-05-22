@@ -1,13 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { UseCaseProxy } from './usecases-proxy';
-import { BcryptService } from '@/infra/cryptography/bcrypt/bcrypt.service';
+import { UseCaseProxy } from '../protocols/usecases-proxy';
 import { TypeormMoviesRepository } from '@/infra/data/typerom/repositories/typeorm-movies.repository';
-import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
-import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
-import { RepositoriesModule } from '@/infra/data/typerom/repositories/repositories.module';
-import { BcryptModule } from '@/infra/cryptography/bcrypt/bcrypt.module';
-import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
-import { TypeormUsersRepository } from '@/infra/data/typerom/repositories/typeorm-users.repository';
+import { TypeormRepositoriesModule } from '@/presentation/typeorm-repositories.module';
 import {
   CreateMovieUseCase,
   DeleteMovieUseCase,
@@ -17,7 +11,7 @@ import {
 } from '@/application/use-case/movie';
 
 @Module({
-  imports: [RepositoriesModule],
+  imports: [TypeormRepositoriesModule],
 })
 export class MoviesUseCasesProxyModule {
   static CREATE_MOVIE_USECASES_PROXY = 'createMovieUsecasesProxy';
