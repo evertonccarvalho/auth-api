@@ -24,7 +24,6 @@ import {
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { HttpCacheInterceptor } from '@/infra/data/cache/interceptor/http-cache.interceptor';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -55,6 +54,8 @@ export class UsersController {
 
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
+  @CacheKey('users')
+  @UseInterceptors(CacheInterceptor)
   findAll() {
     return this.listUsersUseCase.execute();
   }

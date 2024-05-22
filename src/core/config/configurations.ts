@@ -50,7 +50,6 @@ const GeneralConfig = registerAs(ConfigKey.general, () => ({
   salt_or_round: Number(process.env.SALT_OR_ROUND) || 10,
 }));
 
-console.log(CACHEConfig());
 export const configurations = [
   APPConfig,
   DBConfig,

@@ -28,8 +28,6 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
-import { HttpCacheInterceptor } from '@/infra/data/cache/interceptor/http-cache.interceptor';
-import { CacheKey } from '@nestjs/cache-manager';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
