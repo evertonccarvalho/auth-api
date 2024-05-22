@@ -9,7 +9,6 @@ import { RedisModule } from '@/infra/data/cache/redis.module';
 
 @Module({
   imports: [
-    RedisModule,
     MoviesUseCasesProxyModule.register(),
     UsersUseCasesProxyModule.register(),
     AuthUseCasesProxyModule.register(),

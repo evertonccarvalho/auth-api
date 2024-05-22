@@ -8,7 +8,6 @@ import { redisStore } from 'cache-manager-ioredis-yet';
   imports: [
     ConfigModule,
     CacheModule.registerAsync({
-      isGlobal: false,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
