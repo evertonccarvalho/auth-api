@@ -11,16 +11,14 @@ type GenerateJwtProps = {
 };
 
 @Injectable()
-export class JwtTokenService implements IJwtService {
+export class JwtTokenService {
   constructor(
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {}
-  generateJwt(payload: IJwtServicePayload): string {
-    const accesstoken = this.jwtService.sign(payload, {
-      secret: this.configService.get('JWT.secret'),
-    });
-    return accesstoken;
+  async generateJwt(userId: string): Promise<GenerateJwtProps> {
+    const accessToken = await this.jwtService.signAsync({ id: userId }, {});
+    return { accessToken };
   }
 
   async verifyJwt(token: string) {
