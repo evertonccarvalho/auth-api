@@ -8,6 +8,7 @@ import {
   Put,
   Body,
   UseInterceptors,
+  NotFoundException,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -73,6 +74,7 @@ export class UsersController {
       id,
       data: updateDto,
     });
+
     return new UserPresenter(output);
   }
 }

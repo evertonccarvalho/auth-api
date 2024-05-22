@@ -30,7 +30,6 @@ import { RedisModule } from '@/infra/data/cache/redis.module';
       provide: IBcryptService,
       useClass: BcryptService,
     },
-
     SignInUseCase.UseCase,
     SignUpUseCase.UseCase,
     GetUserUseCase.UseCase,

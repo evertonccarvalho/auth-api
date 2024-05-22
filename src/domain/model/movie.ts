@@ -1,5 +1,5 @@
 import { IMovies } from '@/domain/interfaces/movie';
-import { BaseEntity } from '../../application/entities/base-entity';
+import { BaseEntity } from '../entities/base-entity';
 export class MovieModel extends BaseEntity<IMovies> {
   id: string;
   title: string;

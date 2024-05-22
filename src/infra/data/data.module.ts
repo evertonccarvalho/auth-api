@@ -1,7 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmDatabaseModule } from './typerom/typeorm.module';
-import { BcryptService } from '../cryptography/bcrypt/bcrypt.service';
 import { PrismaModule } from './prisma/prisma.module';
 
 interface DatabaseOptions {
