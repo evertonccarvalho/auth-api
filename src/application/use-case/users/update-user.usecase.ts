@@ -1,7 +1,6 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { IUserRepository } from '@/application/repositories/user.repository';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
-import { Injectable } from '@nestjs/common';
 
 export namespace UpdateUserUseCase {
   export type Input = {

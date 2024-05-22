@@ -1,6 +1,5 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { IUserRepository } from '@/application/repositories/user.repository';
-import { Injectable } from '@nestjs/common';
 
 export namespace DeleteUserUseCase {
   export type Input = {

@@ -1,4 +1,4 @@
-export abstract class IBcryptService {
-  abstract generateHash(payload: string): Promise<string>;
-  abstract compareHash(payload: string, hash: string): Promise<boolean>;
+export interface IBcryptService {
+  generateHash(payload: string): Promise<string>;
+  compareHash(payload: string, hash: string): Promise<boolean>;
 }

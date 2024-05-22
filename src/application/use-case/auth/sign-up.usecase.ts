@@ -1,7 +1,6 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { IBcryptService } from '@/application/contracts/hash-provider.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
-import { Injectable } from '@nestjs/common';
 import { UserModel } from '@/domain/model/user';
 import { IAuthRepository } from '@/application/repositories/auth.repository';
 import { UserOutput } from '@/domain/dtos/users';

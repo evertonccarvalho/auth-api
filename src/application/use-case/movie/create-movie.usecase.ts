@@ -1,5 +1,4 @@
 import { MovieModel } from '@/domain/model/movie';
-import { Injectable } from '@nestjs/common';
 import { IMovieRepository } from '../../repositories/movie.repositoy';
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { CreateMovieDto, MovieOutput } from '@/domain/dtos/movie';
