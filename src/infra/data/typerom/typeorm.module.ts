@@ -36,18 +36,18 @@ export const getTypeOrmModuleOptions = (
   ],
   providers: [
     {
-      provide: IUserRepository,
+      provide: 'UserRepository',
       useClass: TypeormUsersRepository,
     },
     {
-      provide: IMovieRepository,
+      provide: 'MovieRepository',
       useClass: TypeormMoviesRepository,
     },
     {
-      provide: IAuthRepository,
+      provide: 'AuthRepository',
       useClass: TypeormAuthRepository,
     },
   ],
-  exports: [IAuthRepository, IUserRepository, IMovieRepository],
+  exports: ['AuthRepository', 'UserRepository', 'MovieRepository'],
 })
 export class TypeOrmDatabaseModule {}
