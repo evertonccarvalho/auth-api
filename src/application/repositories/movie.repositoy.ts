@@ -1,7 +1,7 @@
 import { MovieModel } from '@/domain/model/movie';
 import { UpdateMovieDto } from '@/domain/dtos/movie';
 
-export interface IMovieRepository {
+export interface MovieRepository {
   insert(data: MovieModel): Promise<MovieModel>;
   findById(id: string): Promise<MovieModel>;
   findAll(): Promise<MovieModel[]>;

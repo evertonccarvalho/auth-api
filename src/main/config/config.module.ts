@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { configurations } from './configurations';
-import { TypeOrmDatabaseModule } from '@/infra/data/typerom/typeorm.module';
+import { DataModule } from '../../infra/data/data.module';
 
 @Module({
   imports: [
@@ -9,7 +9,10 @@ import { TypeOrmDatabaseModule } from '@/infra/data/typerom/typeorm.module';
       load: [...configurations],
       isGlobal: true,
     }),
-    TypeOrmDatabaseModule,
+    DataModule.register({
+      type: 'typeorm',
+      global: true,
+    }),
   ],
 })
 export class ConfigsModule {}

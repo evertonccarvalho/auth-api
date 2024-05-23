@@ -1,7 +1,7 @@
-import { IBcryptService } from '@/application/contracts/hash-provider.contract';
+import { HashProvider } from '@/application/contracts/hasher.contract';
 import bcrypt from 'bcrypt';
 
-export class BcryptAdapter implements IBcryptService {
+export class BcryptHashProvider implements HashProvider {
   constructor(private readonly salt: number) {}
   generateHash(payload: string): Promise<string> {
     return bcrypt.hash(payload, this.salt);

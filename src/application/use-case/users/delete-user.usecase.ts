@@ -1,5 +1,6 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { IUserRepository } from '@/application/repositories/user.repository';
+import { UserRepository } from '@/application/repositories/user.repository';
+import { Injectable } from '@nestjs/common';
 
 export namespace DeleteUserUseCase {
   export type Input = {
@@ -7,8 +8,9 @@ export namespace DeleteUserUseCase {
   };
 
   export type Output = void;
+  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
-    constructor(private userRepository: IUserRepository) {}
+    constructor(private userRepository: UserRepository) {}
 
     async execute(input: Input): Promise<Output> {
       await this.userRepository.delete(input.id);
