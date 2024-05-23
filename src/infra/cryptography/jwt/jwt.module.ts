@@ -3,8 +3,8 @@ import { JwtModule as Jwt } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtTokenService } from './jwt.service';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from '@/core/guards/role.guard';
-import { AuthGuard } from '@/core/guards/auth.guard';
+import { RolesGuard } from '@/main/guards/role.guard';
+import { AuthGuard } from '@/main/guards/auth.guard';
 
 @Module({
   imports: [
