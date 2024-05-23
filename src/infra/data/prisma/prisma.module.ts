@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { ConfigService } from '@nestjs/config';
-import { IMovieRepository } from '@/application/repositories/movie.repositoy';
+import { MovieRepository } from '@/application/repositories/movie.repositoy';
 import { TypeormMoviesRepository } from '../typerom/repositories/typeorm-movies.repository';
-import { IAuthRepository } from '@/application/repositories/auth.repository';
-import { IUserRepository } from '@/application/repositories/user.repository';
+import { AuthRepository } from '@/application/repositories/auth.repository';
+import { UserRepository } from '@/application/repositories/user.repository';
 import { PrismaAuthRepository } from './repositories/prisma-auth.repository';
 import { PrismaUsersRepository } from './repositories/prisma-users.repository';
 import { PrismaMoviesRepository } from './repositories/prisma-movies.repository';
@@ -14,18 +14,23 @@ import { PrismaMoviesRepository } from './repositories/prisma-movies.repository'
   providers: [
     PrismaService,
     {
-      provide: IUserRepository,
+      provide: 'IUserRepository',
       useClass: PrismaUsersRepository,
     },
     {
-      provide: IMovieRepository,
+      provide: 'IMovieRepository',
       useClass: PrismaMoviesRepository,
     },
     {
-      provide: IAuthRepository,
+      provide: 'IAuthRepository',
       useClass: PrismaAuthRepository,
     },
   ],
-  exports: [PrismaService, IAuthRepository, IUserRepository, IMovieRepository],
+  exports: [
+    PrismaService,
+    'IAuthRepository',
+    'IUserRepository',
+    'IMovieRepository',
+  ],
 })
 export class PrismaModule {}

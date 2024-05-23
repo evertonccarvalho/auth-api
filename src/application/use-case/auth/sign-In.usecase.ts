@@ -1,9 +1,9 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { InvalidCredentialsError } from '@/presentation/errors/invalid-credentials-error';
-import { IAuthRepository } from '@/application/repositories/auth.repository';
-import { HashProvider } from '@/application/contracts/hash-provider.contract';
-import { IJwtService } from '@/application/contracts/jwt.interface';
+import { AuthRepository } from '@/application/repositories/auth.repository';
+import { HashProvider } from '@/application/contracts/hasher.contract';
+import { EncrypterProvider } from '@/application/contracts/encrypter.contract';
 
 export namespace SignInUseCase {
   export type Input = {
@@ -17,9 +17,9 @@ export namespace SignInUseCase {
 
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
-      private authRepository: IAuthRepository,
+      private authRepository: AuthRepository,
       private hashProvider: HashProvider,
-      private jwtTokenService: IJwtService,
+      private jwtTokenService: EncrypterProvider,
     ) {}
 
     async execute(input: Input): Promise<Output> {

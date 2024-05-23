@@ -1,7 +1,7 @@
 import { UserModel } from '../../domain/model/user';
 
-export abstract class IAuthRepository {
-  abstract insert(data: UserModel): Promise<void>;
-  abstract findByEmail(email: string): Promise<UserModel | undefined>;
-  abstract emailExists(email: string): Promise<void>;
+export interface AuthRepository {
+  insert(data: UserModel): Promise<void>;
+  findByEmail(email: string): Promise<UserModel | undefined>;
+  emailExists(email: string): Promise<void>;
 }

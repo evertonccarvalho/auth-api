@@ -1,5 +1,5 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { IUserRepository } from '@/application/repositories/user.repository';
+import { UserRepository } from '@/application/repositories/user.repository';
 import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
 import { Injectable } from '@nestjs/common';
 
@@ -13,7 +13,7 @@ export namespace UpdateUserUseCase {
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
-    constructor(private userRepository: IUserRepository) {}
+    constructor(private userRepository: UserRepository) {}
 
     async execute(input: Input): Promise<Output> {
       const { id, data } = input;

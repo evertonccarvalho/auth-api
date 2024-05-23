@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { IMovieRepository } from '@/application/repositories/movie.repositoy';
 import { TypeormMoviesRepository } from './repositories/typeorm-movies.repository';
-import { IUserRepository } from '@/application/repositories/user.repository';
 import { TypeormUsersRepository } from './repositories/typeorm-users.repository';
-import { IAuthRepository } from '@/application/repositories/auth.repository';
 import { TypeormAuthRepository } from './repositories/typeorm-auth.repository';
 
 import { UserEntity } from './entities/user.entity';

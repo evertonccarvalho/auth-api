@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IUserRepository } from '@/application/repositories/user.repository';
+import { UserRepository } from '@/application/repositories/user.repository';
 import { UpdateUserDto } from '@/domain/dtos/users';
 import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 import { PrismaService } from '../prisma.service';
@@ -7,7 +7,7 @@ import { UserModel } from '@/domain/model/user';
 import { UserModelMapper } from '../user-model.mapper';
 
 @Injectable()
-export class PrismaUsersRepository implements IUserRepository {
+export class PrismaUsersRepository implements UserRepository {
   constructor(private prismaService: PrismaService) {}
 
   async findById(id: string): Promise<UserModel | undefined> {

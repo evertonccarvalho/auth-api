@@ -10,18 +10,18 @@ import { UserPresenter } from '@/presentation/presenters/user.presenter';
 @Controller('auth')
 export class AuthController {
   constructor(
-    // private readonly signinUseCase: SignInUseCase.UseCase,
+    private readonly signinUseCase: SignInUseCase.UseCase,
     private readonly signupUseCase: SignUpUseCase.UseCase,
   ) {}
 
-  // @SkipAuth()
-  // @Post('signin')
-  // @HttpCode(HttpStatus.OK)
-  // @ApiOperation({ summary: 'Sign in to get JWT token' })
-  // @ApiResponse({ status: 200, description: 'JWT token generated' })
-  // async signIn(@Body() signInDto: SigninDto) {
-  //   return this.signinUseCase.execute(signInDto);
-  // }
+  @SkipAuth()
+  @Post('signin')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Sign in to get JWT token' })
+  @ApiResponse({ status: 200, description: 'JWT token generated' })
+  async signIn(@Body() signInDto: SigninDto) {
+    return this.signinUseCase.execute(signInDto);
+  }
 
   @SkipAuth()
   @Post('signup')

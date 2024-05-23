@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IMovieRepository } from '../../repositories/movie.repositoy';
+import { MovieRepository } from '../../repositories/movie.repositoy';
 import { MovieOutput, UpdateMovieDto } from '@/domain/dtos/movie';
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 
@@ -12,7 +12,7 @@ export namespace UpdateMovieUseCase {
   export type Output = MovieOutput;
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
-    constructor(private movieRepository: IMovieRepository) {}
+    constructor(private movieRepository: MovieRepository) {}
 
     async execute(input: Input): Promise<Output> {
       const { id, data } = input;

@@ -1,4 +1,4 @@
-import { HashProvider } from '@/application/contracts/hash-provider.contract';
+import { HashProvider } from '@/application/contracts/hasher.contract';
 import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
 import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
 import {
@@ -18,16 +18,14 @@ import { AuthController } from '@/presentation/controllers/Auth.controller';
 import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { UsersController } from '@/presentation/controllers/users.controller';
 import { Module } from '@nestjs/common';
-import { JwtModule } from '../infra/cryptography/jwt/jwt.module';
+import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
 import { RedisModule } from '@/infra/data/cache/redis.module';
 import { BcryptHashProvider } from '@/infra/cryptography/bcrypt/bcrypt-adapter';
-import { TypeormUsersRepository } from '@/infra/data/typerom/repositories/typeorm-users.repository';
-import { TypeormAuthRepository } from '@/infra/data/typerom/repositories/typeorm-auth.repository';
+import { ConfigModule } from '@nestjs/config';
 import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
-import { IJwtService } from '@/application/contracts/jwt.interface';
+import { TypeormAuthRepository } from '@/infra/data/typerom/repositories/typeorm-auth.repository';
+import { TypeormUsersRepository } from '@/infra/data/typerom/repositories/typeorm-users.repository';
 import { TypeormMoviesRepository } from '@/infra/data/typerom/repositories/typeorm-movies.repository';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [RedisModule, JwtModule, ConfigModule],
@@ -37,41 +35,20 @@ import { JwtService } from '@nestjs/jwt';
       provide: 'HashProvider',
       useFactory: () => new BcryptHashProvider(10),
     },
-    // {
-    //   provide: 'JwtTokenService',
-    //   useFactory: (jwtService: JwtService, configService: ConfigService) => {
-    //     return new JwtTokenService(jwtService, configService);
-    //   },
-    //   inject: [JwtService, ConfigService],
-    // },
-    // {
-    //   inject: ['AuthRepository', 'HashProvider', 'JwtTokenService'],
-    //   provide: SignInUseCase.UseCase,
-    //   useFactory: (
-    //     authRepository: TypeormAuthRepository,
-    //     hashProvider: HashProvider,
-    //     jwtTokenService: IJwtService,
-    //   ) =>
-    //     new SignInUseCase.UseCase(
-    //       authRepository,
-    //       hashProvider,
-    //       jwtTokenService,
-    //     ),
-    // },
-    // {
-    //   inject: ['AuthRepository', 'HashProvider', 'JwtService'],
-    //   provide: SignInUseCase.UseCase,
-    //   useFactory: (
-    //     authRepository: TypeormAuthRepository,
-    //     jwtTokenService: IJwtService,
-    //     hashProvider: HashProvider,
-    //   ) =>
-    //     new SignInUseCase.UseCase(
-    //       authRepository,
-    //       hashProvider,
-    //       jwtTokenService,
-    //     ),
-    // },
+    {
+      inject: ['AuthRepository', 'HashProvider', JwtTokenService],
+      provide: SignInUseCase.UseCase,
+      useFactory: (
+        authRepository: TypeormAuthRepository,
+        hashProvider: HashProvider,
+        jwtTokenService: JwtTokenService,
+      ) =>
+        new SignInUseCase.UseCase(
+          authRepository,
+          hashProvider,
+          jwtTokenService,
+        ),
+    },
     {
       provide: SignUpUseCase.UseCase,
       useFactory: (
@@ -110,37 +87,36 @@ import { JwtService } from '@nestjs/jwt';
         return new DeleteUserUseCase.UseCase(userRepository);
       },
     },
-
     {
-      inject: ['UserRepository'],
+      inject: ['MovieRepository'],
       provide: CreateMovieUseCase.UseCase,
       useFactory: (movieRepository: TypeormMoviesRepository) => {
         return new CreateMovieUseCase.UseCase(movieRepository);
       },
     },
     {
-      inject: ['UserRepository'],
+      inject: ['MovieRepository'],
       provide: GetMovieUseCase.UseCase,
       useFactory: (movieRepository: TypeormMoviesRepository) => {
         return new GetMovieUseCase.UseCase(movieRepository);
       },
     },
     {
-      inject: ['UserRepository'],
+      inject: ['MovieRepository'],
       provide: GetMoviesUseCase.UseCase,
       useFactory: (movieRepository: TypeormMoviesRepository) => {
         return new GetMoviesUseCase.UseCase(movieRepository);
       },
     },
     {
-      inject: ['UserRepository'],
+      inject: ['MovieRepository'],
       provide: UpdateMovieUseCase.UseCase,
       useFactory: (movieRepository: TypeormMoviesRepository) => {
         return new UpdateMovieUseCase.UseCase(movieRepository);
       },
     },
     {
-      inject: ['UserRepository'],
+      inject: ['MovieRepository'],
       provide: DeleteMovieUseCase.UseCase,
       useFactory: (movieRepository: TypeormMoviesRepository) => {
         return new DeleteMovieUseCase.UseCase(movieRepository);

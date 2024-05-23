@@ -5,11 +5,11 @@ import { MovieModel } from '@/domain/model/movie';
 import { Prisma } from '@prisma/client';
 import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 import { UpdateMovieDto } from '@/domain/dtos/movie';
-import { IMovieRepository } from '@/application/repositories/movie.repositoy';
+import { MovieRepository } from '@/application/repositories/movie.repositoy';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
-export class PrismaMoviesRepository implements IMovieRepository {
+export class PrismaMoviesRepository implements MovieRepository {
   constructor(private prisma: PrismaService) {}
 
   async insert(movie: Prisma.MovieCreateInput): Promise<MovieModel> {

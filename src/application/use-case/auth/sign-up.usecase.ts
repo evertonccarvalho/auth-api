@@ -1,9 +1,9 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { HashProvider } from '@/application/contracts/hash-provider.contract';
+import { HashProvider } from '@/application/contracts/hasher.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { Injectable } from '@nestjs/common';
 import { UserModel } from '@/domain/model/user';
-import { IAuthRepository } from '@/application/repositories/auth.repository';
+import { AuthRepository } from '@/application/repositories/auth.repository';
 import { UserOutput } from '@/domain/dtos/users';
 
 export namespace SignUpUseCase {
@@ -18,7 +18,7 @@ export namespace SignUpUseCase {
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
-      private userRepository: IAuthRepository,
+      private userRepository: AuthRepository,
       private hashProvider: HashProvider,
     ) {}
 

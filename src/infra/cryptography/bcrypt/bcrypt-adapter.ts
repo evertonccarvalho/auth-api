@@ -1,4 +1,4 @@
-import { HashProvider } from '@/application/contracts/hash-provider.contract';
+import { HashProvider } from '@/application/contracts/hasher.contract';
 import bcrypt from 'bcrypt';
 
 export class BcryptHashProvider implements HashProvider {

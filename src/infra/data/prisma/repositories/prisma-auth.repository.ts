@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { IAuthRepository } from '@/application/repositories/auth.repository';
+import { AuthRepository } from '@/application/repositories/auth.repository';
 import {
   EmailIsTakenError,
   NotFoundErrorException,
@@ -14,7 +14,7 @@ import { UserModelMapper } from '../user-model.mapper';
 import { User } from '@prisma/client';
 
 @Injectable()
-export class PrismaAuthRepository implements IAuthRepository {
+export class PrismaAuthRepository implements AuthRepository {
   constructor(private prismaService: PrismaService) {}
 
   async insert(entity: UserModel): Promise<void> {
