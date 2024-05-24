@@ -45,6 +45,6 @@ export const getTypeOrmModuleOptions = (
       useClass: TypeormAuthRepository,
     },
   ],
-  exports: ['AuthRepository', 'UserRepository', 'MovieRepository'],
+  exports: ['UserRepository', 'MovieRepository', 'AuthRepository'],
 })
 export class TypeOrmDatabaseModule {}

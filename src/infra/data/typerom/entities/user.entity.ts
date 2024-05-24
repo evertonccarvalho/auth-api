@@ -17,6 +17,7 @@ export class UserEntity {
   @Column({
     type: 'varchar',
     length: 255,
+    nullable: false,
   })
   name: string;
 
@@ -24,12 +25,14 @@ export class UserEntity {
     type: 'varchar',
     length: 255,
     unique: true,
+    nullable: false,
   })
   email: string;
 
   @Column({
     type: 'varchar',
     length: 255,
+    nullable: false,
   })
   password: string;
 
@@ -37,18 +40,20 @@ export class UserEntity {
     type: 'enum',
     enum: UserStatus,
     default: UserStatus.Pending,
+    nullable: true,
   })
-  status: UserStatus;
+  status?: UserStatus;
 
   @Column({
     type: 'simple-array',
     default: [UserRoles.User],
+    nullable: true,
   })
-  roles: UserRoles[];
+  roles?: UserRoles[];
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
 }
