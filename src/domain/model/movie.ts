@@ -1,15 +1,6 @@
-export class MovieModel {
-  id: string;
-  title: string;
-  synopsis: string;
-  duration: number;
-  director: string;
-  year: number;
-}
-
 import { ApiProperty } from '@nestjs/swagger';
 
-export class MoviePresenter {
+export class MovieModel {
   @ApiProperty()
   id: string;
   @ApiProperty()

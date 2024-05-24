@@ -4,14 +4,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  BaseEntity,
 } from 'typeorm';
-import { UserRoles } from '@/domain/interfaces/enums/roles';
-import { UserStatus } from '@/domain/interfaces/enums/status';
-import { BaseEntity } from '@/domain/entities/base-entity';
-import { IUser } from '../../../../domain/interfaces/user';
+import { UserRoles } from '@/domain/enums/roles';
+import { UserStatus } from '@/domain/enums/status';
 
 @Entity('users')
-export class UserEntity extends BaseEntity<IUser> {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

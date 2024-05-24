@@ -21,7 +21,7 @@ import {
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
+import { UpdateUserDto } from '@/domain/dtos/users';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -39,7 +39,7 @@ export class UsersController {
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     const output = await this.getUserUseCase.execute({ id });
-    return new UserPresenter(output);
+    return output;
   }
 
   @ApiResponse({ status: 404, description: 'Not found' })
@@ -59,7 +59,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'User updated',
-    type: UserOutput,
+    type: UserPresenter,
   })
   @ApiResponse({ status: 400, description: 'Invalid request' })
   @ApiResponse({ status: 404, description: 'User not found' })
@@ -70,6 +70,6 @@ export class UsersController {
       data: updateDto,
     });
 
-    return new UserPresenter(output);
+    return output;
   }
 }

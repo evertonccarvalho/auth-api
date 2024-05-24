@@ -19,7 +19,6 @@ import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { UsersController } from '@/presentation/controllers/users.controller';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
-import { RedisModule } from '@/infra/data/cache/redis.module';
 import { BcryptHashProvider } from '@/infra/cryptography/bcrypt/bcrypt-adapter';
 import { ConfigModule } from '@nestjs/config';
 import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';

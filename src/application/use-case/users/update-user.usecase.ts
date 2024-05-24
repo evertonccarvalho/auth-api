@@ -1,6 +1,7 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { UserRepository } from '@/application/repositories/user.repository';
-import { UpdateUserDto, UserOutput } from '@/domain/dtos/users';
+import { UpdateUserDto } from '@/domain/dtos/users';
+import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { Injectable } from '@nestjs/common';
 
 export namespace UpdateUserUseCase {
@@ -9,7 +10,7 @@ export namespace UpdateUserUseCase {
     data: UpdateUserDto;
   };
 
-  export type Output = UserOutput;
+  export type Output = UserPresenter;
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
@@ -22,7 +23,7 @@ export namespace UpdateUserUseCase {
 
       const updatedUser = await this.userRepository.update(id, data);
 
-      return updatedUser;
+      return new UserPresenter(updatedUser);
     }
   }
 }

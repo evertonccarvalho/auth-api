@@ -1,9 +1,8 @@
 import { BaseEntity } from '@/domain/entities/base-entity';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { IMovies } from '../../../../domain/interfaces/movie';
 
 @Entity('movies')
-export class MovieEntity extends BaseEntity<IMovies> {
+export class MovieEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

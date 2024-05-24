@@ -1,29 +1,24 @@
-import { BaseEntity } from '../entities/base-entity';
-import { UserRoles } from '@/domain/interfaces/enums/roles';
-import { UserStatus } from '@/domain/interfaces/enums/status';
-import { IUser } from '@/domain/interfaces/user';
+import { UserRoles } from '@/domain/enums/roles';
+import { UserStatus } from '@/domain/enums/status';
 
-export class UserModel extends BaseEntity<IUser> {
-  id: string;
+export class UserModel {
+  id?: string;
   name: string;
   email: string;
-  password: string;
-  status: UserStatus;
-  roles: UserRoles[];
-  createdAt: Date;
-  updatedAt: Date;
+  password?: string;
+  status?: UserStatus;
+  roles?: UserRoles[];
+  createdAt?: Date;
+  updatedAt?: Date;
 
-  constructor(props: IUser, id?: string) {
-    super(props, id);
-
-    this.name = props.name;
-    this.email = props.email;
+  constructor(props: Partial<UserModel> = {}) {
+    this.id = props.id;
+    this.name = props.name!;
+    this.email = props.email!;
     this.password = props.password;
-    this.status = props.status;
-    this.roles = props.roles;
-    this.createdAt = props.createdAt;
-    this.updatedAt = props.updatedAt;
-
-    Object.assign(this, props);
+    this.status = props.status ?? UserStatus.Active;
+    this.roles = props.roles ?? [];
+    this.createdAt = props.createdAt ?? new Date();
+    this.updatedAt = props.updatedAt ?? new Date();
   }
 }

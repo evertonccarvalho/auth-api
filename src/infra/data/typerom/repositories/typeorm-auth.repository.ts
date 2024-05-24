@@ -7,6 +7,7 @@ import {
   EmailIsTakenError,
   NotFoundErrorException,
 } from '@/presentation/exceptions';
+import { UserModel } from '@/domain/model/user';
 
 @Injectable()
 export class TypeormAuthRepository implements AuthRepository {
@@ -15,11 +16,11 @@ export class TypeormAuthRepository implements AuthRepository {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async insert(entity: UserEntity): Promise<void> {
-    await this.userRepository.save(entity.toJSON());
+  async insert(entity: UserModel): Promise<void> {
+    await this.userRepository.save(entity);
   }
 
-  async findByEmail(email: string): Promise<UserEntity | undefined> {
+  async findByEmail(email: string): Promise<UserModel | undefined> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
       throw new NotFoundErrorException('User Not found');

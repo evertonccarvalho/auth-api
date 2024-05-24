@@ -29,7 +29,6 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'User created' })
   @ApiResponse({ status: 409, description: 'Email conflict' })
   async create(@Body() signupDto: SignupDto) {
-    const response = await this.signupUseCase.execute(signupDto);
-    return new UserPresenter(response);
+    return await this.signupUseCase.execute(signupDto);
   }
 }

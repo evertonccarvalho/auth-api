@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserOutput } from '../../domain/dtos/users';
-import { UserRoles } from '../../domain/interfaces/enums/roles';
-import { UserStatus } from '../../domain/interfaces/enums/status';
+import { UserRoles } from '../../domain/enums/roles';
+import { UserStatus } from '../../domain/enums/status';
+import { UserModel } from '@/domain/model/user';
 
 export class UserPresenter {
   @ApiProperty({ description: 'Identificação do usuário' })
-  id: string;
+  id?: string;
 
   @ApiProperty({ description: 'Nome do usuário' })
   name: string;
@@ -14,18 +14,18 @@ export class UserPresenter {
   email: string;
 
   @ApiProperty({ description: 'Status do usuário' })
-  status: UserStatus;
+  status?: UserStatus;
 
   @ApiProperty({ description: 'Papéis do usuário' })
-  roles: UserRoles[];
+  roles?: UserRoles[];
 
   @ApiProperty()
-  createdAt: Date;
+  createdAt?: Date;
 
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt?: Date;
 
-  constructor(props: UserOutput) {
+  constructor(props: UserModel) {
     this.id = props.id;
     this.name = props.name;
     this.email = props.email;

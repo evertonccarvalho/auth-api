@@ -2,14 +2,13 @@ import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { UserRepository } from '@/application/repositories/user.repository';
 import { Injectable } from '@nestjs/common';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UserOutput } from '@/domain/dtos/users';
 
 // search-input.ts
 
 export namespace ListUsersUseCase {
   export type Input = any;
 
-  export type Output = UserOutput[];
+  export type Output = UserPresenter[];
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {

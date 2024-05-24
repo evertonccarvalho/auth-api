@@ -1,17 +1,22 @@
+import { UserEntity } from '@/infra/data/typerom/entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 export abstract class BaseEntity<Props = any> {
-  public readonly id: string;
+  public readonly _id: string;
   public readonly props: Props;
 
   constructor(props: Props, id?: string) {
     this.props = props;
-    this.id = id || uuidv4();
+    this._id = id || uuidv4();
+  }
+
+  get id() {
+    return this._id;
   }
 
   toJSON(): Required<{ id: string } & Props> {
     return {
-      id: this.id,
+      id: this._id,
       ...this.props,
     } as Required<{ id: string } & Props>;
   }

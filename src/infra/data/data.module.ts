@@ -1,6 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { TypeOrmDatabaseModule } from './typerom/typeorm.module';
-import { PrismaModule } from './prisma/prisma.module';
 
 interface DatabaseOptions {
   type: 'prisma' | 'mongoose' | 'typeorm';
@@ -20,10 +19,7 @@ export class DataModule {
         imports = [TypeOrmDatabaseModule];
         exports = [TypeOrmDatabaseModule];
         break;
-      case 'prisma':
-        imports = [PrismaModule];
-        exports = [PrismaModule];
-        break;
+
       default:
         throw new Error('Unsupported database type');
     }

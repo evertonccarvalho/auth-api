@@ -24,7 +24,7 @@ import {
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { MoviePresenter } from '@/domain/model/movie';
+import { MovieModel } from '@/domain/model/movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
@@ -71,7 +71,7 @@ export class MoviesController {
   @ApiResponse({
     status: 200,
     description: 'Movie updated',
-    type: MoviePresenter,
+    type: MovieModel,
   })
   @ApiResponse({ status: 400, description: 'Invalid request' })
   @ApiResponse({ status: 404, description: 'Movie not found' })

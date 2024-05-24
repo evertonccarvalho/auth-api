@@ -4,7 +4,7 @@ import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { Injectable } from '@nestjs/common';
 import { UserModel } from '@/domain/model/user';
 import { AuthRepository } from '@/application/repositories/auth.repository';
-import { UserOutput } from '@/domain/dtos/users';
+import { UserPresenter } from '@/presentation/presenters/user.presenter';
 
 export namespace SignUpUseCase {
   export type Input = {
@@ -13,7 +13,7 @@ export namespace SignUpUseCase {
     password: string;
   };
 
-  export type Output = UserOutput;
+  export type Output = void;
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
@@ -30,10 +30,12 @@ export namespace SignUpUseCase {
 
       await this.userRepository.emailExists(email);
       const hashPassword = await this.hashProvider.generateHash(password);
-      const entity = new UserModel({ ...input, password: hashPassword });
-      await this.userRepository.insert(entity);
 
-      return entity;
+      const entity = new UserModel(
+        Object.assign(input, { password: hashPassword }),
+      );
+
+      await this.userRepository.insert(entity);
     }
   }
 }
