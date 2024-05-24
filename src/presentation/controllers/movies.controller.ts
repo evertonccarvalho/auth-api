@@ -28,6 +28,7 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
@@ -48,6 +49,8 @@ export class MoviesController {
     return response;
   }
 
+  // @CacheKey('movies')
+  // @UseInterceptors(CacheInterceptor)
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
   findAll() {
