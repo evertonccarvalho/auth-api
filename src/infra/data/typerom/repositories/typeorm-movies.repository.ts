@@ -14,8 +14,8 @@ export class TypeormMoviesRepository implements MovieRepository {
     private readonly movieRepository: Repository<MovieEntity>,
   ) {}
 
-  async insert(movie: MovieEntity): Promise<MovieEntity> {
-    return await this.movieRepository.save(movie.toJSON());
+  async insert(movie: MovieModel): Promise<MovieModel> {
+    return await this.movieRepository.save(movie);
   }
 
   async findById(id: string): Promise<MovieModel> {
@@ -32,7 +32,7 @@ export class TypeormMoviesRepository implements MovieRepository {
     await this.movieRepository.delete(id);
   }
 
-  async update(id: string, data: UpdateMovieDto): Promise<MovieEntity> {
+  async update(id: string, data: UpdateMovieDto): Promise<MovieModel> {
     const entity = await this.findById(id);
 
     Object.assign(entity, data);
@@ -41,7 +41,7 @@ export class TypeormMoviesRepository implements MovieRepository {
     return updatedUser;
   }
 
-  protected async _get(id: string): Promise<MovieEntity | undefined> {
+  protected async _get(id: string): Promise<MovieModel | undefined> {
     try {
       const entity = await this.movieRepository.findOne({ where: { id } });
       if (!entity) {

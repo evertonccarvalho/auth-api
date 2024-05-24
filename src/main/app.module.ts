@@ -5,7 +5,7 @@ import { RedisModule } from '@/infra/data/cache/redis.module';
 import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
 
 @Module({
-  imports: [ConfigsModule, HttpModule, JwtModule, RedisModule],
+  imports: [ConfigsModule, HttpModule, JwtModule],
   controllers: [],
   providers: [],
 })

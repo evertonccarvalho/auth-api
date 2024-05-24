@@ -8,7 +8,6 @@ import {
   Put,
   ParseUUIDPipe,
   HttpCode,
-  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -16,11 +15,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  CreateMovieDto,
-  MovieOutput,
-  UpdateMovieDto,
-} from '../../domain/dtos/movie';
+import { CreateMovieDto, UpdateMovieDto } from '../../domain/dtos/movie';
 import {
   CreateMovieUseCase,
   DeleteMovieUseCase,
@@ -29,6 +24,7 @@ import {
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { MoviePresenter } from '@/domain/model/movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
@@ -75,7 +71,7 @@ export class MoviesController {
   @ApiResponse({
     status: 200,
     description: 'Movie updated',
-    type: MovieOutput,
+    type: MoviePresenter,
   })
   @ApiResponse({ status: 400, description: 'Invalid request' })
   @ApiResponse({ status: 404, description: 'Movie not found' })

@@ -28,7 +28,7 @@ import { TypeormUsersRepository } from '@/infra/data/typerom/repositories/typeor
 import { TypeormMoviesRepository } from '@/infra/data/typerom/repositories/typeorm-movies.repository';
 
 @Module({
-  imports: [RedisModule, JwtModule, ConfigModule],
+  imports: [JwtModule, ConfigModule],
   controllers: [UsersController, MoviesController, AuthController],
   providers: [
     {

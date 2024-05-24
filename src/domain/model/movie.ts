@@ -1,22 +1,34 @@
-import { IMovies } from '@/domain/interfaces/movie';
-import { BaseEntity } from '../entities/base-entity';
-export class MovieModel extends BaseEntity<IMovies> {
+export class MovieModel {
   id: string;
   title: string;
   synopsis: string;
   duration: number;
   director: string;
   year: number;
+}
 
-  constructor(props: IMovies, id?: string) {
-    super(props, id);
+import { ApiProperty } from '@nestjs/swagger';
 
-    this.title = props.title;
-    this.synopsis = props.synopsis;
-    this.duration = props.duration;
-    this.director = props.director;
-    this.year = props.year;
+export class MoviePresenter {
+  @ApiProperty()
+  id: string;
+  @ApiProperty()
+  title: string;
+  @ApiProperty()
+  synopsis: string;
+  @ApiProperty()
+  duration: number;
+  @ApiProperty()
+  director: string;
+  @ApiProperty()
+  year: number;
 
-    Object.assign(this, props);
+  constructor(todo: MovieModel) {
+    this.id = todo.id;
+    this.title = todo.title;
+    this.synopsis = todo.synopsis;
+    this.duration = todo.duration;
+    this.director = todo.director;
+    this.year = todo.year;
   }
 }
