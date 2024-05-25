@@ -1,23 +1,34 @@
-import { BaseEntity } from '@/domain/entities/base-entity';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity('movies')
 export class Movie {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   title: string;
 
-  @Column()
+  @Column({ nullable: false })
   synopsis: string;
 
-  @Column()
+  @Column({ nullable: false })
   duration: number;
 
-  @Column()
+  @Column({ nullable: false })
   director: string;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ type: 'int', nullable: false })
   year: number;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

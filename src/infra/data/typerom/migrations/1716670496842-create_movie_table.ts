@@ -1,65 +1,24 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class CreateMovieTable1716670496842 implements MigrationInterface {
-  name?: string;
-  transaction?: boolean;
-
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createTable(
-      new Table({
-        name: 'movies',
-        columns: [
-          {
-            name: 'id',
-            type: 'uuid',
-            isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
-          },
-          {
-            name: 'title',
-            type: 'varchar',
-            length: '255',
-            isNullable: false,
-          },
-          {
-            name: 'synopsis',
-            type: 'text',
-            isNullable: false,
-          },
-          {
-            name: 'duration',
-            type: 'int',
-            isNullable: false,
-          },
-          {
-            name: 'director',
-            type: 'varchar',
-            length: '255',
-            isNullable: false,
-          },
-          {
-            name: 'year',
-            type: 'int',
-            default: 0,
-          },
-          {
-            name: 'createdAt',
-            type: 'timestamp',
-            default: 'CURRENT_TIMESTAMP',
-          },
-          {
-            name: 'updatedAt',
-            type: 'timestamp',
-            default: 'CURRENT_TIMESTAMP',
-            onUpdate: 'CURRENT_TIMESTAMP',
-          },
-        ],
-      }),
-    );
+    await queryRunner.query(`
+      CREATE TABLE movies (
+        id uuid PRIMARY KEY NOT NULL,
+        title varchar(255) NOT NULL,
+        director varchar(255) NOT NULL,
+        synopsis text NOT NULL,
+        duration int NOT NULL,
+        year int NOT NULL,
+        created_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        updated_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
+      );
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('movies');
+    await queryRunner.query(`
+      DROP TABLE movies;
+    `);
   }
 }

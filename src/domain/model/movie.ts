@@ -1,25 +1,12 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Movie } from '@/infra/data/typerom/entities/movie.entity';
+import { v4 as uuidv4 } from 'uuid';
 
-export class MovieModel {
-  @ApiProperty()
-  id: string;
-  @ApiProperty()
-  title: string;
-  @ApiProperty()
-  synopsis: string;
-  @ApiProperty()
-  duration: number;
-  @ApiProperty()
-  director: string;
-  @ApiProperty()
-  year: number;
-
-  constructor(todo: MovieModel) {
-    this.id = todo.id;
-    this.title = todo.title;
-    this.synopsis = todo.synopsis;
-    this.duration = todo.duration;
-    this.director = todo.director;
-    this.year = todo.year;
+export class MovieModel extends Movie {
+  constructor(props: Partial<MovieModel>) {
+    super();
+    Object.assign(this, {
+      ...props,
+      id: uuidv4(),
+    });
   }
 }

@@ -5,7 +5,7 @@ import { UserModel } from '@/domain/model/user';
 
 export class UserPresenter {
   @ApiProperty({ description: 'Identificação do usuário' })
-  id?: string;
+  id: string;
 
   @ApiProperty({ description: 'Nome do usuário' })
   name: string;
@@ -14,10 +14,10 @@ export class UserPresenter {
   email: string;
 
   @ApiProperty({ description: 'Status do usuário' })
-  status?: UserStatus;
+  status: UserStatus;
 
   @ApiProperty({ description: 'Papéis do usuário' })
-  roles?: UserRoles;
+  roles: UserRoles;
 
   @ApiProperty()
   createdAt: Date;
