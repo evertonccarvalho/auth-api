@@ -3,15 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { MovieModel } from '@/domain/model/movie';
 import { MovieRepository } from '@/application/repositories/movie.repositoy';
-import { MovieEntity } from '../entities/movie.entity';
+import { Movie } from '../entities/movie.entity';
 import { UpdateMovieDto } from '@/domain/dtos/movie';
 import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 
 @Injectable()
 export class TypeormMoviesRepository implements MovieRepository {
-  private readonly movieRepository: Repository<MovieEntity>;
+  private readonly movieRepository: Repository<Movie>;
   constructor(private readonly dataSource: DataSource) {
-    this.movieRepository = this.dataSource.getRepository(MovieEntity);
+    this.movieRepository = this.dataSource.getRepository(Movie);
   }
 
   async insert(movie: MovieModel): Promise<MovieModel> {

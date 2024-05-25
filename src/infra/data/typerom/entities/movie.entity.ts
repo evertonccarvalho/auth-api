@@ -2,7 +2,7 @@ import { BaseEntity } from '@/domain/entities/base-entity';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('movies')
-export class MovieEntity {
+export class Movie {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

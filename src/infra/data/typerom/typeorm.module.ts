@@ -3,8 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeormMoviesRepository } from './repositories/typeorm-movies.repository';
 import { TypeormUsersRepository } from './repositories/typeorm-users.repository';
 import { TypeormAuthRepository } from './repositories/typeorm-auth.repository';
-import { UserEntity } from './entities/user.entity';
-import { MovieEntity } from './entities/movie.entity';
+import { User } from './entities/user.entity';
+import { Movie } from './entities/movie.entity';
 import { DataSource } from 'typeorm';
 import { join } from 'path';
 

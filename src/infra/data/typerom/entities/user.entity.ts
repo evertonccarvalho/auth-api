@@ -10,7 +10,7 @@ import { UserRoles } from '@/domain/enums/roles';
 import { UserStatus } from '@/domain/enums/status';
 
 @Entity('users')
-export class UserEntity {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

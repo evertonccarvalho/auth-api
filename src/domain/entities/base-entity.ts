@@ -1,4 +1,4 @@
-import { UserEntity } from '@/infra/data/typerom/entities/user.entity';
+import { User } from '@/infra/data/typerom/entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 export abstract class BaseEntity<Props = any> {

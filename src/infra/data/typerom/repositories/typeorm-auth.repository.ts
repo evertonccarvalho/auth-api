@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
+import { User } from '../entities/user.entity';
 import { AuthRepository } from '@/application/repositories/auth.repository';
 import {
   EmailIsTakenError,
@@ -11,9 +11,9 @@ import { UserModel } from '@/domain/model/user';
 
 @Injectable()
 export class TypeormAuthRepository implements AuthRepository {
-  private readonly userRepository: Repository<UserEntity>;
+  private readonly userRepository: Repository<User>;
   constructor(private readonly dataSource: DataSource) {
-    this.userRepository = this.dataSource.getRepository(UserEntity);
+    this.userRepository = this.dataSource.getRepository(User);
   }
 
   async insert(entity: UserModel): Promise<void> {
