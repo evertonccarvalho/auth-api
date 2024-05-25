@@ -5,8 +5,8 @@ export class MovieModel extends Movie {
   constructor(props: Partial<MovieModel>) {
     super();
     Object.assign(this, {
-      ...props,
       id: uuidv4(),
+      ...props,
     });
   }
 }

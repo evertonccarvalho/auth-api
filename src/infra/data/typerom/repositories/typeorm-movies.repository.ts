@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { MovieModel } from '@/domain/model/movie';
 import { MovieRepository } from '@/application/repositories/movie.repositoy';

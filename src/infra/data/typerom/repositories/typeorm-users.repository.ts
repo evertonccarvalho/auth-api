@@ -27,7 +27,7 @@ export class TypeormUsersRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const entity = await this._get(id);
+    await this._get(id);
     await this.userRepository.delete(id);
   }
 

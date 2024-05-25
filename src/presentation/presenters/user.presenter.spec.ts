@@ -47,5 +47,3 @@ describe('UserPresenter unit tests', () => {
     });
   });
 });
-
-// Adicione seus testes para UserCollectionPresenter aqui

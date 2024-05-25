@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { MovieRepository } from '../../repositories/movie.repositoy';
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { MovieModel } from '@/domain/model/movie';
+import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
 
 export namespace GetMoviesUseCase {
   export type Input = any;
@@ -13,7 +14,7 @@ export namespace GetMoviesUseCase {
 
     async execute(): Promise<Output> {
       const result = await this.movieRepository.findAll();
-      const items: MovieModel[] = result.map((item) => {
+      const items: MoviePresenter[] = result.map((item) => {
         return item;
       });
       return items;

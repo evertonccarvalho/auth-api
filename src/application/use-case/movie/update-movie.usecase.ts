@@ -3,6 +3,7 @@ import { MovieRepository } from '../../repositories/movie.repositoy';
 import { UpdateMovieDto } from '@/domain/dtos/movie';
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { MovieModel } from '@/domain/model/movie';
+import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
 
 export namespace UpdateMovieUseCase {
   export type Input = {
@@ -20,7 +21,7 @@ export namespace UpdateMovieUseCase {
       await this.movieRepository.findById(id);
 
       const newMovie = await this.movieRepository.update(id, data);
-      return new MovieModel(newMovie);
+      return new MoviePresenter(newMovie);
     }
   }
 }
