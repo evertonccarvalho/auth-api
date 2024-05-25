@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { AuthRepository } from '@/application/repositories/auth.repository';
 import {
@@ -11,10 +11,10 @@ import { UserModel } from '@/domain/model/user';
 
 @Injectable()
 export class TypeormAuthRepository implements AuthRepository {
-  constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  private readonly userRepository: Repository<UserEntity>;
+  constructor(private readonly dataSource: DataSource) {
+    this.userRepository = this.dataSource.getRepository(UserEntity);
+  }
 
   async insert(entity: UserModel): Promise<void> {
     await this.userRepository.save(entity);

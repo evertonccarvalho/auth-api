@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { UserRepository } from '@/application/repositories/user.repository';
+import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { UpdateUserDto } from '@/domain/dtos/users';
 import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 
 @Injectable()
-export class TypeormUsersRepository implements UserRepository {
-  constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-  ) {}
+export class TypeormUsersRepository {
+  private readonly userRepository: Repository<UserEntity>;
+  constructor(private readonly dataSource: DataSource) {
+    this.userRepository = this.dataSource.getRepository(UserEntity);
+  }
 
   async findById(id: string): Promise<UserEntity | undefined> {
     return this._get(id);
@@ -23,28 +21,21 @@ export class TypeormUsersRepository implements UserRepository {
   }
 
   async update(id: string, data: UpdateUserDto): Promise<UserEntity> {
-    const entity = await this.findById(id);
-
+    const entity = await this._get(id);
     Object.assign(entity, data);
-
-    const updatedUser = await this.userRepository.save(entity);
-    return updatedUser;
+    return this.userRepository.save(entity);
   }
 
   async delete(id: string): Promise<void> {
-    await this._get(id);
+    const entity = await this._get(id);
     await this.userRepository.delete(id);
   }
 
-  protected async _get(id: string): Promise<UserEntity | undefined> {
-    try {
-      const user = await this.userRepository.findOne({ where: { id } });
-      if (!user) {
-        throw new NotFoundErrorException('User Not found');
-      }
-      return user;
-    } catch {
-      throw new NotFoundErrorException('User Not found');
+  private async _get(id: string): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundErrorException(`User with id ${id} not found`);
     }
+    return user;
   }
 }
