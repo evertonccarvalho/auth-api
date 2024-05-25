@@ -26,7 +26,8 @@ import { join } from 'path';
             join(__dirname, '..', '**', 'entities', '*.entity.{ts,js}'),
           ],
           migrations: [join(__dirname, '..', '**', 'migrations', '*.{ts,js}')],
-          synchronize: true,
+          migrationsRun: true,
+          synchronize: false,
           logging: false,
         });
 

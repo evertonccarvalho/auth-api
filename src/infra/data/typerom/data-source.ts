@@ -11,12 +11,10 @@ export const dataSourceOptions: DataSourceOptions = {
   database: process.env.DB_DATABASE_NAME,
   entities: [join(__dirname, '..', '**', 'entities', '*.entity.{ts,js}')],
   migrations: [join(__dirname, '..', '**', 'migrations', '*.{ts,js}')],
-  synchronize: true,
+  synchronize: false,
   logging: false,
 };
 
 export const dataSource = new DataSource({
   ...dataSourceOptions,
-  synchronize: false,
-  migrations: [],
 });
