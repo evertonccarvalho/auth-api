@@ -17,13 +17,13 @@ export class UserPresenter {
   status?: UserStatus;
 
   @ApiProperty({ description: 'Papéis do usuário' })
-  roles?: UserRoles[];
+  roles?: UserRoles;
 
   @ApiProperty()
-  createdAt?: Date;
+  createdAt: Date;
 
   @ApiProperty()
-  updatedAt?: Date;
+  updatedAt: Date;
 
   constructor(props: UserModel) {
     this.id = props.id;

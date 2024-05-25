@@ -11,7 +11,7 @@ describe('UserPresenter unit tests', () => {
     name: 'test name',
     email: 'a@a.com',
     password: 'fake',
-    roles: [UserRoles.User],
+    roles: UserRoles.User,
     status: UserStatus.Pending,
     updatedAt,
     createdAt,
@@ -40,10 +40,10 @@ describe('UserPresenter unit tests', () => {
       id: 'e71c52a2-9710-4a96-a08e-144af4209b5d',
       name: 'test name',
       email: 'a@a.com',
+      roles: UserRoles.User,
+      status: UserStatus.Pending,
       createdAt,
       updatedAt,
-      roles: [UserRoles.User],
-      status: UserStatus.Pending,
     });
   });
 });

@@ -1,89 +1,29 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class CreateUserTable1716670484659 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `CREATE TYPE users_status_enum AS ENUM ('Pending', 'Active', 'Inactive')`,
-    );
+    await queryRunner.query(`
+      CREATE TYPE users_status_enum AS ENUM ('Pending', 'Active', 'Inactive');
+      CREATE TYPE users_roles_enum AS ENUM ('user', 'admin');
 
-    await queryRunner.createTable(
-      new Table({
-        name: 'users',
-        columns: [
-          {
-            name: 'id',
-            type: 'uuid',
-            isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
-          },
-          {
-            name: 'name',
-            type: 'varchar',
-            length: '255',
-            isNullable: false,
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            length: '255',
-            isUnique: true,
-            isNullable: false,
-          },
-          {
-            name: 'password',
-            type: 'varchar',
-            length: '255',
-            isNullable: false,
-          },
-          {
-            name: 'phoneNumber',
-            type: 'varchar',
-            length: '20',
-            isNullable: true,
-          },
-          {
-            name: 'isActive',
-            type: 'boolean',
-            default: true,
-          },
-          {
-            name: 'admin',
-            type: 'boolean',
-            default: false,
-          },
-          {
-            name: 'createdAt',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'updatedAt',
-            type: 'timestamp',
-            default: 'now()',
-            onUpdate: 'now()',
-          },
-          {
-            name: 'status',
-            type: 'enum',
-            enumName: 'users_status_enum',
-            default: `'Pending'`,
-            isNullable: true,
-          },
-          {
-            name: 'roles',
-            type: 'varchar',
-            isArray: true,
-            default: `'{User}'`,
-            isNullable: true,
-          },
-        ],
-      }),
-    );
+      CREATE TABLE users (
+        id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+        name varchar(255) NOT NULL,
+        email varchar(255) NOT NULL UNIQUE,
+        password varchar(255) NOT NULL,
+        status users_status_enum DEFAULT 'Pending',
+        roles users_roles_enum DEFAULT 'user',
+        created_at timestamp DEFAULT now() NOT NULL,
+        updated_at timestamp DEFAULT now() NOT NULL
+      );
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
-    await queryRunner.query(`DROP TYPE users_status_enum`);
+    await queryRunner.query(`
+      DROP TABLE users;
+      DROP TYPE users_status_enum;
+      DROP TYPE users_roles_enum;
+    `);
   }
 }

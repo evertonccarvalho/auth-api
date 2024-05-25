@@ -45,15 +45,16 @@ export class User {
   status?: UserStatus;
 
   @Column({
-    type: 'simple-array',
-    default: [UserRoles.User],
+    type: 'enum',
+    enum: UserRoles,
+    default: UserRoles.User,
     nullable: true,
   })
-  roles?: UserRoles[];
+  roles?: UserRoles;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt?: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt?: Date;
 }
