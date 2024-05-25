@@ -5,13 +5,14 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
   BaseEntity,
+  PrimaryColumn,
 } from 'typeorm';
 import { UserRoles } from '@/domain/enums/roles';
 import { UserStatus } from '@/domain/enums/status';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn('uuid')
   id: string;
 
   @Column({
@@ -40,21 +41,21 @@ export class User {
     type: 'enum',
     enum: UserStatus,
     default: UserStatus.Pending,
-    nullable: true,
+    nullable: false,
   })
-  status?: UserStatus;
+  status: UserStatus;
 
   @Column({
     type: 'enum',
     enum: UserRoles,
     default: UserRoles.User,
-    nullable: true,
+    nullable: false,
   })
-  roles?: UserRoles;
+  roles: UserRoles;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt?: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt?: Date;
+  updatedAt: Date;
 }

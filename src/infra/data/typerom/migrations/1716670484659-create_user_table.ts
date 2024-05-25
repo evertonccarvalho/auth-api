@@ -7,7 +7,7 @@ export class CreateUserTable1716670484659 implements MigrationInterface {
       CREATE TYPE users_roles_enum AS ENUM ('user', 'admin');
 
       CREATE TABLE users (
-        id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+        id uuid PRIMARY KEY NOT NULL,
         name varchar(255) NOT NULL,
         email varchar(255) NOT NULL UNIQUE,
         password varchar(255) NOT NULL,
