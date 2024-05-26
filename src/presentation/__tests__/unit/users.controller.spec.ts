@@ -10,6 +10,7 @@ import { UsersController } from '@/presentation/controllers/users.controller';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UserStatus } from '@/domain/enums/status';
 import { UserRoles } from '@/domain/enums/roles';
+import { RedisModule } from '@/infra/data/cache/redis.module';
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -44,6 +45,7 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [RedisModule],
       controllers: [UsersController],
       providers: [
         {
