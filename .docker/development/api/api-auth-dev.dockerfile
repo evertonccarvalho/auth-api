@@ -15,10 +15,10 @@ RUN npm install -g @nestjs/cli
 
 RUN npm install
 
-RUN npm run build
+# RUN npm run build
 
 EXPOSE 3000
 
 USER node
 
-CMD [ "npm", "run", "start:prod" ]
+CMD [ "npm", "run", "start:dev" ]
