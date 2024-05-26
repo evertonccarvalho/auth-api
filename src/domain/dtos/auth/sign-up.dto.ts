@@ -6,15 +6,15 @@ export class SignupDto {
   @ApiProperty({ description: 'Nome do usuário' })
   @IsString()
   @IsNotEmpty()
-  readonly name: string;
+  name: string;
 
   @ApiProperty({ description: 'Email do usuário' })
   @IsEmail()
   @IsNotEmpty()
-  readonly email: string;
+  email: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(6)
-  readonly password: string;
+  password: string;
 }

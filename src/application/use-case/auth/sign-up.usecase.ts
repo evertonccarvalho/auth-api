@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { UserModel } from '@/domain/model/user';
 import { AuthRepository } from '@/application/repositories/auth.repository';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
+import { UserOutput, UserOutputMapper } from '@/domain/dtos/users/user-output';
 
 export namespace SignUpUseCase {
   export type Input = {
@@ -13,9 +14,8 @@ export namespace SignUpUseCase {
     password: string;
   };
 
-  export type Output = void;
+  export type Output = UserOutput;
 
-  @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(
       private userRepository: AuthRepository,
@@ -24,11 +24,13 @@ export namespace SignUpUseCase {
 
     async execute(input: Input): Promise<Output> {
       const { email, name, password } = input;
+
       if (!email || !name || !password) {
         throw new BadRequestError('Input data not provided');
       }
 
       await this.userRepository.emailExists(email);
+
       const hashPassword = await this.hashProvider.generateHash(password);
 
       const entity = new UserModel(
@@ -36,6 +38,7 @@ export namespace SignUpUseCase {
       );
 
       await this.userRepository.insert(entity);
+      return UserOutputMapper.toOutput(entity);
     }
   }
 }

@@ -4,10 +4,10 @@ export class SigninDto {
   @IsNotEmpty()
   @IsString()
   @IsEmail()
-  readonly email: string;
+  email: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(4)
-  readonly password: string;
+  password: string;
 }
