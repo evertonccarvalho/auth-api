@@ -6,8 +6,8 @@ import { AuthController } from '@/presentation/controllers/Auth.controller';
 import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
 import { BcryptHashProvider } from '@/infra/cryptography/bcrypt/bcrypt-adapter';
 import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
-import { TypeormAuthRepository } from '@/infra/data/typerom/repositories/typeorm-auth.repository';
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
+import { AuthRepository } from '@/application/repositories/auth.repository';
 
 @Module({
   imports: [JwtModule],
@@ -21,7 +21,7 @@ import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
       inject: ['AuthRepository', 'HashProvider', JwtTokenService],
       provide: SignInUseCase.UseCase,
       useFactory: (
-        authRepository: TypeormAuthRepository,
+        authRepository: AuthRepository,
         hashProvider: HashProvider,
         jwtTokenService: JwtTokenService,
       ) =>
@@ -34,7 +34,7 @@ import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
     {
       provide: SignUpUseCase.UseCase,
       useFactory: (
-        userRepository: TypeormAuthRepository,
+        userRepository: AuthRepository,
         hashProvider: HashProvider,
       ) => {
         return new SignUpUseCase.UseCase(userRepository, hashProvider);
