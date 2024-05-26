@@ -1,27 +1,23 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeormMoviesRepository } from './repositories/typeorm-movies.repository';
-import { TypeormUsersRepository } from './repositories/typeorm-users.repository';
-import { TypeormAuthRepository } from './repositories/typeorm-auth.repository';
-import { User } from './entities/user.entity';
-import { Movie } from './entities/movie.entity';
 import { DataSource } from 'typeorm';
 import { join } from 'path';
+import { EnvConfigService } from '@/infra/env-config/env-config.service';
+import { EnvConfigModule } from '@/infra/env-config/env-config.module';
 
 @Module({
-  imports: [ConfigModule],
+  imports: [EnvConfigModule],
   providers: [
     {
       provide: DataSource,
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
+      inject: [EnvConfigService],
+      useFactory: async (configService: EnvConfigService) => {
         const dataSource = new DataSource({
           type: 'postgres',
-          host: configService.get('DB.host'),
-          port: +configService.get<number>('DB.port'),
-          username: configService.get('DB.username'),
-          password: configService.get('DB.password'),
-          database: configService.get('DB.database'),
+          host: configService.getDbHost(),
+          port: configService.getDbPort(),
+          username: configService.getDbUsername(),
+          password: configService.getDbPassword(),
+          database: configService.getDbDatabaseName(),
           entities: [
             join(__dirname, '..', '**', 'entities', '*.entity.{ts,js}'),
           ],

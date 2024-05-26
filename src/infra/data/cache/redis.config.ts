@@ -1,27 +1,27 @@
+import { EnvConfigModule } from '@/infra/env-config/env-config.module';
+import { EnvConfigService } from '@/infra/env-config/env-config.service';
 import { CacheModuleAsyncOptions } from '@nestjs/cache-manager';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-ioredis-yet';
 
 export const RedisOptions: CacheModuleAsyncOptions = {
   isGlobal: true,
-  imports: [ConfigModule],
-  useFactory: async (configService: ConfigService) => {
-    const redisHost = configService.get('CASH.host');
-    const redisPort = configService.get('CASH.port');
-    const cacheTTL = parseInt(configService.get('CASH.ttl', '5')) * 1000;
+  imports: [EnvConfigModule],
+  useFactory: async (configService: EnvConfigService) => {
+    const redisHost = configService.getRedisHost();
+    const redisPort = configService.getRedisPort();
+    console.log(`Connecting to Redis at ${redisHost}:${redisPort}`);
 
     const store = await redisStore({
       host: redisHost,
       port: redisPort,
-      ttl: cacheTTL,
+      ttl: 30 * 1000,
     });
 
-    console.log(`Connecting to Redis at ${redisHost}:${redisPort}`);
     console.log(`Connected to Redis`);
 
     return {
       store: () => store,
     };
   },
-  inject: [ConfigService],
+  inject: [EnvConfigService],
 };

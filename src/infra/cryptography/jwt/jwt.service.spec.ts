@@ -1,59 +1,60 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { EnvConfigService } from '@/infra/env-config/env-config.service';
+import { EnvConfigModule } from '@/infra/env-config/env-config.module';
 import { JwtTokenService } from './jwt.service';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 
-describe('AuthService', () => {
-  let service: JwtTokenService;
-  let jwtServiceMock: JwtService;
-  let configServiceMock: ConfigService;
+describe('AuthService unit tests', () => {
+  let sut: JwtTokenService;
+  let module: TestingModule;
+  let jwtService: JwtService;
+  let envConfigService: EnvConfigService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        JwtTokenService,
-        {
-          provide: JwtService,
-          useValue: {
-            signAsync: jest.fn().mockResolvedValue('mocked-access-token'),
-            verifyAsync: jest.fn().mockResolvedValue({ id: 'mocked-user-id' }),
-          },
-        },
-        {
-          provide: ConfigService,
-          useValue: {
-            get: jest.fn().mockReturnValue('mocked-jwt-secret'),
-          },
-        },
+  beforeAll(async () => {
+    module = await Test.createTestingModule({
+      imports: [
+        EnvConfigModule,
+        JwtModule.registerAsync({
+          imports: [EnvConfigModule],
+          inject: [EnvConfigService],
+          useFactory: async (configService: EnvConfigService) => ({
+            global: true,
+            secret: configService.getJwtSecret(),
+            signOptions: { expiresIn: configService.getJwtExpiresInSeconds() },
+          }),
+        }),
       ],
+      providers: [JwtTokenService],
     }).compile();
 
-    service = module.get<JwtTokenService>(JwtTokenService);
-    jwtServiceMock = module.get<JwtService>(JwtService);
-    configServiceMock = module.get<ConfigService>(ConfigService);
+    jwtService = module.get<JwtService>(JwtService);
+    envConfigService = module.get<EnvConfigService>(EnvConfigService);
+    sut = module.get<JwtTokenService>(JwtTokenService);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(sut).toBeDefined();
   });
 
-  describe('generateJwt', () => {
-    it('should generate JWT token', async () => {
-      const userId = 'user-id';
-      const result = await service.generateJwt(userId);
-      expect(result.accessToken).toEqual('mocked-access-token');
-      expect(jwtServiceMock.signAsync).toHaveBeenCalledWith({ id: userId }, {});
-    });
+  it('should return a jwt', async () => {
+    const result = await sut.generateJwt('fakeId');
+
+    expect(Object.keys(result)).toEqual(['accessToken']);
+    expect(typeof result.accessToken).toEqual('string');
   });
 
-  describe('verifyJwt', () => {
-    it('should verify JWT token', async () => {
-      const token = 'mocked-token';
-      const result = await service.verifyJwt(token);
-      expect(result).toEqual({ id: 'mocked-user-id' });
-      expect(jwtServiceMock.verifyAsync).toHaveBeenCalledWith(token, {
-        secret: 'mocked-jwt-secret',
-      });
-    });
+  it('should verify a jwt', async () => {
+    const result = await sut.generateJwt('fakeId');
+
+    const validToken = await sut.verifyJwt(result.accessToken);
+    expect(validToken).not.toBeNull();
+
+    // Verificar se uma exceção é lançada para um token inválido
+    await expect(sut.verifyJwt('fake')).rejects.toThrow();
+    await expect(
+      sut.verifyJwt(
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+      ),
+    ).rejects.toThrow();
   });
 });

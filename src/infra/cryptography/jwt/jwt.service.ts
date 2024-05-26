@@ -1,13 +1,13 @@
 import { EncryperProps } from '@/application/contracts/encrypter.contract';
+import { EnvConfigService } from '@/infra/env-config/env-config.service';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class JwtTokenService {
   constructor(
     private jwtService: JwtService,
-    private configService: ConfigService,
+    private configService: EnvConfigService,
   ) {}
   async generateJwt(userId: string): Promise<EncryperProps> {
     const accessToken = await this.jwtService.signAsync({ id: userId }, {});
@@ -16,7 +16,7 @@ export class JwtTokenService {
 
   async verifyJwt(token: string) {
     return this.jwtService.verifyAsync(token, {
-      secret: this.configService.get('JWT.secret'),
+      secret: this.configService.getJwtSecret(),
     });
   }
 }

@@ -1,20 +1,22 @@
 import { Module } from '@nestjs/common';
 import { JwtModule as Jwt } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtTokenService } from './jwt.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from '@/main/guards/role.guard';
 import { AuthGuard } from '@/main/guards/auth.guard';
+import { EnvConfigService } from '@/infra/env-config/env-config.service';
+import { EnvConfigModule } from '@/infra/env-config/env-config.module';
 
 @Module({
   imports: [
+    EnvConfigModule,
     Jwt.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
+      imports: [EnvConfigModule],
+      inject: [EnvConfigService],
+      useFactory: async (configService: EnvConfigService) => ({
         global: true,
-        secret: configService.get<string>('JWT.secret'),
-        signOptions: { expiresIn: configService.get<number>('JWT.expiresIn') },
+        secret: configService.getJwtSecret(),
+        signOptions: { expiresIn: configService.getJwtExpiresInSeconds() },
       }),
     }),
   ],

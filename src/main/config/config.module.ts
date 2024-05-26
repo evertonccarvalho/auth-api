@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { configurations } from './configurations';
 import { DataModule } from '../../infra/data/data.module';
+import { EnvConfigModule } from '@/infra/env-config/env-config.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [...configurations],
+    EnvConfigModule.forRoot({
       isGlobal: true,
     }),
     DataModule.register({
