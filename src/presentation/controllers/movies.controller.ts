@@ -46,8 +46,8 @@ export class MoviesController {
     return response;
   }
 
-  @CacheKey('movies')
-  @UseInterceptors(CacheInterceptor)
+  // @CacheKey('movies')
+  // @UseInterceptors(CacheInterceptor)
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
   findAll() {

@@ -2,11 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsInt } from 'class-validator';
 
 export class CreateMovieDto {
-  id: string;
-  @ApiProperty({
-    description: 'The title of the movie.',
-    example: 'Inception',
-  })
   @IsNotEmpty()
   @IsString()
   title: string;
