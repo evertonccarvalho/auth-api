@@ -23,7 +23,6 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { MovieModel } from '@/domain/model/movie';
 
 @ApiTags('Movies')

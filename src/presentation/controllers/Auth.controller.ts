@@ -1,10 +1,8 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { SigninDto, SignupDto } from '../../domain/dtos/auth';
-import { SignInUseCase } from '@/application/use-case/auth/sign-In.usecase';
-import { SignUpUseCase } from '@/application/use-case/auth/sign-up.usecase';
 import { SkipAuth } from '@/main/decorators/auth.decorator';
-import { UserPresenter } from '@/presentation/presenters/user.presenter';
+import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
 
 @ApiTags('Auth')
 @Controller('auth')

@@ -5,7 +5,7 @@ import { UserPresenter } from '@/presentation/presenters/user.presenter';
 
 // search-input.ts
 
-export namespace ListUsersUseCase {
+export namespace GetUsersUseCase {
   export type Input = any;
 
   export type Output = UserPresenter[];

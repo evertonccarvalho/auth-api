@@ -17,7 +17,7 @@ import {
 import {
   DeleteUserUseCase,
   GetUserUseCase,
-  ListUsersUseCase,
+  GetUsersUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
@@ -30,7 +30,7 @@ export class UsersController {
   constructor(
     private readonly getUserUseCase: GetUserUseCase.UseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase.UseCase,
-    private readonly listUsersUseCase: ListUsersUseCase.UseCase,
+    private readonly listUsersUseCase: GetUsersUseCase.UseCase,
     private readonly updateUserUseCase: UpdateUserUseCase.UseCase,
   ) {}
 
