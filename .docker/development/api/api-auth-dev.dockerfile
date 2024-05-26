@@ -1,7 +1,7 @@
 FROM node:lts-alpine
 LABEL Éverton Carvalho <evertonsnake@gmail.com>
 
-ENV NODE_ENV development
+ENV NODE_ENV=development
 ENV TZ=America/Sao_Paulo
 WORKDIR /home/node/app
 
