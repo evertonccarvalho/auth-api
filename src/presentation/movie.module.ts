@@ -1,7 +1,5 @@
 // movie.module.ts
 
-import { Module } from '@nestjs/common';
-import { MoviesController } from '@/presentation/controllers/movies.controller';
 import {
   CreateMovieUseCase,
   DeleteMovieUseCase,
@@ -10,6 +8,8 @@ import {
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
 import { MovieRepository } from '@/domain/repositories/movie.repositoy';
+import { MoviesController } from '@/presentation/controllers/movies.controller';
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [],

@@ -1,6 +1,6 @@
 import { UpdateUserDto } from '@/presentation/dtos/users';
-import { UserEntity } from '../model/user';
 import { RepositoryInterface } from '../../shared/domain/repositories/repository.contract';
+import { UserEntity } from '../model/user';
 
 export interface UserRepository extends RepositoryInterface<UserEntity> {
   findById(id: string): Promise<UserEntity>;

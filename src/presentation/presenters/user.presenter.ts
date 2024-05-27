@@ -1,8 +1,7 @@
+import { UserOutput } from '@/application/dtos/users/user-output';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRoles } from '../../shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '../../shared/infra/database/typeorm/enums/status';
-import { UserEntity } from '@/domain/model/user';
-import { UserOutput } from '@/application/dtos/users/user-output';
 
 export class UserPresenter {
   @ApiProperty({ description: 'Identificação do usuário' })

@@ -1,16 +1,16 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { UserOutput } from '@/application/dtos/users/user-output';
 import {
   DeleteUserUseCase,
   GetUserUseCase,
   GetUsersUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
-import { UpdateUserDto } from '@/presentation/dtos/users';
 import { UsersController } from '@/presentation/controllers/users.controller';
+import { UpdateUserDto } from '@/presentation/dtos/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
-import { UserOutput } from '@/application/dtos/users/user-output';
+import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('UsersController', () => {
   let sut: UsersController;

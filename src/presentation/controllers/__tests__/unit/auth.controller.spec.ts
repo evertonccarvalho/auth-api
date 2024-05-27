@@ -1,10 +1,10 @@
-import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
-import { SignupDto, SigninDto } from '@/presentation/dtos/auth';
 import { UserOutput } from '@/application/dtos/users/user-output';
+import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
+import { AuthController } from '@/presentation/controllers/auth.controller';
+import { SigninDto, SignupDto } from '@/presentation/dtos/auth';
+import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
-import { AuthController } from '@/presentation/controllers/auth.controller';
-import { UserPresenter } from '@/presentation/presenters/user.presenter';
 
 describe('AuthController', () => {
   let sut: AuthController;

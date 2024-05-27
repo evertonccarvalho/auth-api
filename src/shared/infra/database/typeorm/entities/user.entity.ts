@@ -1,14 +1,12 @@
-import {
-  Entity,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  PrimaryGeneratedColumn,
-  BaseEntity,
-  PrimaryColumn,
-} from 'typeorm';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class User {

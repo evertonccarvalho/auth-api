@@ -1,10 +1,10 @@
-import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
-import { Injectable } from '@nestjs/common';
-import { UserRepository } from '@/domain/repositories/user.repository';
 import {
   UserOutput,
   UserOutputMapper,
 } from '@/application/dtos/users/user-output';
+import { UserRepository } from '@/domain/repositories/user.repository';
+import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
+import { Injectable } from '@nestjs/common';
 
 export namespace GetUserUseCase {
   export type Input = {

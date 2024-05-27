@@ -1,8 +1,8 @@
+import { RedisModule } from '@/shared/infra/database/cache/redis.module';
 import { Module } from '@nestjs/common';
+import { AuthModule } from './auth.module';
 import { MovieModule } from './movie.module';
 import { UserModule } from './user.module';
-import { AuthModule } from './auth.module';
-import { RedisModule } from '@/shared/infra/database/cache/redis.module';
 
 @Module({
   imports: [RedisModule, AuthModule, UserModule, MovieModule],

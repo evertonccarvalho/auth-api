@@ -1,6 +1,6 @@
+import { MovieEntity } from '@/domain/model/movie';
 import { instanceToPlain } from 'class-transformer';
 import { MoviePresenter } from './movie.presenter';
-import { MovieEntity } from '@/domain/model/movie';
 
 describe('MoviePresenter unit tests', () => {
   const createdAt = new Date();

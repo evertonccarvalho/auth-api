@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { EnvConfigService } from '@/shared/infra/env-config/env-config.service';
 import { EnvConfigModule } from '@/shared/infra/env-config/env-config.module';
+import { EnvConfigService } from '@/shared/infra/env-config/env-config.service';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { Test, TestingModule } from '@nestjs/testing';
 import { JwtTokenService } from './jwt.service';
 
 describe('AuthService unit tests', () => {

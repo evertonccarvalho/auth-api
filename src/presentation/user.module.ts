@@ -1,7 +1,5 @@
 // user.module.ts
 
-import { Module } from '@nestjs/common';
-import { UsersController } from '@/presentation/controllers/users.controller';
 import {
   DeleteUserUseCase,
   GetUsersUseCase,
@@ -9,6 +7,8 @@ import {
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { UserRepository } from '@/domain/repositories/user.repository';
+import { UsersController } from '@/presentation/controllers/users.controller';
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [],

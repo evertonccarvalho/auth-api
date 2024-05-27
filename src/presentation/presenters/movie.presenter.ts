@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { MovieEntity } from '@/domain/model/movie';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class MoviePresenter {
   @ApiProperty({ description: 'Identificação do Filme' })

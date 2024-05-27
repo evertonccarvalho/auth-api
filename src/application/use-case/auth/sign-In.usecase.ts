@@ -1,9 +1,9 @@
-import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
+import { AuthRepository } from '@/domain/repositories/auth.repository';
+import { EncrypterProvider } from '@/shared/application/contracts/encrypter.contract';
+import { HashProvider } from '@/shared/application/contracts/hasher.contract';
 import { BadRequestError } from '@/shared/application/errors/bad-request-error';
 import { InvalidCredentialsError } from '@/shared/application/errors/invalid-credentials-error';
-import { HashProvider } from '@/shared/application/contracts/hasher.contract';
-import { EncrypterProvider } from '@/shared/application/contracts/encrypter.contract';
-import { AuthRepository } from '@/domain/repositories/auth.repository';
+import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
 
 export namespace SignInUseCase {
   export type Input = {

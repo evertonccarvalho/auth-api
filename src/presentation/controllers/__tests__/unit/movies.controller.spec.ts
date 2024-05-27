@@ -1,4 +1,3 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import {
   CreateMovieUseCase,
   DeleteMovieUseCase,
@@ -7,9 +6,10 @@ import {
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
 import { MoviesController } from '@/presentation/controllers/movies.controller';
+import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
 import { RedisModule } from '@/shared/infra/database/cache/redis.module';
-import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('MoviesController', () => {
   let controller: MoviesController;

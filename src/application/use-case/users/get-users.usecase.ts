@@ -1,9 +1,9 @@
-import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
-import { UserRepository } from '@/domain/repositories/user.repository';
 import {
   UserOutput,
   UserOutputMapper,
 } from '@/application/dtos/users/user-output';
+import { UserRepository } from '@/domain/repositories/user.repository';
+import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
 
 export namespace GetUsersUseCase {
   export type Input = any;

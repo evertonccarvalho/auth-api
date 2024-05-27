@@ -1,6 +1,6 @@
+import { UserEntity } from '@/domain/model/user';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
-import { UserEntity } from '@/domain/model/user';
 
 export type UserOutput = {
   id: string;
