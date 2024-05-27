@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { MovieModel } from '@/domain/model/movie';
-import { MovieRepository } from '@/application/repositories/movie.repositoy';
+import { MovieEntity } from '@/domain/model/movie';
+import { MovieRepository } from '@/application/contracts/repositories/movie.repositoy';
 import { Movie } from '../entities/movie.entity';
 import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
 import { UpdateMovieDto } from '@/application/dtos/movie';
@@ -13,15 +13,15 @@ export class TypeormMoviesRepository implements MovieRepository {
     this.movieRepository = this.dataSource.getRepository(Movie);
   }
 
-  async insert(movie: MovieModel): Promise<MovieModel> {
+  async insert(movie: MovieEntity): Promise<MovieEntity> {
     return await this.movieRepository.save(movie);
   }
 
-  async findById(id: string): Promise<MovieModel> {
+  async findById(id: string): Promise<MovieEntity> {
     return this._get(id);
   }
 
-  async findAll(): Promise<MovieModel[]> {
+  async findAll(): Promise<MovieEntity[]> {
     const movies = await this.movieRepository.find();
     return movies;
   }
@@ -31,7 +31,7 @@ export class TypeormMoviesRepository implements MovieRepository {
     await this.movieRepository.delete(id);
   }
 
-  async update(id: string, data: UpdateMovieDto): Promise<MovieModel> {
+  async update(id: string, data: UpdateMovieDto): Promise<MovieEntity> {
     const entity = await this.findById(id);
 
     Object.assign(entity, data);
@@ -40,7 +40,7 @@ export class TypeormMoviesRepository implements MovieRepository {
     return updatedUser;
   }
 
-  protected async _get(id: string): Promise<MovieModel | undefined> {
+  protected async _get(id: string): Promise<MovieEntity | undefined> {
     try {
       const entity = await this.movieRepository.findOne({ where: { id } });
       if (!entity) {

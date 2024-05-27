@@ -23,7 +23,7 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
-import { MovieModel } from '@/domain/model/movie';
+import { MovieEntity } from '@/domain/model/movie';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { CreateMovieDto, UpdateMovieDto } from '@/application/dtos/movie';
 
@@ -72,7 +72,7 @@ export class MoviesController {
   @ApiResponse({
     status: 200,
     description: 'Movie updated',
-    type: MovieModel,
+    type: MovieEntity,
   })
   @ApiResponse({ status: 400, description: 'Invalid request' })
   @ApiResponse({ status: 404, description: 'Movie not found' })

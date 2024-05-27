@@ -4,8 +4,8 @@ import { JwtTokenService } from './jwt.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from '@/main/guards/role.guard';
 import { AuthGuard } from '@/main/guards/auth.guard';
-import { EnvConfigService } from '@/infra/env-config/env-config.service';
-import { EnvConfigModule } from '@/infra/env-config/env-config.module';
+import { EnvConfigService } from '@/main/config/env-config/env-config.service';
+import { EnvConfigModule } from '@/main/config/env-config/env-config.module';
 
 @Module({
   imports: [

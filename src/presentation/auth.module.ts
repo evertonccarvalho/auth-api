@@ -7,7 +7,7 @@ import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
 import { BcryptHashProvider } from '@/infra/cryptography/bcrypt/bcrypt-adapter';
 import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
-import { AuthRepository } from '@/application/repositories/auth.repository';
+import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
 
 @Module({
   imports: [JwtModule],

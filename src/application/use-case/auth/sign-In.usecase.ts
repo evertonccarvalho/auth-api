@@ -1,7 +1,7 @@
-import { DefaultUseCase } from '@/application/contracts/use-case.contract';
+import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { InvalidCredentialsError } from '@/presentation/errors/invalid-credentials-error';
-import { AuthRepository } from '@/application/repositories/auth.repository';
+import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
 import { HashProvider } from '@/application/contracts/hasher.contract';
 import { EncrypterProvider } from '@/application/contracts/encrypter.contract';
 

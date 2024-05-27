@@ -1,9 +1,9 @@
-import { DefaultUseCase } from '@/application/contracts/use-case.contract';
+import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
 import { HashProvider } from '@/application/contracts/hasher.contract';
 import { BadRequestError } from '@/presentation/errors/bad-request-error';
 import { Injectable } from '@nestjs/common';
-import { UserModel } from '@/domain/model/user';
-import { AuthRepository } from '@/application/repositories/auth.repository';
+import { UserEntity } from '@/domain/model/user';
+import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import {
   UserOutput,
@@ -36,7 +36,7 @@ export namespace SignUpUseCase {
 
       const hashPassword = await this.hashProvider.generateHash(password);
 
-      const entity = new UserModel(
+      const entity = new UserEntity(
         Object.assign(input, { password: hashPassword }),
       );
 

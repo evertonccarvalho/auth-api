@@ -1,5 +1,5 @@
 import { EncryperProps } from '@/application/contracts/encrypter.contract';
-import { EnvConfigService } from '@/infra/env-config/env-config.service';
+import { EnvConfigService } from '@/main/config/env-config/env-config.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 

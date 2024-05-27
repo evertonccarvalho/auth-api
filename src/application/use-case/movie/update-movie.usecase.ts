@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { MovieRepository } from '@/application/repositories/movie.repositoy';
+import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
+import { MovieRepository } from '@/application/contracts/repositories/movie.repositoy';
 import { UpdateMovieDto } from '@/application/dtos/movie';
-import { MovieModel } from '@/domain/model/movie';
+import { MovieEntity } from '@/domain/model/movie';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
 
 export namespace UpdateMovieUseCase {
@@ -11,7 +11,7 @@ export namespace UpdateMovieUseCase {
     data: UpdateMovieDto;
   };
 
-  export type Output = MovieModel;
+  export type Output = MovieEntity;
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private movieRepository: MovieRepository) {}

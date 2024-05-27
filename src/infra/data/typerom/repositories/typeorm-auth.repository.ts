@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import { AuthRepository } from '@/application/repositories/auth.repository';
+import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
 import {
   EmailIsTakenError,
   NotFoundErrorException,
 } from '@/presentation/exceptions';
-import { UserModel } from '@/domain/model/user';
+import { UserEntity } from '@/domain/model/user';
 
 @Injectable()
 export class TypeormAuthRepository implements AuthRepository {
@@ -16,11 +16,11 @@ export class TypeormAuthRepository implements AuthRepository {
     this.userRepository = this.dataSource.getRepository(User);
   }
 
-  async insert(entity: UserModel): Promise<void> {
+  async insert(entity: UserEntity): Promise<void> {
     await this.userRepository.save(entity);
   }
 
-  async findByEmail(email: string): Promise<UserModel | undefined> {
+  async findByEmail(email: string): Promise<UserEntity | undefined> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
       throw new NotFoundErrorException('User Not found');

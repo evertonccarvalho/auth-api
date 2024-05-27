@@ -1,5 +1,5 @@
-import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { UserRepository } from '@/application/repositories/user.repository';
+import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
+import { UserRepository } from '@/application/contracts/repositories/user.repository';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { Injectable } from '@nestjs/common';
 

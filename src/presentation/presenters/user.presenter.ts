@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRoles } from '../../domain/enums/roles';
 import { UserStatus } from '../../domain/enums/status';
-import { UserModel } from '@/domain/model/user';
+import { UserEntity } from '@/domain/model/user';
 import { UserOutput } from '@/application/dtos/users/user-output';
 
 export class UserPresenter {

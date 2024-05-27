@@ -9,7 +9,7 @@ import {
   GetMovieUseCase,
   UpdateMovieUseCase,
 } from '@/application/use-case/movie';
-import { MovieRepository } from '@/application/repositories/movie.repositoy';
+import { MovieRepository } from '@/application/contracts/repositories/movie.repositoy';
 
 @Module({
   imports: [],

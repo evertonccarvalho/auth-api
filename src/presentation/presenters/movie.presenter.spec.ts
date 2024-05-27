@@ -1,11 +1,11 @@
 import { instanceToPlain } from 'class-transformer';
 import { MoviePresenter } from './movie.presenter';
-import { MovieModel } from '@/domain/model/movie';
+import { MovieEntity } from '@/domain/model/movie';
 
 describe('MoviePresenter unit tests', () => {
   const createdAt = new Date();
   const updatedAt = new Date();
-  const props: MovieModel = {
+  const props: MovieEntity = {
     id: 'e71c52a2-9710-4a96-a08e-144af4209b5d',
     title: 'Test Movie',
     synopsis: 'This is a test movie',

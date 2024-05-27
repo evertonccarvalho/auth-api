@@ -1,6 +1,6 @@
 import { UserRoles } from '@/domain/enums/roles';
 import { UserStatus } from '@/domain/enums/status';
-import { UserModel } from '@/domain/model/user';
+import { UserEntity } from '@/domain/model/user';
 
 export type UserOutput = {
   id: string;
@@ -14,7 +14,7 @@ export type UserOutput = {
 };
 
 export class UserOutputMapper {
-  static toOutput(entity: UserModel): UserOutput {
+  static toOutput(entity: UserEntity): UserOutput {
     return entity;
   }
 }

@@ -1,9 +1,9 @@
-import { UserModel } from '@/domain/model/user';
+import { UserEntity } from '@/domain/model/user';
 import { UserOutput, UserOutputMapper } from './user-output';
 
 describe('UserOutputMapper', () => {
   it('deve mapear corretamente um UserModel para UserOutput', () => {
-    const entity = new UserModel({
+    const entity = new UserEntity({
       id: '0441c283-910c-4624-96ea-2453ec1a93d6',
       name: 'user',
       email: '123123a@email.com',

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { MovieModel } from '@/domain/model/movie';
+import { MovieEntity } from '@/domain/model/movie';
 
 export class MoviePresenter {
   @ApiProperty({ description: 'Identificação do Filme' })
@@ -26,7 +26,7 @@ export class MoviePresenter {
   @ApiProperty({ description: 'Data da Última Atualização do Filme' })
   updatedAt: Date;
 
-  constructor(props: MovieModel) {
+  constructor(props: MovieEntity) {
     this.id = props.id;
     this.title = props.title;
     this.synopsis = props.synopsis;
