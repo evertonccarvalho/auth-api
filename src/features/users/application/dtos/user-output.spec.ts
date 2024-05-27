@@ -1,5 +1,5 @@
 import { UserEntity } from '../../domain/entities/user';
-import { UserOutputMapper, UserProps } from './user-output';
+import { UserOutputMapper, UserOutput } from './user-output';
 
 describe('UserOutputMapper', () => {
   it('deve mapear corretamente um UserModel para UserOutput', () => {
@@ -12,7 +12,7 @@ describe('UserOutputMapper', () => {
       createdAt: new Date('2024-05-27T00:12:11.443Z'),
       updatedAt: new Date('2024-05-27T00:12:11.443Z'),
     });
-    const userOutput: UserProps = UserOutputMapper.toOutput(entity);
+    const userOutput: UserOutput = UserOutputMapper.toOutput(entity);
     // expect(userOutput.id).toBe(entity.id);
     expect(userOutput.name).toBe(entity.name);
     expect(userOutput.email).toBe(entity.email);

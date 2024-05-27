@@ -10,7 +10,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
-import { UserProps } from '../../application/dtos/user-output';
+import { UserProps } from '../entities/user';
 
 export class UserRules {
   @MaxLength(255)

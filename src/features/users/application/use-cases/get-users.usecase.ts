@@ -1,6 +1,6 @@
 import {
   UserOutputMapper,
-  UserProps,
+  UserOutput,
 } from '@/features/users/application/dtos/user-output';
 import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
 import { UserRepository } from '../../domain/repositories/user.repository';
@@ -8,7 +8,7 @@ import { UserRepository } from '../../domain/repositories/user.repository';
 export namespace GetUsersUseCase {
   export type Input = any;
 
-  export type Output = UserProps[];
+  export type Output = UserOutput[];
 
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private readonly userRepository: UserRepository) {}

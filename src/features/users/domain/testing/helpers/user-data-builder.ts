@@ -1,7 +1,8 @@
-import { UserProps } from '@/features/users/application/dtos/user-output';
+import { UserOutput } from '@/features/users/application/dtos/user-output';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
 import { faker } from '@faker-js/faker';
+import { UserProps } from '../../entities/user';
 
 type Props = {
   name?: string;

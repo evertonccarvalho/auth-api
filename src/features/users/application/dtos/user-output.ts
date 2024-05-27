@@ -2,8 +2,8 @@ import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
 import { UserEntity } from '../../domain/entities/user';
 
-export type UserProps = {
-  // id: string;
+export type UserOutput = {
+  id: string;
   name: string;
   email: string;
   password: string;
@@ -14,7 +14,7 @@ export type UserProps = {
 };
 
 export class UserOutputMapper {
-  static toOutput(entity: UserEntity): UserProps {
+  static toOutput(entity: UserEntity): UserOutput {
     return entity;
   }
 }

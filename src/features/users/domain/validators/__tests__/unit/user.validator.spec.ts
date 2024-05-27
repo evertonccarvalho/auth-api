@@ -1,10 +1,11 @@
-import { UserProps } from '@/features/users/application/dtos/user-output';
+import { UserOutput } from '@/features/users/application/dtos/user-output';
 import { UserDataBuilder } from '../../../testing/helpers/user-data-builder';
 import {
   UserRules,
   UserValidator,
   UserValidatorFactory,
 } from '../../user.validator';
+import { UserProps } from '../../../entities/user';
 
 let sut: UserValidator;
 let props: UserProps;

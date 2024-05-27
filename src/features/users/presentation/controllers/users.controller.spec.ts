@@ -1,4 +1,4 @@
-import { UserProps } from '@/features/users/application/dtos/user-output';
+import { UserOutput } from '@/features/users/application/dtos/user-output';
 import {
   DeleteUserUseCase,
   GetUserUseCase,
@@ -19,7 +19,7 @@ describe('UsersController', () => {
   let getUsersUseCase: GetUsersUseCase.UseCase;
   let updateUserUseCase: UpdateUserUseCase.UseCase;
   let id: string;
-  let props: UserProps;
+  let props: UserOutput;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -98,7 +98,7 @@ describe('UsersController', () => {
   });
 
   it('should get all users', async () => {
-    const userList: UserProps[] = [props];
+    const userList: UserOutput[] = [props];
     jest.spyOn(getUsersUseCase, 'execute').mockResolvedValueOnce(userList);
 
     const presenterList = await sut.findAll();
