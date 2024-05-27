@@ -1,6 +1,6 @@
 import { MovieModel } from '@/domain/model/movie';
-import { UpdateMovieDto } from '@/domain/dtos/movie';
 import { RepositoryInterface } from '../contracts/repository.contract';
+import { UpdateMovieDto } from '../dtos/movie';
 
 export interface MovieRepository extends RepositoryInterface<MovieModel> {
   insert(data: MovieModel): Promise<MovieModel>;

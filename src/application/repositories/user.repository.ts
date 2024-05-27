@@ -1,4 +1,4 @@
-import { UpdateUserDto } from '@/domain/dtos/users';
+import { UpdateUserDto } from '@/application/dtos/users';
 import { UserModel } from '../../domain/model/user';
 import { RepositoryInterface } from '../contracts/repository.contract';
 

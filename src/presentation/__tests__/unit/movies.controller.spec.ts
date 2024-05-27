@@ -8,8 +8,8 @@ import {
 } from '@/application/use-case/movie';
 import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
-import { CreateMovieDto, UpdateMovieDto } from '@/domain/dtos/movie';
 import { RedisModule } from '@/infra/data/cache/redis.module';
+import { CreateMovieDto, UpdateMovieDto } from '@/application/dtos/movie';
 
 describe('MoviesController', () => {
   let controller: MoviesController;

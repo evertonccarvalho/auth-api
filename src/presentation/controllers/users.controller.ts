@@ -21,7 +21,7 @@ import {
   UpdateUserUseCase,
 } from '@/application/use-case/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UpdateUserDto } from '@/domain/dtos/users';
+import { UpdateUserDto } from '@/application/dtos/users';
 
 @ApiTags('Users')
 @ApiBearerAuth()

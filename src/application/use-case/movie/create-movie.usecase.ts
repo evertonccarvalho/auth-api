@@ -2,7 +2,7 @@ import { MovieModel } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
 import { MovieRepository } from '../../repositories/movie.repositoy';
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
-import { CreateMovieDto } from '@/domain/dtos/movie';
+import { CreateMovieDto } from '@/application/dtos/movie';
 
 export namespace CreateMovieUseCase {
   export type Input = CreateMovieDto;

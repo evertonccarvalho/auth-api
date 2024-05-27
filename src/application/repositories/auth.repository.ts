@@ -1,4 +1,4 @@
-import { UserOutput } from '@/domain/dtos/users/user-output';
+import { UserOutput } from '@/application/dtos/users/user-output';
 import { UserModel } from '../../domain/model/user';
 
 export interface AuthRepository {

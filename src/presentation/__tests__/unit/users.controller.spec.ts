@@ -5,7 +5,7 @@ import {
   GetUsersUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
-import { UpdateUserDto } from '@/domain/dtos/users';
+import { UpdateUserDto } from '@/application/dtos/users';
 import { UsersController } from '@/presentation/controllers/users.controller';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UserStatus } from '@/domain/enums/status';

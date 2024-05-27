@@ -1,6 +1,6 @@
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
-import { SignupDto, SigninDto } from '@/domain/dtos/auth';
-import { UserOutput } from '@/domain/dtos/users/user-output';
+import { SignupDto, SigninDto } from '@/application/dtos/auth';
+import { UserOutput } from '@/application/dtos/users/user-output';
 import { UserRoles } from '@/domain/enums/roles';
 import { UserStatus } from '@/domain/enums/status';
 import { AuthController } from '@/presentation/controllers/auth.controller';

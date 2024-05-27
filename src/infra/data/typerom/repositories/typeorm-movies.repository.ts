@@ -3,8 +3,8 @@ import { DataSource, Repository } from 'typeorm';
 import { MovieModel } from '@/domain/model/movie';
 import { MovieRepository } from '@/application/repositories/movie.repositoy';
 import { Movie } from '../entities/movie.entity';
-import { UpdateMovieDto } from '@/domain/dtos/movie';
 import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
+import { UpdateMovieDto } from '@/application/dtos/movie';
 
 @Injectable()
 export class TypeormMoviesRepository implements MovieRepository {

@@ -16,7 +16,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CreateMovieDto, UpdateMovieDto } from '../../domain/dtos/movie';
 import {
   CreateMovieUseCase,
   DeleteMovieUseCase,
@@ -26,6 +25,7 @@ import {
 } from '@/application/use-case/movie';
 import { MovieModel } from '@/domain/model/movie';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { CreateMovieDto, UpdateMovieDto } from '@/application/dtos/movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()

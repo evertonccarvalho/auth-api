@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../../repositories/movie.repositoy';
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { MovieModel } from '@/domain/model/movie';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
+import { MovieRepository } from '@/application/repositories/movie.repositoy';
 
 export namespace GetMovieUseCase {
   export type Input = { id: string };

@@ -1,6 +1,6 @@
 import { DefaultUseCase } from '@/application/contracts/use-case.contract';
 import { UserRepository } from '@/application/repositories/user.repository';
-import { UpdateUserDto } from '@/domain/dtos/users';
+import { UpdateUserDto } from '@/application/dtos/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { Injectable } from '@nestjs/common';
 

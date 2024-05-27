@@ -5,7 +5,10 @@ import { Injectable } from '@nestjs/common';
 import { UserModel } from '@/domain/model/user';
 import { AuthRepository } from '@/application/repositories/auth.repository';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UserOutput, UserOutputMapper } from '@/domain/dtos/users/user-output';
+import {
+  UserOutput,
+  UserOutputMapper,
+} from '@/application/dtos/users/user-output';
 
 export namespace SignUpUseCase {
   export type Input = {
