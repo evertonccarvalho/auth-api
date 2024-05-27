@@ -1,12 +1,20 @@
 import {
-  Controller,
-  Get,
-  Param,
-  Delete,
-  ParseUUIDPipe,
-  HttpCode,
-  Put,
+  DeleteUserUseCase,
+  GetUserUseCase,
+  GetUsersUseCase,
+  UpdateUserUseCase,
+} from '@/application/use-case/users';
+import { UpdateUserDto } from '@/presentation/dtos/users';
+import { UserPresenter } from '@/presentation/presenters/user.presenter';
+import {
   Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  ParseUUIDPipe,
+  Put,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -14,15 +22,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  DeleteUserUseCase,
-  GetUserUseCase,
-  GetUsersUseCase,
-  UpdateUserUseCase,
-} from '@/application/use-case/users';
-import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UpdateUserDto } from '@/presentation/dtos/users';
-import { UserOutputMapper } from '@/application/dtos/users/user-output';
 
 @ApiTags('Users')
 @ApiBearerAuth()

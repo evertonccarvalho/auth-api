@@ -1,13 +1,23 @@
 import {
-  Controller,
-  Get,
+  CreateMovieUseCase,
+  DeleteMovieUseCase,
+  GetMoviesUseCase,
+  GetMovieUseCase,
+  UpdateMovieUseCase,
+} from '@/application/use-case/movie';
+import { MovieEntity } from '@/domain/model/movie';
+import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import {
   Body,
-  Post,
+  Controller,
   Delete,
-  Param,
-  Put,
-  ParseUUIDPipe,
+  Get,
   HttpCode,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
   UseInterceptors,
 } from '@nestjs/common';
 import {
@@ -16,16 +26,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  CreateMovieUseCase,
-  DeleteMovieUseCase,
-  GetMoviesUseCase,
-  GetMovieUseCase,
-  UpdateMovieUseCase,
-} from '@/application/use-case/movie';
-import { MovieEntity } from '@/domain/model/movie';
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
