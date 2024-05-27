@@ -1,6 +1,6 @@
 import {
-  UserOutput,
   UserOutputMapper,
+  UserProps,
 } from '@/features/users/application/dtos/user-output';
 import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
 import { Injectable } from '@nestjs/common';
@@ -11,7 +11,7 @@ export namespace GetUserUseCase {
     id: string;
   };
 
-  export type Output = UserOutput;
+  export type Output = UserProps;
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private userRepository: UserRepository) {}

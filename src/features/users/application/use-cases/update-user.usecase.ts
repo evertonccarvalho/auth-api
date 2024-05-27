@@ -1,6 +1,6 @@
 import {
-  UserOutput,
   UserOutputMapper,
+  UserProps,
 } from '@/features/users/application/dtos/user-output';
 import { UpdateUserDto } from '@/features/users/infra/dtos';
 import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
@@ -13,7 +13,7 @@ export namespace UpdateUserUseCase {
     data: UpdateUserDto;
   };
 
-  export type Output = UserOutput;
+  export type Output = UserProps;
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {

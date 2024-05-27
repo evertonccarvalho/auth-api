@@ -1,4 +1,4 @@
-import { UserOutput } from '@/features/users/application/dtos/user-output';
+import { UserProps } from '@/features/users/application/dtos/user-output';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRoles } from '../../../../shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '../../../../shared/infra/database/typeorm/enums/status';
@@ -25,7 +25,7 @@ export class UserPresenter {
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(props: UserOutput) {
+  constructor(props: UserProps) {
     this.id = props.id;
     this.name = props.name;
     this.email = props.email;

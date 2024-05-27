@@ -1,6 +1,6 @@
 import {
-  UserOutput,
   UserOutputMapper,
+  UserProps,
 } from '@/features/users/application/dtos/user-output';
 import { UserEntity } from '@/features/users/domain/entities/user';
 import { HashProvider } from '@/shared/application/contracts/hasher.contract';
@@ -15,7 +15,7 @@ export namespace SignUpUseCase {
     password: string;
   };
 
-  export type Output = UserOutput;
+  export type Output = UserProps;
 
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(

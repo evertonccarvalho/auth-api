@@ -3,7 +3,7 @@ import {
   SignUpUseCase,
 } from '@/features/auth/application/use-cases';
 import { SigninDto, SignupDto } from '@/features/auth/domain/dtos';
-import { UserOutput } from '@/features/users/application/dtos/user-output';
+import { UserProps } from '@/features/users/application/dtos/user-output';
 import { UserPresenter } from '@/features/users/presentation/presenters/user.presenter';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
@@ -14,7 +14,7 @@ describe('AuthController', () => {
   let signUpUseCase: SignUpUseCase.UseCase;
   let signinUseCase: SignInUseCase.UseCase;
   let id: string;
-  let props: UserOutput;
+  let props: UserProps;
 
   beforeEach(async () => {
     sut = new AuthController(signinUseCase, signUpUseCase);
