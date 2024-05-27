@@ -22,6 +22,7 @@ import {
 } from '@/application/use-case/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UpdateUserDto } from '@/presentation/dtos/users';
+import { UserOutputMapper } from '@/application/dtos/users/user-output';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -30,7 +31,7 @@ export class UsersController {
   constructor(
     private readonly getUserUseCase: GetUserUseCase.UseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase.UseCase,
-    private readonly listUsersUseCase: GetUsersUseCase.UseCase,
+    private readonly getUsersUseCase: GetUsersUseCase.UseCase,
     private readonly updateUserUseCase: UpdateUserUseCase.UseCase,
   ) {}
 
@@ -39,7 +40,7 @@ export class UsersController {
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     const output = await this.getUserUseCase.execute({ id });
-    return output;
+    return new UserPresenter(output);
   }
 
   @ApiResponse({ status: 404, description: 'Not found' })
@@ -52,8 +53,9 @@ export class UsersController {
 
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get()
-  findAll() {
-    return this.listUsersUseCase.execute();
+  async findAll() {
+    const outputs = await this.getUsersUseCase.execute();
+    return outputs.map((output) => new UserPresenter(output));
   }
 
   @ApiResponse({
@@ -70,6 +72,6 @@ export class UsersController {
       data: updateDto,
     });
 
-    return output;
+    return new UserPresenter(output);
   }
 }

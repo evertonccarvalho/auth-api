@@ -3,6 +3,10 @@ import { UpdateUserDto } from '@/presentation/dtos/users';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '@/domain/repositories/user.repository';
+import {
+  UserOutput,
+  UserOutputMapper,
+} from '@/application/dtos/users/user-output';
 
 export namespace UpdateUserUseCase {
   export type Input = {
@@ -10,7 +14,7 @@ export namespace UpdateUserUseCase {
     data: UpdateUserDto;
   };
 
-  export type Output = UserPresenter;
+  export type Output = UserOutput;
 
   @Injectable()
   export class UseCase implements DefaultUseCase<Input, Output> {
@@ -19,11 +23,11 @@ export namespace UpdateUserUseCase {
     async execute(input: Input): Promise<Output> {
       const { id, data } = input;
 
-      await this.userRepository.findById(id);
+      const entity = await this.userRepository.findById(id);
 
-      const updatedUser = await this.userRepository.update(id, data);
+      await this.userRepository.update(id, data);
 
-      return new UserPresenter(updatedUser);
+      return UserOutputMapper.toOutput(entity);
     }
   }
 }

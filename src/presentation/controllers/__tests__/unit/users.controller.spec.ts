@@ -10,42 +10,19 @@ import { UsersController } from '@/presentation/controllers/users.controller';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
 import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
-import { RedisModule } from '@/shared/infra/database/cache/redis.module';
+import { UserOutput } from '@/application/dtos/users/user-output';
 
 describe('UsersController', () => {
-  let controller: UsersController;
+  let sut: UsersController;
   let getUserUseCase: GetUserUseCase.UseCase;
   let deleteUserUseCase: DeleteUserUseCase.UseCase;
-  let listUsersUseCase: GetUsersUseCase.UseCase;
+  let getUsersUseCase: GetUsersUseCase.UseCase;
   let updateUserUseCase: UpdateUserUseCase.UseCase;
-
-  const userPresenter = new UserPresenter({
-    id: 'some-uuid',
-    name: 'John Doe',
-    password: 'fake_password',
-    email: 'john.doe@example.com',
-    status: UserStatus.Active,
-    roles: UserRoles.User,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
-
-  const userListPresenter = [
-    new UserPresenter({
-      id: 'some-uuid',
-      name: 'John Doe',
-      password: 'fake_password',
-      email: 'john.doe@example.com',
-      status: UserStatus.Active,
-      roles: UserRoles.User,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  ];
+  let id: string;
+  let props: UserOutput;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [RedisModule],
       controllers: [UsersController],
       providers: [
         {
@@ -67,79 +44,78 @@ describe('UsersController', () => {
       ],
     }).compile();
 
-    controller = module.get<UsersController>(UsersController);
+    sut = module.get<UsersController>(UsersController);
     getUserUseCase = module.get<GetUserUseCase.UseCase>(GetUserUseCase.UseCase);
     deleteUserUseCase = module.get<DeleteUserUseCase.UseCase>(
       DeleteUserUseCase.UseCase,
     );
-    listUsersUseCase = module.get<GetUsersUseCase.UseCase>(
+    getUsersUseCase = module.get<GetUsersUseCase.UseCase>(
       GetUsersUseCase.UseCase,
     );
     updateUserUseCase = module.get<UpdateUserUseCase.UseCase>(
       UpdateUserUseCase.UseCase,
     );
+
+    id = 'df96ae94-6128-486e-840c-b6f78abb4801';
+    props = {
+      id,
+      name: 'John Doe',
+      password: 'fake_password',
+      email: 'john.doe@example.com',
+      status: UserStatus.Active,
+      roles: UserRoles.User,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(sut).toBeDefined();
   });
 
-  describe('findOne', () => {
-    it('should return a user', async () => {
-      const id = 'some-uuid';
-      jest
-        .spyOn(getUserUseCase, 'execute')
-        .mockResolvedValueOnce(userPresenter);
+  it('should gets a user', async () => {
+    jest.spyOn(getUserUseCase, 'execute').mockResolvedValueOnce(props);
 
-      expect(await controller.findOne(id)).toEqual(userPresenter);
-      expect(getUserUseCase.execute).toHaveBeenCalledWith({ id });
+    const presenter = await sut.findOne(id);
+    expect(presenter).toBeInstanceOf(UserPresenter);
+    expect(presenter).toStrictEqual(new UserPresenter(props));
+    expect(getUserUseCase.execute).toHaveBeenCalledWith({ id });
+  });
+
+  it('should update a user', async () => {
+    const updateDto: UpdateUserDto = { name: 'Jane Doe' };
+    const updatedProps = { ...props, ...updateDto };
+    jest
+      .spyOn(updateUserUseCase, 'execute')
+      .mockResolvedValueOnce(updatedProps);
+
+    const result = await sut.update(id, updateDto);
+    expect(result).toStrictEqual(new UserPresenter(updatedProps));
+    expect(updateUserUseCase.execute).toHaveBeenCalledWith({
+      id,
+      data: updateDto,
     });
   });
 
-  describe('remove', () => {
-    it('should delete a user', async () => {
-      const id = 'some-uuid';
-      jest.spyOn(deleteUserUseCase, 'execute').mockResolvedValueOnce(undefined);
+  it('should get all users', async () => {
+    const userList: UserOutput[] = [props];
+    jest.spyOn(getUsersUseCase, 'execute').mockResolvedValueOnce(userList);
 
-      expect(await controller.remove(id)).toBeUndefined();
-      expect(deleteUserUseCase.execute).toHaveBeenCalledWith({ id });
-    });
+    const presenterList = await sut.findAll();
+    const expectedPresenterList = userList.map(
+      (user) => new UserPresenter(user),
+    );
+
+    expect(presenterList).toEqual(expectedPresenterList);
+    expect(getUsersUseCase.execute).toHaveBeenCalled();
   });
 
-  describe('findAll', () => {
-    it('should return a list of users', async () => {
-      jest
-        .spyOn(listUsersUseCase, 'execute')
-        .mockResolvedValueOnce(userListPresenter);
+  it('should delete a user', async () => {
+    const output = undefined;
+    jest.spyOn(deleteUserUseCase, 'execute').mockResolvedValueOnce(output);
 
-      expect(await controller.findAll()).toEqual(userListPresenter);
-      expect(listUsersUseCase.execute).toHaveBeenCalled();
-    });
-  });
-
-  describe('update', () => {
-    it('should update a user', async () => {
-      const id = 'some-uuid';
-      const updateDto: UpdateUserDto = { name: 'Jane Doe' };
-      const updatedUser = new UserPresenter({
-        id: 'some-uuid',
-        name: 'Jane Doe',
-        password: 'fake_password',
-        email: 'jane.doe@example.com',
-        status: UserStatus.Active,
-        roles: UserRoles.User,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-      jest
-        .spyOn(updateUserUseCase, 'execute')
-        .mockResolvedValueOnce(updatedUser);
-
-      expect(await controller.update(id, updateDto)).toEqual(updatedUser);
-      expect(updateUserUseCase.execute).toHaveBeenCalledWith({
-        id,
-        data: updateDto,
-      });
-    });
+    const result = await sut.remove(id);
+    expect(result).toStrictEqual(output);
+    expect(deleteUserUseCase.execute).toHaveBeenCalledWith({ id });
   });
 });
