@@ -1,6 +1,6 @@
 import { JwtModule } from '@/shared/infra/cryptography/jwt/jwt.module';
 import { Module } from '@nestjs/common';
-import { HttpModule } from '../presentation/http.module';
+import { HttpModule } from '../shared/infra/http.module';
 import { ConfigsModule } from './config/config.module';
 
 @Module({
