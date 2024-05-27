@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
-import { AuthRepository } from '@/application/contracts/auth.repository';
 import {
   EmailIsTakenError,
   NotFoundErrorException,
 } from '@/shared/application/exceptions';
 import { UserEntity } from '@/domain/model/user';
+import { AuthRepository } from '@/domain/repositories/auth.repository';
+import { User } from '@/shared/infra/database/typeorm/entities/user.entity';
 
 @Injectable()
 export class TypeormAuthRepository implements AuthRepository {

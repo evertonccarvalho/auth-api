@@ -1,8 +1,8 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { TypeOrmDatabaseModule } from './typerom/typeorm.module';
-import { TypeormUsersRepository } from './typerom/repositories/typeorm-users.repository';
-import { TypeormMoviesRepository } from './typerom/repositories/typeorm-movies.repository';
-import { TypeormAuthRepository } from './typerom/repositories/typeorm-auth.repository';
+import { TypeOrmDatabaseModule } from './typeorm/typeorm.module';
+import { TypeormUsersRepository } from '../../../infra/database/typeorm/repositories/typeorm-users.repository';
+import { TypeormMoviesRepository } from '../../../infra/database/typeorm/repositories/typeorm-movies.repository';
+import { TypeormAuthRepository } from '../../../infra/database/typeorm/repositories/typeorm-auth.repository';
 
 interface DatabaseOptions {
   type: 'prisma' | 'mongoose' | 'typeorm';

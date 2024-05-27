@@ -1,8 +1,8 @@
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
 import { SignupDto, SigninDto } from '@/presentation/dtos/auth';
 import { UserOutput } from '@/application/dtos/users/user-output';
-import { UserRoles } from '@/domain/enums/roles';
-import { UserStatus } from '@/domain/enums/status';
+import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
+import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
 import { AuthController } from '@/presentation/controllers/auth.controller';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 

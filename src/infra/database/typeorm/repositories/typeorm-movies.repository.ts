@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { MovieEntity } from '@/domain/model/movie';
-import { MovieRepository } from '@/application/contracts/movie.repositoy';
-import { Movie } from '../entities/movie.entity';
+import { MovieRepository } from '@/domain/repositories/movie.repositoy';
 import { NotFoundErrorException } from '@/shared/application/exceptions/not-found-error.exception';
 import { UpdateMovieDto } from '@/presentation/dtos/movie';
+import { Movie } from '@/shared/infra/database/typeorm/entities/movie.entity';
 
 @Injectable()
 export class TypeormMoviesRepository implements MovieRepository {

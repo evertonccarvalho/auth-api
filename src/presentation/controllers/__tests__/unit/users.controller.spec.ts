@@ -8,9 +8,9 @@ import {
 import { UpdateUserDto } from '@/presentation/dtos/users';
 import { UsersController } from '@/presentation/controllers/users.controller';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
-import { UserStatus } from '@/domain/enums/status';
-import { UserRoles } from '@/domain/enums/roles';
-import { RedisModule } from '@/infra/data/cache/redis.module';
+import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
+import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
+import { RedisModule } from '@/shared/infra/database/cache/redis.module';
 
 describe('UsersController', () => {
   let controller: UsersController;

@@ -7,8 +7,8 @@ import {
   BaseEntity,
   PrimaryColumn,
 } from 'typeorm';
-import { UserRoles } from '@/domain/enums/roles';
-import { UserStatus } from '@/domain/enums/status';
+import { UserRoles } from '@/shared/infra/database/typeorm/enums/roles';
+import { UserStatus } from '@/shared/infra/database/typeorm/enums/status';
 
 @Entity('users')
 export class User {

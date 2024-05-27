@@ -1,23 +1,6 @@
-import { Movie } from '@/infra/data/typerom/entities/movie.entity';
+import { Movie } from '@/shared/infra/database/typeorm/entities/movie.entity';
 import { v4 as uuidv4 } from 'uuid';
-export class MovieModel {
-  id: string;
-
-  title: string;
-
-  synopsis: string;
-
-  duration: number;
-
-  director: string;
-
-  year: number;
-
-  createdAt: Date;
-
-  updatedAt: Date;
-}
-export class MovieEntity extends MovieModel {
+export class MovieEntity extends Movie {
   constructor(props: Partial<MovieEntity>) {
     super();
     Object.assign(this, {

@@ -1,7 +1,7 @@
 import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
-import { UserRepository } from '@/application/contracts/user.repository';
 import { Injectable } from '@nestjs/common';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
+import { UserRepository } from '@/domain/repositories/user.repository';
 
 // search-input.ts
 

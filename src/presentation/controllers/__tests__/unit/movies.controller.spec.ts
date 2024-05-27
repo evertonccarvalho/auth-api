@@ -8,7 +8,7 @@ import {
 } from '@/application/use-case/movie';
 import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
-import { RedisModule } from '@/infra/data/cache/redis.module';
+import { RedisModule } from '@/shared/infra/database/cache/redis.module';
 import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
 
 describe('MoviesController', () => {

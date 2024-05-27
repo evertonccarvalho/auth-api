@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { join } from 'path';
-import { EnvConfigService } from '@/main/config/env-config/env-config.service';
-import { EnvConfigModule } from '@/main/config/env-config/env-config.module';
+import { EnvConfigService } from '@/shared/infra/env-config/env-config.service';
+import { EnvConfigModule } from '@/shared/infra/env-config/env-config.module';
 
 @Module({
   imports: [EnvConfigModule],

@@ -1,5 +1,5 @@
 import { UpdateUserDto } from '@/presentation/dtos/users';
-import { UserEntity } from '../../domain/model/user';
+import { UserEntity } from '../model/user';
 import { RepositoryInterface } from '../../shared/domain/repositories/repository.contract';
 
 export interface UserRepository extends RepositoryInterface<UserEntity> {

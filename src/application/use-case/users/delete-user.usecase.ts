@@ -1,5 +1,5 @@
+import { UserRepository } from '@/domain/repositories/user.repository';
 import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
-import { UserRepository } from '@/application/contracts/user.repository';
 import { Injectable } from '@nestjs/common';
 
 export namespace DeleteUserUseCase {

@@ -3,11 +3,11 @@
 import { Module } from '@nestjs/common';
 import { HashProvider } from '@/shared/application/contracts/hasher.contract';
 import { AuthController } from '@/presentation/controllers/Auth.controller';
-import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
-import { BcryptHashProvider } from '@/infra/cryptography/bcrypt/bcrypt-adapter';
-import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
+import { JwtModule } from '@/shared/infra/cryptography/jwt/jwt.module';
+import { BcryptHashProvider } from '@/shared/infra/cryptography/bcrypt/bcrypt-adapter';
+import { JwtTokenService } from '@/shared/infra/cryptography/jwt/jwt.service';
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
-import { AuthRepository } from '@/application/contracts/auth.repository';
+import { AuthRepository } from '@/domain/repositories/auth.repository';
 
 @Module({
   imports: [JwtModule],

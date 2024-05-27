@@ -1,5 +1,5 @@
-import { EnvConfigModule } from '@/main/config/env-config/env-config.module';
-import { EnvConfigService } from '@/main/config/env-config/env-config.service';
+import { EnvConfigModule } from '@/shared/infra/env-config/env-config.module';
+import { EnvConfigService } from '@/shared/infra/env-config/env-config.service';
 import { CacheModuleAsyncOptions } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 
