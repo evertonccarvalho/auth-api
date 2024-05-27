@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
+import { AuthRepository } from '@/application/contracts/auth.repository';
 import {
   EmailIsTakenError,
   NotFoundErrorException,
-} from '@/presentation/exceptions';
+} from '@/shared/application/exceptions';
 import { UserEntity } from '@/domain/model/user';
 
 @Injectable()

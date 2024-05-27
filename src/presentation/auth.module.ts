@@ -1,13 +1,13 @@
 // auth.module.ts
 
 import { Module } from '@nestjs/common';
-import { HashProvider } from '@/application/contracts/hasher.contract';
+import { HashProvider } from '@/shared/application/contracts/hasher.contract';
 import { AuthController } from '@/presentation/controllers/Auth.controller';
 import { JwtModule } from '@/infra/cryptography/jwt/jwt.module';
 import { BcryptHashProvider } from '@/infra/cryptography/bcrypt/bcrypt-adapter';
 import { JwtTokenService } from '@/infra/cryptography/jwt/jwt.service';
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
-import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
+import { AuthRepository } from '@/application/contracts/auth.repository';
 
 @Module({
   imports: [JwtModule],

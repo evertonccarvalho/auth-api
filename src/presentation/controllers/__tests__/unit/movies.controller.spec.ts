@@ -9,7 +9,7 @@ import {
 import { MoviesController } from '@/presentation/controllers/movies.controller';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
 import { RedisModule } from '@/infra/data/cache/redis.module';
-import { CreateMovieDto, UpdateMovieDto } from '@/application/dtos/movie';
+import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
 
 describe('MoviesController', () => {
   let controller: MoviesController;

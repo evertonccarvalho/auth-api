@@ -1,5 +1,5 @@
 import { UserOutput } from '@/application/dtos/users/user-output';
-import { UserEntity } from '../../../domain/model/user';
+import { UserEntity } from '../../domain/model/user';
 
 export interface AuthRepository {
   insert(entity: UserEntity): Promise<void>;

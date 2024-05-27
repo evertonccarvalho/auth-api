@@ -1,8 +1,8 @@
 import { MovieEntity } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../../contracts/repositories/movie.repositoy';
-import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
-import { CreateMovieDto } from '@/application/dtos/movie';
+import { MovieRepository } from '../../contracts/movie.repositoy';
+import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
+import { CreateMovieDto } from '@/presentation/dtos/movie';
 
 export namespace CreateMovieUseCase {
   export type Input = CreateMovieDto;

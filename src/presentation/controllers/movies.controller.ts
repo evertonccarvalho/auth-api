@@ -25,7 +25,7 @@ import {
 } from '@/application/use-case/movie';
 import { MovieEntity } from '@/domain/model/movie';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { CreateMovieDto, UpdateMovieDto } from '@/application/dtos/movie';
+import { CreateMovieDto, UpdateMovieDto } from '@/presentation/dtos/movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()

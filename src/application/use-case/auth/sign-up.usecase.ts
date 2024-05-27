@@ -1,9 +1,9 @@
-import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
-import { HashProvider } from '@/application/contracts/hasher.contract';
-import { BadRequestError } from '@/presentation/errors/bad-request-error';
+import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
+import { HashProvider } from '@/shared/application/contracts/hasher.contract';
+import { BadRequestError } from '@/shared/application/errors/bad-request-error';
 import { Injectable } from '@nestjs/common';
 import { UserEntity } from '@/domain/model/user';
-import { AuthRepository } from '@/application/contracts/repositories/auth.repository';
+import { AuthRepository } from '@/application/contracts/auth.repository';
 import { UserPresenter } from '@/presentation/presenters/user.presenter';
 import {
   UserOutput,

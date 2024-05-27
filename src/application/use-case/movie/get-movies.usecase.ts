@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../../contracts/repositories/movie.repositoy';
-import { DefaultUseCase } from '@/domain/use-case/use-case.contract';
+import { MovieRepository } from '../../contracts/movie.repositoy';
+import { DefaultUseCase } from '@/shared/domain/use-case/use-case.contract';
 import { MovieEntity } from '@/domain/model/movie';
 import { MoviePresenter } from '@/presentation/presenters/movie.presenter';
 

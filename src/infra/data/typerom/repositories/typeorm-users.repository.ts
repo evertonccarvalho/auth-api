@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import { UpdateUserDto } from '@/application/dtos/users';
-import { NotFoundErrorException } from '@/presentation/exceptions/not-found-error.exception';
+import { UpdateUserDto } from '@/presentation/dtos/users';
+import { NotFoundErrorException } from '@/shared/application/exceptions/not-found-error.exception';
 
 @Injectable()
 export class TypeormUsersRepository {

@@ -8,7 +8,7 @@ import {
   GetUserUseCase,
   UpdateUserUseCase,
 } from '@/application/use-case/users';
-import { UserRepository } from '@/application/contracts/repositories/user.repository';
+import { UserRepository } from '@/application/contracts/user.repository';
 
 @Module({
   imports: [],

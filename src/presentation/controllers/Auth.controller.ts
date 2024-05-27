@@ -3,7 +3,7 @@ import { ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { SkipAuth } from '@/main/decorators/auth.decorator';
 import { SignInUseCase, SignUpUseCase } from '@/application/use-case/auth';
 import { UserPresenter } from '../presenters/user.presenter';
-import { SigninDto, SignupDto } from '@/application/dtos/auth';
+import { SigninDto, SignupDto } from '@/presentation/dtos/auth';
 
 @ApiTags('Auth')
 @Controller('auth')
