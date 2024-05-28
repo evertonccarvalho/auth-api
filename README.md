@@ -1,6 +1,33 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API Documentation
+
+## Image Preview
+
+![API Preview](.github/preview.jpg)
+
+## Overview
+
+This API is built using Nest.js and incorporates various technologies such as TypeORM for database interactions, JWT for authentication, Swagger for API documentation, and Docker for containerization.
+
+## Installation
+
+To get started with the API locally, follow these steps:
+
+1. Clone this repository.
+2. Navigate to the project directory.
+3. Install dependencies using pnpm:
+
+````bash
+$ pnpm install
+
+## Description
+
+The API was built with the intention of learning Nest.js, SOLID principles, and Clean Architecture.
+
+## Instalation and running the app locally
+
+```bash
+$ pnpm install
+
 
 ## Description
 
@@ -8,7 +35,7 @@
 
 ```bash
 $ pnpm install
-```
+````
 
 ## Running the app
 
