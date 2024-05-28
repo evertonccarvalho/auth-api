@@ -2,7 +2,7 @@
 
 ## Image Preview
 
-![API Preview](.github/preview.jpg)
+![API Preview](/public/preview.jpg)
 
 ## Overview
 
