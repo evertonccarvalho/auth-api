@@ -15,6 +15,7 @@ import {
   Param,
   ParseUUIDPipe,
   Put,
+  Req,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -34,6 +35,21 @@ export class UsersController {
     private readonly updateUserUseCase: UpdateUserUseCase.UseCase,
   ) {}
 
+  @ApiForbiddenResponse({ description: 'Access denied' })
+  @Get()
+  async findAll() {
+    const outputs = await this.getUsersUseCase.execute();
+    return outputs.map((output) => new UserPresenter(output));
+  }
+
+  @Get('me')
+  async getLogedUser(@Req() req) {
+    const id = req.user.id;
+    console.log(id);
+    const output = await this.getUserUseCase.execute({ id });
+    return new UserPresenter(output);
+  }
+
   @ApiResponse({ status: 404, description: 'Not found' })
   @ApiForbiddenResponse({ description: 'Access denied' })
   @Get(':id')
@@ -48,13 +64,6 @@ export class UsersController {
   @Delete(':id')
   async remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.deleteUserUseCase.execute({ id });
-  }
-
-  @ApiForbiddenResponse({ description: 'Access denied' })
-  @Get()
-  async findAll() {
-    const outputs = await this.getUsersUseCase.execute();
-    return outputs.map((output) => new UserPresenter(output));
   }
 
   @ApiResponse({
